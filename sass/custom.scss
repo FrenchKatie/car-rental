@@ -1,4 +1,88 @@
-@import "reset.scss";
 @import "bgImages.scss";
+@import "reset.scss";
+
 @import "variables.scss";
 @import "fonts.scss";
+
+
+.input {
+    padding: 18px 30px;
+    border: none;
+    border-right: 1px solid #B3B3B3;
+}
+
+.input::placeholder{
+  color: #B3B3B3;
+}
+
+.homeInner{
+  // outline: 1px blue solid;
+}
+
+
+.home{
+    @include homeBg;
+    height: 100vh;
+    position: relative;
+}
+
+.homeInner{
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bannerHeading{
+    @include bannerHeading;
+    padding-left: 0px !important;
+}
+.returnBtn{
+  @include unSelectedBtn;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.returnBtn:hover {
+    background: rgba(0,0,0,0);
+    color: #3a7999;
+    box-shadow: inset 0 0 0 3px #3a7999;
+}
+
+.onewayBtn{
+  @include selectedBtn;
+  margin-top: 40px;
+}
+
+.submitBtn{
+  color: white;
+  background-color: $primary;
+  border: none;
+}
+
+
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+body { margin: 30px; }
+.search {
+  position: relative;
+  color: #aaa;
+  font-size: 16px;
+}
+
+.search input {
+  width: 250px;
+  height: 32px;
+
+  background: #fcfcfc;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.search input { text-indent: 32px;}
+.search .fa-search {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}

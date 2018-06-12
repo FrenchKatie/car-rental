@@ -1,3 +1,10 @@
 $(document).ready(function() {
-	$('#pagepiling').pagepiling();
+			$('#pagepiling').pagepiling();
+
+			$( "#dateLeave" ).datepicker();
+			$( "#dateReturn" ).datepicker();
+			
+
+
+    // });
 });

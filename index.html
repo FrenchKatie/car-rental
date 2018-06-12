@@ -7,17 +7,44 @@
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="css/jquery.pagepiling.css" />
   <link rel="stylesheet" href="css/custom.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/jquery-ui.min.css">
 </head>
   <body>
       <div id="pagepiling">
-          	<div class="section">Some section</div>
-          	<div class="section">Some section</div>
-          	<div class="section">Some section</div>
-          	<div class="section">Some section</div>
-      </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+          	<div class="section">
+                  <div class="home">
+                    <div class="homeInner">
+                      <div class="row">
+                            <h1 class="col bannerHeading">Book a Rental</h1>
+                            <button type="button" class="returnBtn"name="button">Return</button>
+                            <button type="button" class="onewayBtn"name="button">One Way</button>
+                      </div>
+                        <form class="" action="index.html" method="post">
+
+                          <div class="row">
+                                <input type="text" id="dateLeave" class="col-4 input" name="dateLeave" placeholder="When are you leaving? ">
+                                <input type="text" id="dateReturn" class="col-4 input" name="dateReturn" placeholder="When are you returning?">
+                                <input type="number" name="points" class="col-3 input"placeholder="How many seats do you need?" step="1" min="1" max="6">
+                            <button type="button" name="button" class="submitBtn col-1"><i class="fas fa-search"></i></button>
+                          </div>
+                        </form>
+                    </div>
+                  </div>
+            </div>
+
+
+          	<div class="section">
+                
+            </div>
+          	<!-- <div class="section">Some section</div>
+          	<div class="section">Some section</div> -->
+      </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.pagepiling.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
