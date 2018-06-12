@@ -3,7 +3,14 @@
   color: white;
 }
 
-@mixin btnFont {
-  font-size: 20px;
-  font-weight: 400
+.headingTwo{
+    color: $secondary;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.headingThree{
+    color: $secondary;
+    font-size: 25px;
+    font-weight: 200;
 }

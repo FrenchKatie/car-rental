@@ -1,88 +1,109 @@
 @import "bgImages.scss";
 @import "reset.scss";
-
 @import "variables.scss";
 @import "fonts.scss";
 
+//----------------------
+//REUSABLE INPUT CLASSES
+//----------------------
+        .input {
+            padding: 18px 30px;
+            border: none;
+            border-right: 1px solid #B3B3B3;
+        }
 
-.input {
-    padding: 18px 30px;
-    border: none;
-    border-right: 1px solid #B3B3B3;
-}
+        .input::placeholder{
+          color: #B3B3B3;
+        }
 
-.input::placeholder{
-  color: #B3B3B3;
-}
+//-----------------------
+//REUSABLE BUTTON CLASSES
+//-----------------------
 
-.homeInner{
-  // outline: 1px blue solid;
-}
+      .outlineBtn{
+          @include outlineBtn;
+          margin-right: 20px;
+          margin-top: 40px;
+          width: 160px;
+      }
 
+      .outlineBtn:hover {
+          background: rgba(0,0,0,0);
+          color: #3a7999;
+          box-shadow: inset 0 0 0 3px #3a7999;
+      }
 
-.home{
-    @include homeBg;
-    height: 100vh;
-    position: relative;
-}
+      .fillBtn{
+          @include fillBtn;
+          margin-top: 40px;
+          width: 160px;
+      }
 
-.homeInner{
-    width: 60%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+      .iconBtn{
+          @include fillBtn;
+          font-size: 18px;
+      }
+      .btnText{
+          text-align: center;
+          margin-left: 65px;
+      }
+      .icon{
+          text-align: right;
+          margin-left : 55px;
+          margin-right: 10px;
+      }
+      // span{
+      //   text-align: center;
+      //   margin-left: 65px;
+      // }
+      // i{
+      //   text-align: right;
+      //   margin-left : 55px;
+      //   margin-right: 10px;
+      // }
 
-.bannerHeading{
-    @include bannerHeading;
-    padding-left: 0px !important;
-}
-.returnBtn{
-  @include unSelectedBtn;
-  margin-right: 20px;
-  margin-top: 40px;
-}
+//---------------------
+//REUSABLE FONT CLASSES
+//---------------------
 
-.returnBtn:hover {
-    background: rgba(0,0,0,0);
-    color: #3a7999;
-    box-shadow: inset 0 0 0 3px #3a7999;
-}
+      .bannerHeading{
+          @include bannerHeading;
+          padding-left: 0px !important;
+      }
 
-.onewayBtn{
-  @include selectedBtn;
-  margin-top: 40px;
-}
+//-------------------
+//SECTION ONE STYLING
+//-------------------
 
-.submitBtn{
-  color: white;
-  background-color: $primary;
-  border: none;
-}
+      .sectionOne{
+          @include sectionOneBg;
+          height: 100vh;
+          position: relative;
+      }
 
+      .sectionOneInner{
+          width: 60%;
+          @include centerAll;
+      }
 
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-body { margin: 30px; }
-.search {
-  position: relative;
-  color: #aaa;
-  font-size: 16px;
-}
+      .submitBtn{
+          color: white;
+          background-color: $primary;
+          border: none;
+      }
 
-.search input {
-  width: 250px;
-  height: 32px;
+//--------------------
+//SECTION FIVE STYLING
+//--------------------
 
-  background: #fcfcfc;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
-}
+      .sectionFive{
+          @include sectionFiveBg;
+          height: 100vh;
+          position: relative;
+      }
 
-.search input { text-indent: 32px;}
-.search .fa-search {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
+      .sectionFiveInner{
+          @include centerAll;
+          width: 60%;
+          text-align: center;
+      }

@@ -1,5 +1,15 @@
-@mixin homeBg{
+// @mixin backgroundImg {
+//
+// }
+
+@mixin sectionOneBg{
   background-image: url(../images/home.jpg);
   background-position: center top;
+  background-size: cover;
+}
+
+@mixin sectionFiveBg{
+  background-image: url(../images/final.jpg);
+  background-position: center;
   background-size: cover;
 }
