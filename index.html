@@ -13,44 +13,158 @@
 </head>
   <body>
       <div id="pagepiling">
-
-
           	<div class="section">
-                  <div class="sectionOne">
-                    <div class="sectionOneInner">
-                      <div class="row">
-                            <h1 class="col bannerHeading">Book a Rental</h1>
-                            <button type="button" class="outlineBtn"name="button">Return</button>
-                            <button type="button" class="fillBtn"name="button">One Way</button>
-                      </div>
-                        <form class="" action="index.html" method="post">
+                  <div class="sectionOneBg">
+                      <div class="sectionOneInner">
+                        <div class="row">
+                              <h1 class="col bannerHeading">Book a Rental</h1>
+                              <button type="button" class="outlineBtn"name="button">Return</button>
+                              <button type="button" class="fillBtn"name="button">One Way</button>
+                        </div>
+                          <form class="" action="index.html" method="post">
 
-                          <div class="row">
-                                <input type="text" id="dateLeave" class="col-4 input" name="dateLeave" placeholder="When are you leaving? ">
-                                <input type="text" id="dateReturn" class="col-4 input" name="dateReturn" placeholder="When are you returning?">
-                                <input type="number" name="points" class="col-3 input"placeholder="How many seats do you need?" step="1" min="1" max="6">
-                            <button type="button" name="button" class="submitBtn col-1"><i class="fas fa-search"></i></button>
-                          </div>
-                        </form>
-                    </div>
+                              <div class="row">
+                                    <input type="text" id="dateLeave" class="col-4 input" name="dateLeave" placeholder="When are you leaving? ">
+                                    <input type="text" id="dateReturn" class="col-4 input" name="dateReturn" placeholder="When are you returning?">
+                                    <input type="number" name="points" class="col-3 input"placeholder="How many seats do you need?" step="1" min="1" max="6">
+                                    <button type="button" name="button" class="submitBtn col-1" id="bla"><i class="fas fa-search"></i></button>
+                              </div>
+                          </form>
+                      </div>
                   </div>
             </div>
 
             <div class="section">
-                  <div class="sectionFive">
-                    <div class="sectionFiveInner">
-                        <h1 class="bannerHeading">You're good to go!</h1>
-                        <h2 class="headingTwo">Congratulations, your booking has been succesful.</h2>
-                        <h3 class="headingThree">We'll see you on March 13 when you start your journey</h3>
-                        <button type="button" name="button" class="iconBtn"><span class="btnText">Ok</span><i class="icon fas fa-chevron-right"></i></button>
-                    </div>
+                  <div class="sectionThreeBg">
+                      <div class="sectionThreeInner">
+                          <div class="halfScreen"  id="vehicleContent">
+                              <div class="">
+                                    <h2 class="headingTwo">Find what vehicle option suits you best</h2>
+                                    <h3 class="headingFour">You requested a vehicle with <span class="featureFont">3</span> seats for a period of <span class="featureFont">4</span> days</h3>
+                                    <h3 class="headingFour">Select a vehicle down below to see more information</h3>
+                              </div>
+                              <div class="item">
+                                  <div class="flexMe">
+                                      <div class="flexChildren itemLabel">
+                                            <p class="headingSix removeSpace">Motorbike</p>
+                                            <p class="headingFive ">1 Seat</p>
+                                      </div>
+                                      <div class="flexChildren" id="bikeInfoBtn">
+                                          <button type="button" name="button"class="moreInfoBtn"><span class="btnText">View information</span><i class="icon fas fa-chevron-down"></i></button>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="itemInfo hide" id="bikeInfo">
+                                      <div class="itemImage">
+                                            <img src="images/motorhome.png" alt="">
+                                      </div>
+                                      <div class="">
+                                            <h4 class="headingFive">General</h4>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Seats</p>
+                                                <p class="flexChildren alignRight">Two</p>
+                                            </div>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Rental cost per day</p>
+                                                <p class="flexChildren alignRight">$129</p>
+                                            </div>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Fuel consumption per 100km</p>
+                                                <p class="flexChildren alignRight">8.5 L</p>
+                                            </div>
+                                      </div>
+                                      <div class="">
+                                            <h4 class="headingFive">Your trip</h4>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Rental cost total</p>
+                                                <p class="flexChildren alignRight">$516</p>
+                                            </div>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Estimated fuel consumption total</p>
+                                                <p class="flexChildren alignRight">140</p>
+                                            </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="item flexMe">
+                                  <div class="flexChildren itemLabel">
+                                        <p class="headingSix removeSpace">Small Car</p>
+                                        <p class="headingFive ">1 - 2 Seats</p>
+                                  </div>
+                                  <div class="flexChildren" id="smlCarInfoBtn">
+                                      <button type="button" name="button" class="moreInfoBtn"><span class="btnText">View information</span><i class="icon fas fa-chevron-down"></i></button>
+                                  </div>
+                                  <div class="itemInfo hide" id="smlCarInfo">
+                                      <div class="itemImage">
+                                            <img src="images/motorhome.png" alt="">
+                                      </div>
+                                      <div class="">
+                                            <h4 class="headingFive">General</h4>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Seats</p>
+                                                <p class="flexChildren alignRight">Two</p>
+                                            </div>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Rental cost per day</p>
+                                                <p class="flexChildren alignRight">$129</p>
+                                            </div>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Fuel consumption per 100km</p>
+                                                <p class="flexChildren alignRight">8.5 L</p>
+                                            </div>
+                                      </div>
+                                      <div class="">
+                                            <h4 class="headingFive">Your trip</h4>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Rental cost total</p>
+                                                <p class="flexChildren alignRight">$516</p>
+                                            </div>
+                                            <div class="flexMe">
+                                                <p class="flexChildren">Estimated fuel consumption total</p>
+                                                <p class="flexChildren alignRight">140</p>
+                                            </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="item flexMe">
+                                  <div class="flexChildren itemLabel">
+                                        <p class="headingSix removeSpace">Large Car</p>
+                                        <p class="headingFive ">1 - 5 Seats</p>
+                                  </div>
+                                  <div class="flexChildren">
+                                      <button type="button" name="button" class="moreInfoBtn"><span class="btnText">View information</span><i class="icon fas fa-chevron-down"></i></button>
+                                  </div>
+                              </div>
+
+                              <div class="item flexMe">
+                                  <div class="flexChildren itemLabel">
+                                        <p class="headingSix removeSpace">Motorhome</p>
+                                        <p class="headingFive ">2 - 6 Seats</p>
+                                  </div>
+                                  <div class="flexChildren">
+                                      <button type="button" name="button" class="moreInfoBtn"><span class="btnText">View information</span><i class="icon fas fa-chevron-down"></i></button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+            </div>
+
+            <div class="section">
+                  <div class="sectionFiveBg">
+                      <div class="sectionFiveInner">
+                          <h1 class="bannerHeading">You're good to go!</h1>
+                          <h2 class="headingTwo">Congratulations, your booking has been succesful.</h2>
+                          <h3 class="headingThree">We'll see you on March 13 when you start your journey</h3>
+                          <button type="button" name="button" class="iconBtnFill"><span class="btnText">Ok</span><i class="icon fas fa-chevron-right"></i></button>
+                      </div>
                   </div>
             </div>
 
 
-
-          	<!-- <div class="section">Some section</div>
-          	<div class="section">Some section</div> -->
       </div>
     <script src="js/jquery.js"></script>
     <script src="js/jquery-ui.min.js"></script>

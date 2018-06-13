@@ -1,32 +1,4 @@
 $primary: #74B9FF;
 $secondary: #666666;
-
-@mixin btn {
-    border-radius: 100px;
-    // padding: 10px 20px;
-    border: 3px solid $primary;
-
-    height: 50px;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-@mixin fillBtn{
-    @include btn;
-    background-color: $primary;
-    color: white;
-}
-
-@mixin outlineBtn{
-    @include btn;
-    background-color: Transparent;
-    background-repeat:no-repeat;
-    color: $primary;
-}
-
-@mixin centerAll {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+$tertiary: #999999;
+$bgGrey: #FAF5F5;

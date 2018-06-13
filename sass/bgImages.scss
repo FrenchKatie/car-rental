@@ -1,15 +1,33 @@
-// @mixin backgroundImg {
-//
-// }
-
-@mixin sectionOneBg{
-  background-image: url(../images/home.jpg);
-  background-position: center top;
-  background-size: cover;
+@mixin bg {
+    background-size: cover;
+    height: 100vh;
+    position: relative;
 }
 
-@mixin sectionFiveBg{
-  background-image: url(../images/final.jpg);
-  background-position: center;
-  background-size: cover;
+.sectionOneBg{
+    @include bg;
+    background-image: url(../images/home.jpg);
+    background-position: center top;
+}
+
+.sectionThreeBg{
+  @include bg;
+    background-image: url(../images/vehicles.jpg);
+    background-position: left center;
+}
+
+.sectionFiveBg{
+    @include bg;
+    background-image: url(../images/final.jpg);
+    background-position: center;
+}
+
+.itemImage{
+  display: block;
+}
+
+.itemImage img{
+    // max-width: 60%;
+    // margin-left: 20%;
+    width: 100%;
 }
