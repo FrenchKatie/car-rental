@@ -43,16 +43,103 @@
                                     <h3 class="headingFour">You requested a vehicle with <span class="featureFont">3</span> seats for a period of <span class="featureFont">4</span> days</h3>
                                     <h3 class="headingFour">Select a vehicle down below to see more information</h3>
                               </div>
-                              <div class="item">
+
+
+                              <div id="itemWrapp">
+                                      <div class="myItem itemMotorbike flexMe">
+                                          <div class="flexChildren itemLabel">
+                                                <p class="headingSix removeSpace">Motorbike</p>
+                                                <p class="headingFive ">1 Seat</p>
+                                          </div>
+                                          <!-- <button type="button" name="button" class="clickMe">click</button> -->
+                                          <button type="button" name="button"class="moreInfoBtn"><span class="btnText flexChildren">View information</span><i class="icon fas fa-chevron-down"></i></button>
+                                          <div class="hide">
+                                                <div class="itemImage">
+                                                      <img src="images/motorhome.png" alt="">
+                                                </div>
+                                                <div class="">
+                                                      <h4 class="headingFive">General</h4>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Seats</p>
+                                                          <p class="flexChildren alignRight">Two</p>
+                                                      </div>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Rental cost per day</p>
+                                                          <p class="flexChildren alignRight">$129</p>
+                                                      </div>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Fuel consumption per 100km</p>
+                                                          <p class="flexChildren alignRight">8.5 L</p>
+                                                      </div>
+                                                </div>
+                                                <div class="">
+                                                      <h4 class="headingFive">Your trip</h4>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Rental cost total</p>
+                                                          <p class="flexChildren alignRight">$516</p>
+                                                      </div>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Estimated fuel consumption total</p>
+                                                          <p class="flexChildren alignRight">140</p>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                      </div>
+                                      <div class="myItem itemSmlCar flexMe">
+                                          <div class="flexChildren itemLabel">
+                                                <p class="headingSix removeSpace">Small Car</p>
+                                                <p class="headingFive ">1 Seat</p>
+                                          </div>
+                                          <!-- <button type="button" name="button" class="clickMe">click</button> -->
+                                          <button type="button" name="button" class="moreInfoBtn"><span class="btnText flexChildren">View information</span><i class="icon fas fa-chevron-down"></i></button>
+                                          <div class="hide block">
+                                                <div class="itemImage">
+                                                      <img src="images/largecar.png" alt="">
+                                                </div>
+                                                <div class="">
+                                                      <h4 class="headingFive">General</h4>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Seats</p>
+                                                          <p class="flexChildren alignRight">Two</p>
+                                                      </div>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Rental cost per day</p>
+                                                          <p class="flexChildren alignRight">$129</p>
+                                                      </div>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Fuel consumption per 100km</p>
+                                                          <p class="flexChildren alignRight">8.5 L</p>
+                                                      </div>
+                                                </div>
+                                                <div class="">
+                                                      <h4 class="headingFive">Your trip</h4>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Rental cost total</p>
+                                                          <p class="flexChildren alignRight">$516</p>
+                                                      </div>
+                                                      <div class="flexMe">
+                                                          <p class="flexChildren">Estimated fuel consumption total</p>
+                                                          <p class="flexChildren alignRight">140</p>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                      </div>
+                              </div>
+
+
+
+
+                              <!-- <div class="item">
                                   <div class="flexMe">
                                       <div class="flexChildren itemLabel">
                                             <p class="headingSix removeSpace">Motorbike</p>
                                             <p class="headingFive ">1 Seat</p>
                                       </div>
-                                      <div class="flexChildren" id="bikeInfoBtn">
+                                      <div class="flexChildren blabtn" id="bikeInfoBtn">
                                           <button type="button" name="button"class="moreInfoBtn"><span class="btnText">View information</span><i class="icon fas fa-chevron-down"></i></button>
                                       </div>
                                   </div>
+
 
 
                                   <div class="itemInfo hide" id="bikeInfo">
@@ -88,14 +175,24 @@
                                   </div>
                               </div>
 
+
+
+
+
+
+
+
                               <div class="item flexMe">
                                   <div class="flexChildren itemLabel">
                                         <p class="headingSix removeSpace">Small Car</p>
                                         <p class="headingFive ">1 - 2 Seats</p>
                                   </div>
-                                  <div class="flexChildren" id="smlCarInfoBtn">
+                                  <div class="flexChildren blabtn" id="smlCarInfoBtn">
                                       <button type="button" name="button" class="moreInfoBtn"><span class="btnText">View information</span><i class="icon fas fa-chevron-down"></i></button>
                                   </div>
+
+
+
                                   <div class="itemInfo hide" id="smlCarInfo">
                                       <div class="itemImage">
                                             <img src="images/motorhome.png" alt="">
@@ -127,27 +224,7 @@
                                             </div>
                                       </div>
                                   </div>
-                              </div>
-
-                              <div class="item flexMe">
-                                  <div class="flexChildren itemLabel">
-                                        <p class="headingSix removeSpace">Large Car</p>
-                                        <p class="headingFive ">1 - 5 Seats</p>
-                                  </div>
-                                  <div class="flexChildren">
-                                      <button type="button" name="button" class="moreInfoBtn"><span class="btnText">View information</span><i class="icon fas fa-chevron-down"></i></button>
-                                  </div>
-                              </div>
-
-                              <div class="item flexMe">
-                                  <div class="flexChildren itemLabel">
-                                        <p class="headingSix removeSpace">Motorhome</p>
-                                        <p class="headingFive ">2 - 6 Seats</p>
-                                  </div>
-                                  <div class="flexChildren">
-                                      <button type="button" name="button" class="moreInfoBtn"><span class="btnText">View information</span><i class="icon fas fa-chevron-down"></i></button>
-                                  </div>
-                              </div>
+                              </div> -->
                           </div>
                       </div>
                   </div>

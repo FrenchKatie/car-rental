@@ -1,32 +1,30 @@
-$(document).ready(function() {
-			$('#pagepiling').pagepiling({
-					normalScrollElements: '#vehicleContent'
-			});
+(function() {
 
+			//Page Piling Plugin
+			//------------------
+			$('#pagepiling').pagepiling({
+					normalScrollElements: '.halfScreen'
+			});
+			// $.fn.pagepiling.setAllowScrolling(false);
+
+
+
+			//Jquery UI Date Picker
+			//---------------------
 			$( "#dateLeave" ).datepicker();
 			$( "#dateReturn" ).datepicker();
 
-			// $.fn.pagepiling.setAllowScrolling(false);
-			//
-			// $( "#bla" ).click(function() {
-			//   	$.fn.pagepiling.moveSectionDown();
-			// });
 
 
-			// $('#bikeInfoBtn').click(function(){
-	    //   $("#bikeInfo").slideToggle();
-			// });
-			$('#bikeInfoBtn').click(function(){
-	      toggleItemInfo();
-			});
-
-			// $('#smlCarInfoBtn').click(function(){
-	    //   $("#smlCarInfo").slideToggle();
-			// });
+			//Toggling Item Info Dynamically
+			//------------------------------
+			$(".moreInfoBtn").click(function(){
+					 	console.dir(this);
+				 	 	$(this).next().slideToggle();
+			 })
 
 
-			function toggleItemInfo(event){
-						event.target.slideToggle();
-			}
 
-});
+
+
+}());
