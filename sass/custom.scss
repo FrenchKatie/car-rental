@@ -89,6 +89,11 @@
           @include fillBtn;
           font-size: 18px;
       }
+      .iconBtnFillWide{
+          @include fillBtn;
+          font-size: 18px;
+          width: 100%;
+      }
       .iconBtnOutline{
           @include outlineBtn;
           font-size: 18px;
@@ -98,6 +103,11 @@
           margin-left: 65px;
       }
       .icon{
+          text-align: right;
+          margin-left : 55px;
+          margin-right: 10px;
+      }
+      .iconWide{
           text-align: right;
           margin-left : 55px;
           margin-right: 10px;
@@ -130,27 +140,39 @@
           border: none;
       }
 
+
+
+//--------------------
+//SECTION TWO STYLING
+//--------------------
+
+
+      body {
+          margin:0;
+          padding:0;
+      }
+      #map {
+          position:absolute;
+          left: 30%;
+          top:0;
+          bottom:0;
+          width:70%;
+      }
+
 //--------------------
 //SECTION THREE STYLING
 //--------------------
 
       .halfScreen{
           background-color: white;
-          width: 30%;
+          width: 40%;
           height: 100vh;
           padding: 40px;
           overflow: scroll;
       }
 
-      .item{
-          background-color: $bgGrey;
-          width: 100%;
-          margin-bottom: 20px;
-      }
-
       .itemLabel{
-          // margin-left: 20px;
-          margin-top: 20px;
+          padding: 0px !important;
       }
 
       .itemInfo{
@@ -158,20 +180,22 @@
           width: 100%;
           padding-left: 15%;
           padding-right: 15%;
-          // overflow: scroll;
-
       }
 
       .moreInfoBtn{
         @include outlineBtn;
         font-size: 18px;
-        margin-right: 20px;
         width: 350px;
-        margin-top: 30px;
       }
 
       .hide{
         display: none;
+      }
+
+      .myItem{
+        background-color: $bgGrey;
+        margin-top: 10px;
+        padding: 20px;
       }
 
 //--------------------

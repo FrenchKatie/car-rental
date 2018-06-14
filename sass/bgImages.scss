@@ -10,9 +10,20 @@
     background-position: center top;
 }
 
+.sectionTwoBg{
+    @include bg;
+    background-color: white;
+}
+
 .sectionThreeBg{
   @include bg;
     background-image: url(../images/vehicles.jpg);
+    background-position: left center;
+}
+
+.sectionFourBg{
+  @include bg;
+    background-image: url(../images/trip.jpg);
     background-position: left center;
 }
 
@@ -22,12 +33,13 @@
     background-position: center;
 }
 
-.itemImage{
-  display: block;
+.itemInformation{
+  width: 100%;
+
 }
 
-.itemImage img{
-    // max-width: 60%;
-    // margin-left: 20%;
-    width: 100%;
+.itemImage{
+  display: block;
+  width: 20%;
+  margin: auto;
 }
