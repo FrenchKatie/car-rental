@@ -93,10 +93,6 @@
           @include outlineBtn;
           font-size: 18px;
       }
-      .iconBtnOutline:focus{
-          -webkit-box-shadow: none!important;
-          box-shadow: none!important;
-      }
       .btnText{
           text-align: center;
           margin-left: 65px;
@@ -171,6 +167,7 @@
         font-size: 18px;
         margin-right: 20px;
         width: 350px;
+        margin-top: 30px;
       }
 
       .hide{
