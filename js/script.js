@@ -10,17 +10,11 @@
 			});
 			// $.fn.pagepiling.setAllowScrolling(false);
 
-
-
-
 			//---------------------
 			//Jquery UI Date Picker
 			//---------------------
 			$( "#dateLeave" ).datepicker();
 			$( "#dateReturn" ).datepicker();
-
-
-
 
 			//------------------------------
 			//Toggling Item Info Dynamically
@@ -29,8 +23,6 @@
 					 	// console.dir(this);
 				 	 	$(this).next().slideToggle();
 			})
-
-
 
 			//-------
 			//Map Box
@@ -73,9 +65,11 @@
 			  				getRoute();
 			});
 
+			var start = [];
+			var end = [];
+
 			function getRoute() {
-							  var start = [174.475047, -37.021158];
-							  var end = [168.572909, -45.12498];
+
 							  var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?geometries=geojson&access_token=' + mapboxgl.accessToken;
 							  $.ajax({
 									    method: 'GET',
@@ -174,22 +168,47 @@
 			var dropoffLocation = document.getElementById('inputGroupSelect2');
 			var getUserPickupLocation = pickupLocation.value;
 			var getUserDropoffLocation = dropoffLocation.value;
-			//
-			$("#test").click(function(){
-						console.dir(pickupLocation.value);
-						// console.dir(dropoffLocation.value);
+			var test = document.getElementById('test');
 
-						if (pickupLocation.value = auckland) {
-								alert("auckland yeah yeah");
-								console.dir(locationData["0"].coordinates[0]);
-						}else if(pickupLocation.value = wellington){
-							alert("welly ok ok ok");
-							console.log(locationData["1"].coordinates[0]);
-						}else if(pickupLocation.value = queenstown){
-							alert("queenstown wowie wowie");
-							console.log(locationData["2"].coordinates[0]);
-						}
 
-			})
+			//On click event listener
+			test.addEventListener('click', function (e) {
+						e.preventDefault();
+						startLocation();
+						endLocation();
+
+			}); //end of click event
+
+			function startLocation() {
+							if (pickupLocation.value === "auckland") {
+										// console.dir(locationData["0"].coordinates);
+										start.push(locationData["0"].coordinates);
+										console.log(start);
+							}else if(pickupLocation.value === "wellington"){
+										// console.log(locationData["1"].coordinates);
+										start.push(locationData["1"].coordinates);
+										console.log(start);
+							}else if(pickupLocation.value === "queenstown"){
+										// console.log(locationData["2"].coordinates);
+										start.push(locationData["2"].coordinates);
+										console.log(start);
+							}
+			}
+
+			function endLocation () {
+							if (dropoffLocation.value === "auckland") {
+										// console.dir(locationData["0"].coordinates);
+										end.push(locationData["0"].coordinates);
+										console.log(end);
+							}else if(dropoffLocation.value === "wellington"){
+										// console.log(locationData["1"].coordinates);
+										end.push(locationData["1"].coordinates);
+										console.log(end);
+							}else if(dropoffLocation.value === "queenstown"){
+										// console.log(locationData["2"].coordinates);
+										end.push(locationData["2"].coordinates);
+										console.log(end);
+							}
+			}
 
 }());
