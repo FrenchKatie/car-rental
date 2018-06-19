@@ -40,12 +40,18 @@ var vehicleData = [
 
 var locationData = [
       auckland = {
-        coordinates: [174.763332, -36.848460]
+        location: 'auckland',
+        coordinates: [174.763332,
+                      -36.848460]
       },
       wellington = {
-        coordinates: [174.776236, -41.286460]
+        location: 'wellington',
+        coordinates: [174.776236,
+                      -41.286460]
       },
       queenstown = {
-        coordinates: [168.662644, -45.031162]
+        location: 'queenstown',
+        coordinates: [168.662644,
+                      -45.031162]
       }
 ]

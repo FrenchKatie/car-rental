@@ -24,50 +24,23 @@
 				 	 	$(this).next().slideToggle();
 			})
 
-			//-------
-			//Map Box
- 			//-------
-
-			// function createMap () {
-			// 	//get input fields
-			// 	var pickupLocation = document.getElementById('inputGroupSelect1');
-			// 	var dropoffLocation = document.getElementById('inputGroupSelect2');
-			// 	//get user input locations
-			// 	var getUserPickupLocation = pickupLocation.value;
-			// 	var getUserDropoffLocation = dropoffLocation.value;
-			// 	//Get drop off same as pickup
-			// 	//----if statement where getUserPickupLocation and getUserDropoffLocation will = eachother
-			// 	//Get coordinates
-			//
-			//
-			//
-			// }
-
-
+			//---------------
+			//Map Box & Route
+ 			//---------------
 
 			mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0aWVmcmVuY2giLCJhIjoiY2ppM240MGFyMDA5cTNrbDJwNTkwYWZmOSJ9.vMh53hzHle4vA4uwg0TE6A';
-
 			var map = new mapboxgl.Map({
 								container: 'map',
 								style: 'mapbox://styles/mapbox/streets-v9',
 								center: [173.839405, -41.181890],
 								zoom: 5
 			});
-
 			var directions = new MapboxDirections({
 								accessToken:
 									'pk.eyJ1Ijoia2F0aWVmcmVuY2giLCJhIjoiY2ppM240MGFyMDA5cTNrbDJwNTkwYWZmOSJ9.vMh53hzHle4vA4uwg0TE6A',
 								unit: 'metric',
 								profile: 'mapbox/driving'
 			});
-
-			map.on('load', function() {
-			  				getRoute();
-			});
-
-			var start = [];
-			var end = [];
-
 			function getRoute() {
 
 							  var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?geometries=geojson&access_token=' + mapboxgl.accessToken;
@@ -121,14 +94,6 @@
 							  });
 			}
 
-
-
-
-
-// *** LOGIC JS ***
-
-
-
 			//--------------------------------------
 			// Getting user input of Dates & Seats
 			//--------------------------------------
@@ -137,24 +102,28 @@
 			var seatNumber = document.getElementById('seats');
 
 
-
 			$("#sectionOneSubmitBtn").click(function(){
-				//Getting the difference between the two dates
+						getSeats();
+						getDates();
+			})
+			//Storing the users seat input in a variable
+			function getSeats() {
+						var userSeat = seatNumber.value
+						console.log(userSeat);
+			}
+
+			//Storing the users date inputs in variables
+			function getDates() {
 						var date1 = new Date(leaveDate.value);
 						var date2 = new Date(returnDate.value);
+						//Getting the difference between the two dates
 						var diffDays = parseInt((date2 - date1) / (1000 * 60 * 60 * 24));
-						// alert(diffDays)
 						console.log(diffDays);
-						console.log(seatNumber);
-
-
-
-			})
+			}
 
 			//----------------------------------------------
 			// Showing vehicles that match date & seat needs
 			//----------------------------------------------
-
 
 
 
@@ -176,38 +145,31 @@
 						e.preventDefault();
 						startLocation();
 						endLocation();
+						getRoute();
+			});
 
-			}); //end of click event
+			//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
+			var start = [];
+			var end = [];
 
+			//Finding the start location coordinates depending on what the user input was.  This is called in the click function above
 			function startLocation() {
 							if (pickupLocation.value === "auckland") {
-										// console.dir(locationData["0"].coordinates);
-										start.push(locationData["0"].coordinates);
-										console.log(start);
+										start =[174.763332, -36.848460]
 							}else if(pickupLocation.value === "wellington"){
-										// console.log(locationData["1"].coordinates);
-										start.push(locationData["1"].coordinates);
-										console.log(start);
+										start =[174.776236, -41.286460]
 							}else if(pickupLocation.value === "queenstown"){
-										// console.log(locationData["2"].coordinates);
-										start.push(locationData["2"].coordinates);
-										console.log(start);
+										start =[168.662644, -45.031162]
 							}
 			}
-
+			//Finding the end location coordinates depending on what the user input was. This is called in the click function above
 			function endLocation () {
 							if (dropoffLocation.value === "auckland") {
-										// console.dir(locationData["0"].coordinates);
-										end.push(locationData["0"].coordinates);
-										console.log(end);
+										end = [174.763332, -36.848460]
 							}else if(dropoffLocation.value === "wellington"){
-										// console.log(locationData["1"].coordinates);
-										end.push(locationData["1"].coordinates);
-										console.log(end);
+										end = [174.776236, -41.286460]
 							}else if(dropoffLocation.value === "queenstown"){
-										// console.log(locationData["2"].coordinates);
-										end.push(locationData["2"].coordinates);
-										console.log(end);
+										end = [168.662644, -45.031162]
 							}
 			}
 
