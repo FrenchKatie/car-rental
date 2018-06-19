@@ -1,6 +1,7 @@
 (function() {
 
-// *** FRONT END JS ***
+			var seats = 0;
+			var diffDays = 0;
 
 			//------------------
 			//Page Piling Plugin
@@ -13,8 +14,33 @@
 			//---------------------
 			//Jquery UI Date Picker
 			//---------------------
-			$( "#dateLeave" ).datepicker();
-			$( "#dateReturn" ).datepicker();
+			$( "#dateLeave,#dateReturn" ).datepicker({
+						changeMonth: true,
+						changeYear: true,
+						firstDay: 1,
+						dateFormat: 'dd/mm/yy',
+			})
+
+			$( "#dateLeave" ).datepicker({ dateFormat: 'dd-mm-yy' });
+			$( "#dateReturn" ).datepicker({ dateFormat: 'dd-mm-yy' });
+
+			$('#dateReturn').change(function() {
+						var startDate = $('#dateLeave').datepicker('getDate');
+						var endDate   = $('#dateReturn').datepicker('getDate');
+
+						if (startDate<endDate) {
+									diffDays   = (endDate - startDate)/1000/60/60/24;
+									// $('#days').val(days);
+									console.log(diffDays);
+						}
+						else {
+									alert ("You cant come back before you have been!");
+									$('#dateLeave').val("");
+									$('#dateReturn').val("");
+									// $('#days').val("");
+									console.log(diffDays);
+						}
+			}); //end change function
 
 			//------------------------------
 			//Toggling Item Info Dynamically
@@ -103,27 +129,35 @@
 
 
 			$("#sectionOneSubmitBtn").click(function(){
-						getSeats();
+						//Storing the users seat input in a variable
+						seats = seatNumber.value;
+						console.log(seats);
 						getDates();
 			})
-			//Storing the users seat input in a variable
-			function getSeats() {
-						var userSeat = seatNumber.value
-						console.log(userSeat);
-			}
 
 			//Storing the users date inputs in variables
 			function getDates() {
-						var date1 = new Date(leaveDate.value);
-						var date2 = new Date(returnDate.value);
-						//Getting the difference between the two dates
-						var diffDays = parseInt((date2 - date1) / (1000 * 60 * 60 * 24));
-						console.log(diffDays);
+						// var date1 = new Date(leaveDate.value);
+						// var date2 = new Date(returnDate.value);
+						// var timeDiff = date2.getTime() - date1.getTime();
+						// // console.log(leaveDate.value);
+						// // console.log(date1);
+						// //Getting the difference between the two dates
+						// diffDays = parseInt((returnDate.value - leaveDate.value) / (1000 * 60 * 24));
+						// console.log(diffDays);
+
+
 			}
+			console.log(seats);
+
+
+
+
 
 			//----------------------------------------------
 			// Showing vehicles that match date & seat needs
 			//----------------------------------------------
+
 
 
 
@@ -138,20 +172,16 @@
 			var getUserPickupLocation = pickupLocation.value;
 			var getUserDropoffLocation = dropoffLocation.value;
 			var test = document.getElementById('test');
-
-
 			//On click event listener
 			test.addEventListener('click', function (e) {
-						e.preventDefault();
-						startLocation();
-						endLocation();
-						getRoute();
+							e.preventDefault();
+							startLocation();
+							endLocation();
+							getRoute();
 			});
-
 			//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
 			var start = [];
 			var end = [];
-
 			//Finding the start location coordinates depending on what the user input was.  This is called in the click function above
 			function startLocation() {
 							if (pickupLocation.value === "auckland") {
