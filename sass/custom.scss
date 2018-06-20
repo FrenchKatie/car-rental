@@ -2,7 +2,9 @@
 @import "variables.scss";
 @import "fonts.scss";
 
-
+//----------------------
+//REUSABLE LAYOUT CLASSES
+//----------------------
         @mixin centerAll {
             position: absolute;
             top: 50%;
@@ -15,7 +17,7 @@
         }
 
         .alignRight{
-          text-align: right;
+            text-align: right;
         }
 
         .flexMe{
@@ -26,6 +28,21 @@
 
         .flexChildren{
             flex: 1;
+        }
+
+        .halfScreenMap{
+            background-color: white;
+            width: 40%;
+            height: 100vh;
+            padding: 40px;
+        }
+
+        .halfScreen{
+            background-color: white;
+            width: 40%;
+            height: 100vh;
+            padding: 40px;
+            overflow: scroll;
         }
 
 //----------------------
@@ -112,6 +129,16 @@
           margin-left : 55px;
           margin-right: 10px;
       }
+      .nextIconBtnFillWide{
+          @include fillBtn;
+          font-size: 18px;
+          width: 35%;
+          position: absolute;
+          bottom: 5%;
+          left: 2.5%;
+      }
+
+
 
 
 
@@ -153,23 +180,24 @@
       }
       #map {
           position:absolute;
-          left: 30%;
+          left: 40%;
           top:0;
           bottom:0;
-          width:70%;
+          width:60%;
       }
+
+      #inputGroupSelect1{
+          margin-top: 20px;
+      }
+      #inputGroupSelect2{
+          margin-top: 20px;
+      }
+
 
 //--------------------
 //SECTION THREE STYLING
 //--------------------
 
-      .halfScreen{
-          background-color: white;
-          width: 40%;
-          height: 100vh;
-          padding: 40px;
-          overflow: scroll;
-      }
 
       .itemLabel{
           padding: 0px !important;

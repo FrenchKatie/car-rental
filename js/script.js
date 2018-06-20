@@ -1,7 +1,13 @@
 (function() {
 
+			var leaveDate = document.getElementById('dateLeave');
+			var returnDate = document.getElementById('dateReturn');
+			var seatNumber = document.getElementById('seats');
 			var seats = 0;
 			var diffDays = 0;
+			var startDate = 0;
+			var endDate = 0;
+			var distance = 0;
 
 			//------------------
 			//Page Piling Plugin
@@ -24,14 +30,16 @@
 			$( "#dateLeave" ).datepicker({ dateFormat: 'dd-mm-yy' });
 			$( "#dateReturn" ).datepicker({ dateFormat: 'dd-mm-yy' });
 
+
 			$('#dateReturn').change(function() {
-						var startDate = $('#dateLeave').datepicker('getDate');
-						var endDate   = $('#dateReturn').datepicker('getDate');
+						//Storing the users date inputs in variables
+						startDate = $('#dateLeave').datepicker('getDate');
+						endDate   = $('#dateReturn').datepicker('getDate');
 
 						if (startDate<endDate) {
 									diffDays   = (endDate - startDate)/1000/60/60/24;
-									// $('#days').val(days);
-									console.log(diffDays);
+									// $('#days').val(diffDays);
+									console.log(diffDays + " days requested to rent");
 						}
 						else {
 									alert ("You cant come back before you have been!");
@@ -46,7 +54,6 @@
 			//Toggling Item Info Dynamically
 			//------------------------------
 			$(".moreInfoBtn").click(function(){
-					 	// console.dir(this);
 				 	 	$(this).next().slideToggle();
 			})
 
@@ -75,6 +82,7 @@
 									    url: directionsRequest,
 							  }).done(function(data) {
 									    var route = data.routes[0].geometry;
+											distance = data.routes[0].distance / 1000;
 									    map.addLayer({
 										      id: 'route',
 										      type: 'line',
@@ -123,36 +131,12 @@
 			//--------------------------------------
 			// Getting user input of Dates & Seats
 			//--------------------------------------
-			var leaveDate = document.getElementById('dateLeave');
-			var returnDate = document.getElementById('dateReturn');
-			var seatNumber = document.getElementById('seats');
-
 
 			$("#sectionOneSubmitBtn").click(function(){
 						//Storing the users seat input in a variable
 						seats = seatNumber.value;
-						console.log(seats);
-						getDates();
+						// console.log(seats + " seats requested");
 			})
-
-			//Storing the users date inputs in variables
-			function getDates() {
-						// var date1 = new Date(leaveDate.value);
-						// var date2 = new Date(returnDate.value);
-						// var timeDiff = date2.getTime() - date1.getTime();
-						// // console.log(leaveDate.value);
-						// // console.log(date1);
-						// //Getting the difference between the two dates
-						// diffDays = parseInt((returnDate.value - leaveDate.value) / (1000 * 60 * 24));
-						// console.log(diffDays);
-
-
-			}
-			console.log(seats);
-
-
-
-
 
 			//----------------------------------------------
 			// Showing vehicles that match date & seat needs
@@ -163,21 +147,22 @@
 
 
 
-			//--------------------------------------
-			// Mapping Route & Getting User location
-			//--------------------------------------
+			//-------------------------------------------------
+			// Mapping Route & Getting User location & Distance
+			//-------------------------------------------------
 
 			var pickupLocation = document.getElementById('inputGroupSelect1');
 			var dropoffLocation = document.getElementById('inputGroupSelect2');
 			var getUserPickupLocation = pickupLocation.value;
 			var getUserDropoffLocation = dropoffLocation.value;
-			var test = document.getElementById('test');
+			var viewRoute = document.getElementById('viewRoute');
 			//On click event listener
-			test.addEventListener('click', function (e) {
+			viewRoute.addEventListener('click', function (e) {
 							e.preventDefault();
 							startLocation();
 							endLocation();
 							getRoute();
+							console.log(distance);
 			});
 			//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
 			var start = [];
@@ -202,5 +187,45 @@
 										end = [168.662644, -45.031162]
 							}
 			}
+
+			//---------------------------------------------------
+			// Dynamically putting users info into booking review
+			//---------------------------------------------------
+
+			// var confirmPickupDate = document.getElementById('bookingPickupDate');
+			// confirmPickupDate.insertadjacentHTML('afterend', 'test me out');
+			//insertadjacentHTML
+
+			// var newLine = '<div class="flexMe">';
+			// 		newLine += '		<p class="flexChildren headingSix">Pick-up date</p>';
+			// 		newLine += '		<p class="flexChildren alignRight headingFive">March 13 2018</p>';
+			// 		newLine += '</div>';
+
+
+
+			// <div class="flexMe">
+			// 		<p class="flexChildren headingSix">Pick-up date</p>
+			// 		<p class="flexChildren alignRight headingFive">March 13 2018</p>
+			// </div>
+			// <div class="flexMe">
+			// 		<p class="flexChildren headingSix">Drop-off date</p>
+			// 		<p class="flexChildren alignRight headingFive">March 15 2018</p>
+			// </div>
+			// <div class="flexMe">
+			// 		<p class="flexChildren headingSix">Pick-up location</p>
+			// 		<p class="flexChildren alignRight headingFive">Auckland</p>
+			// </div>
+			// <div class="flexMe">
+			// 		<p class="flexChildren headingSix">Drop-off location</p>
+			// 		<p class="flexChildren alignRight headingFive">Queenstown</p>
+			// </div>
+			// <div class="flexMe">
+			// 		<p class="flexChildren headingSix">Vehicle</p>
+			// 		<p class="flexChildren alignRight headingFive">Small car</p>
+			// </div>
+			// <div class="flexMe">
+			// 			<h2 class="flexChildren headingFour">Total booking cost:</h2>
+			// 			<h3 class="flexChildren alignRight headingFour">$516</h3>
+			// </div>
 
 }());

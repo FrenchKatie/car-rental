@@ -36,30 +36,33 @@
                   </div>
             </div>
 
+
+
             <div class="section">
                   <div class="sectionTwoBg">
-                      <div class="sectionTwoInner">
+                      <div class="sectionTwoInner halfScreenMap">
                           <h2 class="headingTwo">Where are you headed?</h2>
-                          <p>Pick up</p>
                           <select class="custom-select" id="inputGroupSelect1">
-                              <option selected>Choose...</option>
+                              <option selected>Choose pick up location</option>
                               <option value="auckland">Auckland</option>
                               <option value="wellington">Wellington</option>
                               <option value="queenstown">Queenstown</option>
                           </select>
-                          <p> Drop off</p>
                           <select class="custom-select" id="inputGroupSelect2">
-                              <option selected>Choose...</option>
+                              <option selected>Choose drop off location</option>
                               <option value="auckland">Auckland</option>
                               <option value="wellington">Wellington</option>
                               <option value="queenstown">Queenstown</option>
                           </select>
-                          <button type="button" id="test" name="button">test</button>
+                          <button type="button" class="outlineBtn" id="viewRoute" name="button">View Route</button>
+                          <button type="button" name="button" class="nextIconBtnFillWide"><span class="btnText col-12">Confirm locations</span><i class="iconWide fas fa-chevron-right"></i></button>
                       </div>
 
                       <div id='map'></div>
                   </div>
             </div>
+
+
 
             <div class="section">
                   <div class="sectionThreeBg">
@@ -81,9 +84,6 @@
                                           </div>
                                           <button type="button" name="button" class="moreInfoBtn"><span class="btnText col-9">View information</span><i class="icon fas fa-chevron-down"></i></button>
                                           <div class="hide itemInformation">
-                                                <!-- <div class="itemImage">
-                                                      <img src="images/smallcaricon.svg" alt="">
-                                                </div> -->
                                                 <div class="">
                                                       <h4 class="headingFive">General</h4>
                                                       <div class="flexMe">
@@ -124,9 +124,6 @@
                                           </div>
                                           <button type="button" name="button" class="moreInfoBtn"><span class="btnText col-9">View information</span><i class="icon fas fa-chevron-down"></i></button>
                                           <div class="hide itemInformation">
-                                                <!-- <div class="itemImage">
-                                                      <img src="images/smallcaricon.svg" alt="">
-                                                </div> -->
                                                 <div class="">
                                                       <h4 class="headingFive">General</h4>
                                                       <div class="flexMe">
@@ -175,7 +172,7 @@
                                 <div class="bookingConfirmInfo">
                                       <div class="flexMe">
                                           <p class="flexChildren headingSix">Pick-up date</p>
-                                          <p class="flexChildren alignRight headingFive">March 13 2018</p>
+                                          <p class="flexChildren alignRight headingFive" id="bookingPickupDate"></p>
                                       </div>
                                       <div class="flexMe">
                                           <p class="flexChildren headingSix">Drop-off date</p>
@@ -198,6 +195,7 @@
                                             <h3 class="flexChildren alignRight headingFour">$516</h3>
                                       </div>
                                 </div>
+                                <button type="button" name="button" class="nextIconBtnFillWide"><span class="btnText col-12">Confirm your booking</span><i class="iconWide fas fa-chevron-right"></i></button>
 
 
                           </div>
