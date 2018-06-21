@@ -60,7 +60,6 @@
 			//---------------
 			//Map Box & Route
  			//---------------
-
 			mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0aWVmcmVuY2giLCJhIjoiY2ppM240MGFyMDA5cTNrbDJwNTkwYWZmOSJ9.vMh53hzHle4vA4uwg0TE6A';
 			var map = new mapboxgl.Map({
 								container: 'map',
@@ -126,6 +125,7 @@
 													  }
 												});
 							  });
+
 			}
 
 			//--------------------------------------
@@ -137,15 +137,6 @@
 						seats = seatNumber.value;
 						// console.log(seats + " seats requested");
 			})
-
-			//----------------------------------------------
-			// Showing vehicles that match date & seat needs
-			//----------------------------------------------
-
-
-
-
-
 
 			//-------------------------------------------------
 			// Mapping Route & Getting User location & Distance
@@ -162,7 +153,15 @@
 							startLocation();
 							endLocation();
 							getRoute();
-							console.log(distance);
+
+
+							getPricePerDay(0);
+							getPricePerDay(1);
+							getPricePerDay(2);
+
+							getFuelConsumption(0, distance);
+							getFuelConsumption(1, distance);
+							getFuelConsumption(2, distance);
 			});
 			//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
 			var start = [];
@@ -187,45 +186,22 @@
 										end = [168.662644, -45.031162]
 							}
 			}
-
 			//---------------------------------------------------
-			// Dynamically putting users info into booking review
+			// Working out prices based on distance etc
 			//---------------------------------------------------
 
-			// var confirmPickupDate = document.getElementById('bookingPickupDate');
-			// confirmPickupDate.insertadjacentHTML('afterend', 'test me out');
-			//insertadjacentHTML
 
-			// var newLine = '<div class="flexMe">';
-			// 		newLine += '		<p class="flexChildren headingSix">Pick-up date</p>';
-			// 		newLine += '		<p class="flexChildren alignRight headingFive">March 13 2018</p>';
-			// 		newLine += '</div>';
+			//gets price per day of the vehicle index number multiplied by days travelled
+			function getPricePerDay (indexNum) {
+							var getPricePerDay = vehicleData[indexNum].pricePerDay * diffDays;
+							console.log(getPricePerDay + " price to rent");
+			}
+			//gets getFuelConsumption for the vehicle by its corresponding index number and distance travelled
+			function getFuelConsumption (indexNum, distanceToTravel) {
+							console.log(distance + " is the distance travelled");
+							var getFuelConsumption = distanceToTravel / 100 * vehicleData[indexNum].fuelKm;
+							console.log(getFuelConsumption + " fuel consumption");
+			}
 
-
-
-			// <div class="flexMe">
-			// 		<p class="flexChildren headingSix">Pick-up date</p>
-			// 		<p class="flexChildren alignRight headingFive">March 13 2018</p>
-			// </div>
-			// <div class="flexMe">
-			// 		<p class="flexChildren headingSix">Drop-off date</p>
-			// 		<p class="flexChildren alignRight headingFive">March 15 2018</p>
-			// </div>
-			// <div class="flexMe">
-			// 		<p class="flexChildren headingSix">Pick-up location</p>
-			// 		<p class="flexChildren alignRight headingFive">Auckland</p>
-			// </div>
-			// <div class="flexMe">
-			// 		<p class="flexChildren headingSix">Drop-off location</p>
-			// 		<p class="flexChildren alignRight headingFive">Queenstown</p>
-			// </div>
-			// <div class="flexMe">
-			// 		<p class="flexChildren headingSix">Vehicle</p>
-			// 		<p class="flexChildren alignRight headingFive">Small car</p>
-			// </div>
-			// <div class="flexMe">
-			// 			<h2 class="flexChildren headingFour">Total booking cost:</h2>
-			// 			<h3 class="flexChildren alignRight headingFour">$516</h3>
-			// </div>
 
 }());

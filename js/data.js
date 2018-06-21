@@ -5,6 +5,7 @@
 
 var vehicleData = [
         motorbike = {
+              type: "motorbike",
               minSeats: 1,
               maxSeats: 1,
               pricePerDay: 109,
@@ -13,6 +14,7 @@ var vehicleData = [
               fuelKm: 3.7
         },
         smallCar = {
+              type: "smallCar",
               minSeats:1,
               maxSeats:2,
               pricePerDay: 129,
@@ -21,6 +23,7 @@ var vehicleData = [
               fuelKm: 8.5
         },
         largeCar = {
+              type: "largeCar",
               minSeats:1,
               maxSeats:5,
               pricePerDay: 144,
@@ -29,6 +32,7 @@ var vehicleData = [
               fuelKm:9.7
         },
         motorhome = {
+              type: "motorhome",
               minSeats: 2,
               maxSeats: 6,
               pricePerDay: 200,
