@@ -55,7 +55,7 @@
                               <option value="queenstown">Queenstown</option>
                           </select>
                           <button type="button" class="outlineBtn" id="viewRoute" name="button">View Route</button>
-                          <button type="button" name="button" class="nextIconBtnFillWide"><span class="btnText col-12">Confirm locations</span><i class="iconWide fas fa-chevron-right"></i></button>
+                          <button type="button" name="button" class="nextIconBtnFillWide" id="confirmLocation"><span class="btnText col-12">Confirm locations</span><i class="iconWide fas fa-chevron-right"></i></button>
                       </div>
 
                       <div id='map'></div>
@@ -68,7 +68,7 @@
                   <div class="sectionThreeBg">
                       <div class="sectionThreeInner" >
                           <div class="halfScreen"  id="vehicleContent">
-                              <div class="" id="bla">
+                              <div class="" id="itemsHeader">
                                     <h2 class="headingTwo">Find what vehicle option suits you best</h2>
                                     <h3 class="headingFour">You requested a vehicle with <span class="featureFont">3</span> seats for a period of <span class="featureFont">4</span> days</h3>
                                     <h3 class="headingFour">Select a vehicle down below to see more information</h3>
@@ -76,7 +76,7 @@
                               </div>
 
 
-                              <!-- <div id="itemWrapp">
+                              <div id="itemWrapp">
 
                                       <div class="myItem itemMotorbike row justify-content-between" id="motorbike">
                                           <div class=" itemLabel col-3">
@@ -111,10 +111,10 @@
                                                           <p class="flexChildren alignRight">140</p>
                                                       </div>
                                                 </div>
-                                                <button type="button" name="button" class="iconBtnFillWide"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
+                                                <button type="button" name="button" class="iconBtnFillWide" id="confirmJourney"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
 
                                           </div>
-                                      </div> -->
+                                      </div>
 
 
 
@@ -198,7 +198,7 @@
 
 
 
-                                      <div class="myItem itemMotorhome row justify-content-between" id="motorhome">
+                                      <!-- <div class="myItem itemMotorhome row justify-content-between" id="motorhome">
                                           <div class=" itemLabel col-3">
                                                 <p class="headingSix removeSpace">Motorhome</p>
                                                 <p class="headingFive removeSpace">6 Seats</p>
@@ -234,7 +234,7 @@
                                                 <button type="button" name="button" class="iconBtnFillWide"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
 
                                           </div>
-                                      </div>
+                                      </div> -->
                               </div>
                           </div>
                       </div>
@@ -252,20 +252,20 @@
                                 </div>
                                 <div class="bookingConfirmInfo">
                                       <div class="flexMe">
-                                          <p class="flexChildren headingSix">Pick-up date</p>
-                                          <p class="flexChildren alignRight headingFive" id="bookingPickupDate"></p>
+                                          <p class="flexChildren headingSix" id="journeyLeaveDate">Pick-up date</p>
+                                          <!-- <p class="flexChildren alignRight headingFive" id="bookingPickupDate"></p> -->
                                       </div>
                                       <div class="flexMe">
-                                          <p class="flexChildren headingSix">Drop-off date</p>
-                                          <p class="flexChildren alignRight headingFive">March 15 2018</p>
+                                          <p class="flexChildren headingSix" id="journeyReturnDate">Drop-off date</p>
+                                          <!-- <p class="flexChildren alignRight headingFive">March 15 2018</p> -->
                                       </div>
                                       <div class="flexMe">
-                                          <p class="flexChildren headingSix">Pick-up location</p>
-                                          <p class="flexChildren alignRight headingFive">Auckland</p>
+                                          <p class="flexChildren headingSix" id="journeyLeaveLoc">Pick-up location</p>
+                                          <!-- <p class="flexChildren alignRight headingFive">Auckland</p> -->
                                       </div>
                                       <div class="flexMe">
-                                          <p class="flexChildren headingSix">Drop-off location</p>
-                                          <p class="flexChildren alignRight headingFive">Queenstown</p>
+                                          <p class="flexChildren headingSix" id="journeyReturnLoc">Drop-off location</p>
+                                          <!-- <p class="flexChildren alignRight headingFive">Queenstown</p> -->
                                       </div>
                                       <div class="flexMe">
                                           <p class="flexChildren headingSix">Vehicle</p>
@@ -291,8 +291,8 @@
                   <div class="sectionFiveBg">
                       <div class="sectionFiveInner">
                           <h1 class="bannerHeading">You're good to go!</h1>
-                          <h2 class="headingTwo">Congratulations, your booking has been succesful.</h2>
-                          <h3 class="headingThree">We'll see you on March 13 when you start your journey</h3>
+                          <h2 class="headingTwo" id="sectionFiveCongrat">Congratulations, your booking has been succesful.</h2>
+                          <!-- <h3 class="headingThree">We'll see you on March 13 when you start your journey</h3> -->
                           <button type="button" name="button" class="iconBtnFill"><span class="btnText">Ok</span><i class="icon fas fa-chevron-right"></i></button>
                       </div>
                   </div>

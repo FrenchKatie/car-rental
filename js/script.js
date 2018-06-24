@@ -7,6 +7,7 @@
 			var diffDays = 0;
 			var startDate = 0;
 			var endDate = 0;
+			var route = 0;
 			var distance = 0;
 			var userOptions = [];
 
@@ -16,7 +17,16 @@
 			$('#pagepiling').pagepiling({
 					normalScrollElements: '.halfScreen'
 			});
-			// $.fn.pagepiling.setAllowScrolling(false);
+			$.fn.pagepiling.setAllowScrolling(false);
+
+			$("#confirmLocation").click(function(){
+						//pagepiling plugin - move to next section
+						$.fn.pagepiling.moveSectionDown();
+			});
+			$("#confirmJourney").click(function(){
+						//pagepiling plugin - move to next section
+						$.fn.pagepiling.moveSectionDown();
+			});
 
 			//---------------------
 			//Jquery UI Date Picker
@@ -39,15 +49,11 @@
 
 						if (startDate<endDate) {
 									diffDays   = (endDate - startDate)/1000/60/60/24;
-									// $('#days').val(diffDays);
-									// console.log(diffDays + " days requested to rent");
 						}
 						else {
 									alert ("You cant come back before you have been!");
 									$('#dateLeave').val("");
 									$('#dateReturn').val("");
-									// $('#days').val("");
-									// console.log(diffDays);
 						}
 			}); //end change function
 
@@ -56,6 +62,7 @@
 			//------------------------------
 			$(".moreInfoBtn").click(function(){
 				 	 	$(this).next().slideToggle();
+
 			});
 
 			//---------------
@@ -81,8 +88,8 @@
 									    method: 'GET',
 									    url: directionsRequest,
 							  }).done(function(data) {
-									    var route = data.routes[0].geometry;
-											distance = data.routes[0].distance / 1000;
+											// custom function once ajax completes
+											goodToGo(data);
 									    map.addLayer({
 										      id: 'route',
 										      type: 'line',
@@ -126,7 +133,9 @@
 													  }
 												});
 							  });
+
 			}
+
 
 			//--------------------------------------
 			// Getting user input of Dates & Seats
@@ -135,8 +144,8 @@
 			$("#sectionOneSubmitBtn").click(function(){
 						//Storing the users seat input in a variable
 						seats = parseInt(seatNumber.value);
-						// console.log(seats + " seats requested");
-						getVehicle();
+						//pagepiling plugin - move to next section
+						$.fn.pagepiling.moveSectionDown();
 			});
 
 			//-------------------------------------------------
@@ -154,17 +163,9 @@
 							startLocation();
 							endLocation();
 							getRoute();
+							//logs the distance of the route but needs to be fired after the Route function is finished running
+							getVehicle();
 
-							// console.log(distance);
-
-
-							// getPricePerDay(0);
-							// getPricePerDay(1);
-							// getPricePerDay(2);
-							//
-							// getFuelConsumption(0, distance);
-							// getFuelConsumption(1, distance);
-							// getFuelConsumption(2, distance);
 			});
 			//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
 			var start = [];
@@ -202,13 +203,14 @@
 												vehicleData[i].maxDays >= diffDays) {
 
 													var newElement = "";
+													newElement += "<div class='myItem row justify-content-between'>"
 													newElement += "<div class='itemLabel col-3'>"
-													newElement +=			"<p class='headingSix removeSpace'>Motorhome</p>"
-													newElement +=			"<p class='headingFive removeSpace'>6 Seats</p>"
+													newElement +=			"<p class='headingSix removeSpace'>" + vehicleData[i].type + "</p>"
+													newElement +=			"<p class='headingFive removeSpace'>" + vehicleData[i].maxSeats + " Seats</p>"
 													newElement += "</div>"
 													newElement += "<button type='button' name='button' class='moreInfoBtn'><span class='btnText col-9'>View information</span><i class='icon fas fa-chevron-down'></i></button>"
-													newElement += "div class='hide itemInformation'>"
-													newElement += "<div>"
+													newElement += "<div class='hide'>"
+													newElement += "<div class='fullWidth'>"
 													newElement += 		"<h4 class='headingFive'>General</h4>"
 													newElement += 		"<div class='flexMe'>"
 													newElement += 					"<p class='flexChildren'>Seats</p>"
@@ -218,74 +220,74 @@
 													newElement +=			"</div>"
 													newElement +=			"<div class='flexMe'>"
 													newElement +=					"<p class='flexChildren'>Rental cost per day</p>"
-													newElement +=					"<p class='flexChildren alignRight'>$129</p>"
+													newElement +=					"<p class='flexChildren alignRight'>$" + vehicleData[i].pricePerDay + "</p>"
 													newElement +=			"</div>"
 													newElement +=			"<div class='flexMe'>"
 													newElement +=					"<p class='flexChildren'>Fuel consumption per 100km</p>"
-													newElement +=					"<p class='flexChildren alignRight'>8.5 L</p>"
+													newElement +=					"<p class='flexChildren alignRight'>" + vehicleData[i].fuelKm + "L</p>"
 													newElement +=			"</div>"
 													newElement +=	"</div>"
-													newElement +=	"<div>"
+													newElement +=	"<div class='fullWidth'>"
 													newElement +=			"<h4 class='headingFive'>Your trip</h4>"
 													newElement +=			"<div class='flexMe'>"
 													newElement +=					"<p class='flexChildren'>Rental cost total</p>"
-													newElement +=					"<p class='flexChildren alignRight'>$516</p>"
+													newElement +=					"<p class='flexChildren alignRight'>$" + vehicleData[i].pricePerDay * diffDays + "</p>"
 													newElement +=			"</div>"
 													newElement +=			"<div class='flexMe'>"
 													newElement +=					"<p class='flexChildren'>Estimated fuel consumption total</p>"
-													newElement +=					"<p class='flexChildren alignRight'>140</p>"
+													newElement +=					"<p class='flexChildren alignRight'>" + vehicleData[i].fuelKm * distance + "L</p>"
 													newElement +=			"</div>"
 													newElement +=	"</div>"
-													newElement +=	"<button type='button' name='button' class='iconBtnFillWide'><span class='btnText col-12'>Confirm this vehicle</span><i class='iconWide fas fa-chevron-right'></i></button>"
+													newElement +=	"<button type='button' name='button' class='iconBtnFillWide' id='confirm" + vehicleData[i].type + "'><span class='btnText col-12'>Confirm this vehicle</span><i class='iconWide fas fa-chevron-right'></i></button>"
+													newElement +=	"</div>"
+													newElement +=	"</div>"
 													newElement +=	"</div>"
 
-													var bla = document.getElementById("bla");
-													bla.insertAdjacentHTML("afterEnd", newElement);
+													var insertItem = document.getElementById("itemsHeader");
+													insertItem.insertAdjacentHTML("afterEnd", newElement);
 
-
-													// var vehicleType = document.getElementById("'" + vehicleData[i].type + "'");
-													// console.dir(document.getElementById("motorbike"));
-													// vehicleType.style.display = "block";
-
-													// var type = vehicleData[i].type;
-
-													// var vehDom = $("'#"+vehicleData[i].type+"'")[0];
-													// // console.dir();
-													// vehDom.style.display = "block";
-
-													// $("'#" + vehicleData[i].type + "'").style.display = "block";
-
-														//
-														// var motorbike = document.getElementById("motorbike");
-														// type.style.display = "block";
-										// }else{
-														// alert("I've got nothing for you...");
 										}
-							// }
-							//
-							// //if diffdays is less than or equal to maxdays AND if diffdays is greater than min days
-							// //AND if seats is less than or equal to maxseats AND if minseats run this:
-							// if ((diffDays <= vehicleData[0].maxDays) &&  (diffDays >= vehicleData[0].minDays)
-							// 		&& (seats <= vehicleData[0].maxSeats) &&  (seats >= vehicleData[0].minSeats)) {
-							// 				var motorbike = document.getElementById("motorbike");
-							// 				motorbike.style.display = "block";
-							// }if ((diffDays <= vehicleData[1].maxDays) &&  (diffDays >= vehicleData[1].minDays)
-							// 		&& (seats <= vehicleData[1].maxSeats) &&  (seats >= vehicleData[1].minSeats)) {
-							// 				var smallCar = document.getElementById("smallCar");
-							// 				smallCar.style.display = "block";
-							// }if ((diffDays <= vehicleData[2].maxDays) &&  (diffDays >= vehicleData[2].minDays)
-							// 		&& (seats <= vehicleData[2].maxSeats) &&  (seats >= vehicleData[2].minSeats)) {
-							// 				var largeCar = document.getElementById("largeCar");
-							// 				largeCar.style.display = "block";
-							// }if ((diffDays <= vehicleData[3].maxDays) &&  (diffDays >= vehicleData[3].minDays)
-							// 		&& (seats <= vehicleData[3].maxSeats) &&  (seats >= vehicleData[3].minSeats)) {
-							// 				var motorhome = document.getElementById("motorhome");
-							// 				motorhome.style.display = "block";
-							// }else{
-							// 				alert("I've got nothing for you...");
-							// }
-			}
+
+						 }
+						 //Inputs HTML saying the date leaving dynamically for section 5
+						 var lastPageleavingDate = "<h3 class='headingThree'>We'll see you on " + leaveDate.value + " when you start your journey</h3>";
+						 var insertLastPageleavingDate = document.getElementById("sectionFiveCongrat");
+						 insertLastPageleavingDate.insertAdjacentHTML("afterEnd", lastPageleavingDate);
+
+						 //inputs html saying journey leaving date
+						 var journeyLeaveDate = "<p class='flexChildren alignRight headingFive' id='bookingPickupDate'>" + leaveDate.value + "</p>";
+						 var insertJourneyLeaveDate = document.getElementById("journeyLeaveDate");
+						 insertJourneyLeaveDate.insertAdjacentHTML("afterEnd", journeyLeaveDate);
+
+						 //inputs html saying journey returning date
+						 var journeyReturnDate = "<p class='flexChildren alignRight headingFive' id='bookingDropoffDate'>" + returnDate.value + "</p>";
+						 var insertJourneyReturnDate = document.getElementById("journeyReturnDate");
+						 insertJourneyReturnDate.insertAdjacentHTML("afterEnd", journeyReturnDate);
+
+						 //inputs html saying journey leaving location
+						 var journeyLeaveLoc = "<p class='flexChildren alignRight headingFive'>" + pickupLocation.value + "</p>";
+						 var insertJourneyLeaveLoc = document.getElementById("journeyLeaveLoc");
+						 insertJourneyLeaveLoc.insertAdjacentHTML("afterEnd", journeyLeaveLoc);
+
+						 //inputs html saying journey returning location
+						 var journeyReturnLoc = "<p class='flexChildren alignRight headingFive'>" + dropoffLocation.value + "</p>";
+						 var insertJourneyReturnLoc = document.getElementById("journeyReturnLoc");
+						 insertJourneyReturnLoc.insertAdjacentHTML("afterEnd", journeyReturnLoc);
+
+
+
 		}
+
+		//Have called this function above in the "done" phase of my Ajax call, Which means that it can grab the data info for distance
+		function goodToGo ( data ) {
+		    route = data.routes[0].geometry;
+			  distance = data.routes[0].distance / 1000;
+			  console.log('checking');
+				console.log(route);
+				console.log(distance);
+		}
+
+
 
 
 
