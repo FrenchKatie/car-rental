@@ -49,6 +49,21 @@
           width: 100%;
         }
 
+//----------------
+//TOOL TIP STYLING
+//----------------
+
+        .tooltip-inner {
+            background-color: #ee5253 !important;
+            color: white !important;
+            padding: 10px 40px !important;
+        }
+        .bs-tooltip-bottom .arrow::before {
+            // border-top-color: orange;
+            display: none;
+        }
+
+
 //----------------------
 //REUSABLE INPUT CLASSES
 //----------------------

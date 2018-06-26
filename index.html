@@ -23,13 +23,15 @@
                               <button type="button" class="outlineBtn"name="button">Return</button>
                               <button type="button" class="fillBtn"name="button">One Way</button>
                         </div>
-                          <form class="" action="index.html" method="post">
+                          <form class="needs-validation" action="index.html" method="post" name="homeForm" novalidate>
 
-                              <div class="row">
-                                    <input type="text" id="dateLeave" class="col-4 input" name="dateLeave" placeholder="When are you leaving? ">
-                                    <input type="text" id="dateReturn" class="col-4 input" name="dateReturn" placeholder="When are you returning?">
-                                    <input type="number" name="points" class="col-3 input" placeholder="How many seats do you need?" step="1" min="1" max="6" id="seats">
-                                    <button type="button" name="button" id="sectionOneSubmitBtn" class="submitBtn col-1"><i class="fas fa-search"></i></button>
+                              <div class="form-row">
+
+                                    <input required type="text" id="dateLeave" class="col-4 input " name="dateLeave" placeholder="When are you leaving?"  data-toggle="tooltip" title="You must select a leaving date" data-placement="bottom">
+                                    <input required type="text" id="dateReturn" class="col-4 input" name="dateReturn" placeholder="When are you returning?"   data-toggle="tooltip" title="You must select a returning date" data-placement="bottom">
+                                    <input required type="number" name="seatSelect" class="col-3 input" placeholder="How many seats do you need?" step="1" min="1" max="6" id="seats" data-toggle="tooltip" title="You must select how many seats you require" data-placement="bottom">
+
+                                    <button type="submit" name="button" id="sectionOneSubmitBtn" class="submitBtn col-1"><i class="fas fa-search"></i></button>
                               </div>
                           </form>
                       </div>
@@ -69,8 +71,8 @@
                       <div class="sectionThreeInner" >
                           <div class="halfScreen"  id="vehicleContent">
                               <div class="" id="itemsHeader">
-                                    <h2 class="headingTwo">Find what vehicle option suits you best</h2>
-                                    <h3 class="headingFour">You requested a vehicle with <span class="featureFont">3</span> seats for a period of <span class="featureFont">4</span> days</h3>
+                                    <h2 class="headingTwo" id="mainItemsHeader">Find what vehicle option suits you best</h2>
+                                    <!-- <h3 class="headingFour">You requested a vehicle with <span class="featureFont">3</span> seats for a period of <span class="featureFont">4</span> days</h3> -->
                                     <h3 class="headingFour">Select a vehicle down below to see more information</h3>
 
                               </div>
@@ -78,7 +80,7 @@
 
                               <div id="itemWrapp">
 
-                                      <div class="myItem itemMotorbike row justify-content-between" id="motorbike">
+                                      <!-- <div class="myItem itemMotorbike row justify-content-between" id="motorbike">
                                           <div class=" itemLabel col-3">
                                                 <p class="headingSix removeSpace">Motorbike</p>
                                                 <p class="headingFive removeSpace">1 Seat</p>
@@ -111,10 +113,10 @@
                                                           <p class="flexChildren alignRight">140</p>
                                                       </div>
                                                 </div>
-                                                <button type="button" name="button" class="iconBtnFillWide" id="confirmJourney"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
+                                                <button type="button" name="button" class="iconBtnFillWide" id="confirmVehicle"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
 
                                           </div>
-                                      </div>
+                                      </div> -->
 
 
 
@@ -276,7 +278,7 @@
                                             <h3 class="flexChildren alignRight headingFour">$516</h3>
                                       </div>
                                 </div>
-                                <button type="button" name="button" class="nextIconBtnFillWide"><span class="btnText col-12">Confirm your booking</span><i class="iconWide fas fa-chevron-right"></i></button>
+                                <button type="button" name="button" class="nextIconBtnFillWide" id="confirmJourney"><span class="btnText col-12">Confirm your booking</span><i class="iconWide fas fa-chevron-right"></i></button>
 
 
                           </div>
@@ -302,9 +304,16 @@
       </div>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.css' type='text/css' />
-    <script src="js/jquery.js"></script>
+    <!-- <script src="js/jquery.js"></script> -->
+    <!-- <script src="js/jquery-ui.min.js"></script> -->
+    <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+    <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
     <script src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
     <script type="text/javascript" src="js/jquery.pagepiling.min.js"></script>
     <script src="js/data.js"></script>
     <script type="text/javascript" src="js/script.js"></script>

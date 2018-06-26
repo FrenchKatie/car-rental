@@ -51,9 +51,12 @@
 									diffDays   = (endDate - startDate)/1000/60/60/24;
 						}
 						else {
-									alert ("You cant come back before you have been!");
-									$('#dateLeave').val("");
-									$('#dateReturn').val("");
+									console.log("You cant come back before you have been!");
+									returnDate.title = 'The past is unavailable';
+									console.log(returnDate.title);
+
+									// $('#dateLeave').val("");
+									// $('#dateReturn').val("");
 						}
 			}); //end change function
 
@@ -142,10 +145,17 @@
 			//--------------------------------------
 
 			$("#sectionOneSubmitBtn").click(function(){
+						event.preventDefault();
+						// $('#dateLeave').tooltip('show');
+						// $('#dateReturn').tooltip('show');
+						// $('#seats').tooltip('show');
+						checkForm();
+
 						//Storing the users seat input in a variable
 						seats = parseInt(seatNumber.value);
 						//pagepiling plugin - move to next section
-						$.fn.pagepiling.moveSectionDown();
+						// $.fn.pagepiling.moveSectionDown();
+						// validateForm();
 			});
 
 			//-------------------------------------------------
@@ -164,7 +174,7 @@
 							endLocation();
 							getRoute();
 							//logs the distance of the route but needs to be fired after the Route function is finished running
-							getVehicle();
+							getAllElements();
 
 			});
 			//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
@@ -190,12 +200,21 @@
 										end = [168.662644, -45.031162];
 							}
 			}
+
+			//Have called this function above in the "done" phase of my Ajax call, Which means that it can grab the data info for distance
+			function goodToGo ( data ) {
+					route = data.routes[0].geometry;
+					distance = data.routes[0].distance / 1000;
+					console.log('checking');
+					console.log(route);
+					console.log(distance);
+			}
 			//--------------------------------------------------------------
 			// Dynamically show the right vehicle options for users requests
 			//--------------------------------------------------------------
 
-			function getVehicle () {
-
+			function getAllElements () {
+							//getting vehicles
 							for(var i = 0; i < vehicleData.length; i++){
 										if (vehicleData[i].minSeats <= seats &&
 												vehicleData[i].maxSeats >= seats &&
@@ -209,7 +228,7 @@
 													newElement +=			"<p class='headingFive removeSpace'>" + vehicleData[i].maxSeats + " Seats</p>"
 													newElement += "</div>"
 													newElement += "<button type='button' name='button' class='moreInfoBtn'><span class='btnText col-9'>View information</span><i class='icon fas fa-chevron-down'></i></button>"
-													newElement += "<div class='hide'>"
+													// newElement += "<div class='hide'>"
 													newElement += "<div class='fullWidth'>"
 													newElement += 		"<h4 class='headingFive'>General</h4>"
 													newElement += 		"<div class='flexMe'>"
@@ -240,15 +259,19 @@
 													newElement +=	"</div>"
 													newElement +=	"<button type='button' name='button' class='iconBtnFillWide' id='confirm" + vehicleData[i].type + "'><span class='btnText col-12'>Confirm this vehicle</span><i class='iconWide fas fa-chevron-right'></i></button>"
 													newElement +=	"</div>"
-													newElement +=	"</div>"
+													// newElement +=	"</div>"
 													newElement +=	"</div>"
 
 													var insertItem = document.getElementById("itemsHeader");
 													insertItem.insertAdjacentHTML("afterEnd", newElement);
-
 										}
-
 						 }
+
+						 //Changes h3 tag to dynamically display how many seats & days user has requested
+						 var newh3Element = "<h3 class='headingFour'>You requested a vehicle with <span class='featureFont'>" + seats + "</span> seats for a period of <span class='featureFont'>" + diffDays + "</span> days</h3>"
+						 var insertnewh3Element = document.getElementById("mainItemsHeader");
+						 insertnewh3Element.insertAdjacentHTML("afterEnd", newh3Element);
+
 						 //Inputs HTML saying the date leaving dynamically for section 5
 						 var lastPageleavingDate = "<h3 class='headingThree'>We'll see you on " + leaveDate.value + " when you start your journey</h3>";
 						 var insertLastPageleavingDate = document.getElementById("sectionFiveCongrat");
@@ -274,21 +297,37 @@
 						 var insertJourneyReturnLoc = document.getElementById("journeyReturnLoc");
 						 insertJourneyReturnLoc.insertAdjacentHTML("afterEnd", journeyReturnLoc);
 
-
-
-		}
-
-		//Have called this function above in the "done" phase of my Ajax call, Which means that it can grab the data info for distance
-		function goodToGo ( data ) {
-		    route = data.routes[0].geometry;
-			  distance = data.routes[0].distance / 1000;
-			  console.log('checking');
-				console.log(route);
-				console.log(distance);
 		}
 
 
 
+
+
+
+		//----------------
+		// Form Validation
+		//----------------
+
+
+		function checkForm() {
+					if (leaveDate.value === ""){
+							$('#dateLeave').tooltip('show');
+					}else if (returnDate.value === "") {
+							$('#dateReturn').tooltip('show');
+					}else if (seats == 0) {
+							// $('#seats').tooltip('show');
+					}else if (seats > 6) {
+							console.log("You cant have more than 6 seats!");
+							seats.title = 'You can only have 6 seats max'; //not working
+							console.log(seats);
+
+							$('#seats').tooltip({title: 'You can only have six seats max'});
+							$('#seats').tooltip('show');
+					}
+
+
+
+		}
 
 
 
@@ -309,6 +348,7 @@
 			// 				var getFuelConsumption = distanceToTravel / 100 * vehicleData[indexNum].fuelKm;
 			// 				console.log(getFuelConsumption + " fuel consumption");
 			// }
+
 
 
 }());
