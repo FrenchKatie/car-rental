@@ -48,19 +48,39 @@
         .fullWidth{
           width: 100%;
         }
+//----------------------
+//PARSLEY ERROR MESSAGES
+//----------------------
 
-//----------------
-//TOOL TIP STYLING
-//----------------
+        .parsley-errors-list:first-child {
+          list-style-type: none;
+          position: absolute;
+          bottom: -4em;
 
-        .tooltip-inner {
-            background-color: #ee5253 !important;
-            color: white !important;
-            padding: 10px 40px !important;
+          transition: all .3s ease-in;
+          -o-transition: all .3s ease-in;
+          -moz-transition: all .3s ease-in;
+          -webkit-transition: all .3s ease-in;
         }
-        .bs-tooltip-bottom .arrow::before {
-            // border-top-color: orange;
-            display: none;
+        .parsley-errors-list:nth-child(2) {
+          list-style-type: none;
+          position: absolute;
+          bottom: -4em;
+
+          transition: all .3s ease-in;
+          -o-transition: all .3s ease-in;
+          -moz-transition: all .3s ease-in;
+          -webkit-transition: all .3s ease-in;
+        }
+        .parsley-errors-list:nth-child(3) {
+          list-style-type: none;
+          position: absolute;
+          bottom: -4em;
+
+          transition: all .3s ease-in;
+          -o-transition: all .3s ease-in;
+          -moz-transition: all .3s ease-in;
+          -webkit-transition: all .3s ease-in;
         }
 
 

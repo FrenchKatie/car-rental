@@ -10,6 +10,7 @@
 			var route = 0;
 			var distance = 0;
 			var userOptions = [];
+			console.dir(typeof userOptions + "what am i");
 
 			//------------------
 			//Page Piling Plugin
@@ -153,9 +154,10 @@
 
 						//Storing the users seat input in a variable
 						seats = parseInt(seatNumber.value);
+						// userOptions.push(seats);
 						//pagepiling plugin - move to next section
-						// $.fn.pagepiling.moveSectionDown();
-						// validateForm();
+						$.fn.pagepiling.moveSectionDown();
+						checkForm();
 			});
 
 			//-------------------------------------------------
@@ -207,13 +209,15 @@
 					distance = data.routes[0].distance / 1000;
 					console.log('checking');
 					console.log(route);
-					console.log(distance);
+					console.log(vehicleData[2].fuelKm * distance + "bbbb");
 			}
 			//--------------------------------------------------------------
 			// Dynamically show the right vehicle options for users requests
 			//--------------------------------------------------------------
 
 			function getAllElements () {
+
+
 							//getting vehicles
 							for(var i = 0; i < vehicleData.length; i++){
 										if (vehicleData[i].minSeats <= seats &&
@@ -233,9 +237,7 @@
 													newElement += 		"<h4 class='headingFive'>General</h4>"
 													newElement += 		"<div class='flexMe'>"
 													newElement += 					"<p class='flexChildren'>Seats</p>"
-													newElement += 					"<p class='flexChildren alignRight'>"
-													newElement += 							"<i class='far fa-user'></i>"
-													newElement +=						"</p>"
+													newElement += 					"<p class='flexChildren alignRight'>" + vehicleData[i].maxSeats + " Seats</p>"
 													newElement +=			"</div>"
 													newElement +=			"<div class='flexMe'>"
 													newElement +=					"<p class='flexChildren'>Rental cost per day</p>"
@@ -261,11 +263,19 @@
 													newElement +=	"</div>"
 													// newElement +=	"</div>"
 													newElement +=	"</div>"
+													console.log(vehicleData[i].type);
 
 													var insertItem = document.getElementById("itemsHeader");
 													insertItem.insertAdjacentHTML("afterEnd", newElement);
+													userOptions.push(vehicleData[i]);
+													console.dir(userOptions + " user options array");
+
+														// console.log(vehicleData[i].fuelKm * distance + "ddddd");
 										}
+										console.log(distance);
+										console.dir(vehicleData[i]+ "ffff");
 						 }
+						 	// console.dir(vehicleData[i]+ "xxx");
 
 						 //Changes h3 tag to dynamically display how many seats & days user has requested
 						 var newh3Element = "<h3 class='headingFour'>You requested a vehicle with <span class='featureFont'>" + seats + "</span> seats for a period of <span class='featureFont'>" + diffDays + "</span> days</h3>"
@@ -297,6 +307,8 @@
 						 var insertJourneyReturnLoc = document.getElementById("journeyReturnLoc");
 						 insertJourneyReturnLoc.insertAdjacentHTML("afterEnd", journeyReturnLoc);
 
+
+
 		}
 
 
@@ -310,22 +322,9 @@
 
 
 		function checkForm() {
-					if (leaveDate.value === ""){
-							$('#dateLeave').tooltip('show');
-					}else if (returnDate.value === "") {
-							$('#dateReturn').tooltip('show');
-					}else if (seats == 0) {
-							// $('#seats').tooltip('show');
-					}else if (seats > 6) {
-							console.log("You cant have more than 6 seats!");
-							seats.title = 'You can only have 6 seats max'; //not working
-							console.log(seats);
+				$('#firstForm').parsley().validate();
 
-							$('#seats').tooltip({title: 'You can only have six seats max'});
-							$('#seats').tooltip('show');
-					}
-
-
+				// alert("hello are you working???");
 
 		}
 
