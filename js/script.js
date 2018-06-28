@@ -1,353 +1,552 @@
 (function() {
+	//------------------
+	//Global Variables
+	//------------------
+	var leaveDate = document.getElementById("dateLeave");
+	var returnDate = document.getElementById("dateReturn");
+	var seatNumber = document.getElementById("seats");
+	var seats = 0;
+	var diffDays = 0;
+	var startDate = 0;
+	var endDate = 0;
+	var route = 0;
+	var distance = 0;
+	// var userOptions = [];
+	var userVehicleSelect = 0;
+	var pickDate = 0;
+	var dropDate = 0;
 
-			var leaveDate = document.getElementById('dateLeave');
-			var returnDate = document.getElementById('dateReturn');
-			var seatNumber = document.getElementById('seats');
-			var seats = 0;
-			var diffDays = 0;
-			var startDate = 0;
-			var endDate = 0;
-			var route = 0;
-			var distance = 0;
-			var userOptions = [];
-			console.dir(typeof userOptions + "what am i");
+	//------------------
+	//Page Piling Plugin
+	//------------------
+	$("#pagepiling").pagepiling({
+		normalScrollElements: ".halfScreen"
+	});
 
-			//------------------
-			//Page Piling Plugin
-			//------------------
-			$('#pagepiling').pagepiling({
-					normalScrollElements: '.halfScreen'
+	$.fn.pagepiling.setAllowScrolling(false);
+
+	//------------------
+	//Event Handlers
+	//------------------
+
+	$("#confirmLocation").click(function() {
+		$.fn.pagepiling.moveSectionDown();
+		getAllElements();
+	});
+	// $("#confirmJourney").click(function(){
+	// 			//pagepiling plugin - move to next section
+	// 			$.fn.pagepiling.moveSectionDown();
+	// });
+
+	$("#sectionOneSubmitBtn").click(function() {
+		event.preventDefault();
+		checkForm();
+	});
+	//Getting which vehicle was selected and inputting name & calculated price into the journey page
+	$(document).on("click", ".vehicleConfirmBtn", function() {
+		// console.dir($(this)["0"].id);
+		$.fn.pagepiling.moveSectionDown();
+
+		if ($(this)["0"].id == "confirmmotorbike") {
+			userVehicleSelect = vehicleData[0].name;
+			userVehicleSelectPrice = vehicleData[0].pricePerDay;
+			userPrice = compareDates(pickDate, dropDate) * vehicleData[0].pricePerDay;
+			//inputs html saying journey vehicle
+			var journeyVehicle =
+				"<p class='flexChildren alignRight headingFive cap'>" +
+				userVehicleSelect +
+				"</p>";
+			var insertJourneyVehicle = document.getElementById("journeyVehicle");
+			insertJourneyVehicle.insertAdjacentHTML("afterEnd", journeyVehicle);
+
+			var journeyVehiclePrice =
+				"<h3 class='flexChildren alignRight headingFour'>$" +
+				userVehicleSelectPrice * compareDates(pickDate, dropDate) +
+				"</h3>";
+			var insertJourneyVehiclePrice = document.getElementById(
+				"journeyVehiclePrice"
+			);
+			insertJourneyVehiclePrice.insertAdjacentHTML(
+				"afterEnd",
+				journeyVehiclePrice
+			);
+		} else if ($(this)["0"].id == "confirmsmallCar") {
+			userVehicleSelect = vehicleData[1].name;
+			userVehicleSelectPrice = vehicleData[1].pricePerDay;
+			userPrice = compareDates(pickDate, dropDate) * vehicleData[1].pricePerDay;
+			//inputs html saying journey vehicle
+			var journeyVehicle =
+				"<p class='flexChildren alignRight headingFive cap'>" +
+				userVehicleSelect +
+				"</p>";
+			var insertJourneyVehicle = document.getElementById("journeyVehicle");
+			insertJourneyVehicle.insertAdjacentHTML("afterEnd", journeyVehicle);
+			var journeyVehiclePrice =
+				"<h3 class='flexChildren alignRight headingFour'>$" +
+				userVehicleSelectPrice * compareDates(pickDate, dropDate) +
+				"</h3>";
+			var insertJourneyVehiclePrice = document.getElementById(
+				"journeyVehiclePrice"
+			);
+			insertJourneyVehiclePrice.insertAdjacentHTML(
+				"afterEnd",
+				journeyVehiclePrice
+			);
+		} else if ($(this)["0"].id == "confirmlargeCar") {
+			userVehicleSelect = vehicleData[2].name;
+			userVehicleSelectPrice = vehicleData[2].pricePerDay;
+			userPrice = compareDates(pickDate, dropDate) * vehicleData[2].pricePerDay;
+			//inputs html saying journey vehicle
+			var journeyVehicle =
+				"<p class='flexChildren alignRight headingFive cap'>" +
+				userVehicleSelect +
+				"</p>";
+			var insertJourneyVehicle = document.getElementById("journeyVehicle");
+			insertJourneyVehicle.insertAdjacentHTML("afterEnd", journeyVehicle);
+			var journeyVehiclePrice =
+				"<h3 class='flexChildren alignRight headingFour'>$" +
+				userVehicleSelectPrice * compareDates(pickDate, dropDate) +
+				"</h3>";
+			var insertJourneyVehiclePrice = document.getElementById(
+				"journeyVehiclePrice"
+			);
+			insertJourneyVehiclePrice.insertAdjacentHTML(
+				"afterEnd",
+				journeyVehiclePrice
+			);
+		} else if ($(this)["0"].id == "confirmmotorhome") {
+			userVehicleSelect = vehicleData[3].name;
+			userVehicleSelectPrice = vehicleData[3].pricePerDay;
+			userPrice = compareDates(pickDate, dropDate) * vehicleData[3].pricePerDay;
+			//inputs html saying journey vehicle
+			var journeyVehicle =
+				"<p class='flexChildren alignRight headingFive cap'>" +
+				userVehicleSelect +
+				"</p>";
+			var insertJourneyVehicle = document.getElementById("journeyVehicle");
+			insertJourneyVehicle.insertAdjacentHTML("afterEnd", journeyVehicle);
+			var journeyVehiclePrice =
+				"<h3 class='flexChildren alignRight headingFour'>$" +
+				userVehicleSelectPrice * compareDates(pickDate, dropDate) +
+				"</h3>";
+			var insertJourneyVehiclePrice = document.getElementById(
+				"journeyVehiclePrice"
+			);
+			insertJourneyVehiclePrice.insertAdjacentHTML(
+				"afterEnd",
+				journeyVehiclePrice
+			);
+		}
+	});
+
+	// <h3 class="flexChildren alignRight headingFour">$516</h3>
+
+	//---------------
+	//Map Box & Route
+	//---------------
+	mapboxgl.accessToken =
+		"pk.eyJ1Ijoia2F0aWVmcmVuY2giLCJhIjoiY2ppM240MGFyMDA5cTNrbDJwNTkwYWZmOSJ9.vMh53hzHle4vA4uwg0TE6A";
+	var map = new mapboxgl.Map({
+		container: "map",
+		style: "mapbox://styles/mapbox/streets-v9",
+		center: [173.839405, -41.18189],
+		zoom: 5
+	});
+	var directions = new MapboxDirections({
+		accessToken:
+			"pk.eyJ1Ijoia2F0aWVmcmVuY2giLCJhIjoiY2ppM240MGFyMDA5cTNrbDJwNTkwYWZmOSJ9.vMh53hzHle4vA4uwg0TE6A",
+		unit: "metric",
+		profile: "mapbox/driving"
+	});
+	function getRoute() {
+		var directionsRequest =
+			"https://api.mapbox.com/directions/v5/mapbox/driving/" +
+			start[0] +
+			"," +
+			start[1] +
+			";" +
+			end[0] +
+			"," +
+			end[1] +
+			"?geometries=geojson&access_token=" +
+			mapboxgl.accessToken;
+		$.ajax({
+			method: "GET",
+			url: directionsRequest
+		}).done(function(data) {
+			// custom function once ajax completes
+			goodToGo(data);
+			map.addLayer({
+				id: "route",
+				type: "line",
+				source: {
+					type: "geojson",
+					data: {
+						type: "Feature",
+						geometry: route
+					}
+				},
+				paint: {
+					"line-width": 2
+				}
 			});
-			$.fn.pagepiling.setAllowScrolling(false);
-
-			$("#confirmLocation").click(function(){
-						//pagepiling plugin - move to next section
-						$.fn.pagepiling.moveSectionDown();
-			});
-			$("#confirmJourney").click(function(){
-						//pagepiling plugin - move to next section
-						$.fn.pagepiling.moveSectionDown();
-			});
-
-			//---------------------
-			//Jquery UI Date Picker
-			//---------------------
-			$( "#dateLeave,#dateReturn" ).datepicker({
-						changeMonth: true,
-						changeYear: true,
-						firstDay: 1,
-						dateFormat: 'dd/mm/yy',
-			});
-
-			$( "#dateLeave" ).datepicker({ dateFormat: 'dd-mm-yy' });
-			$( "#dateReturn" ).datepicker({ dateFormat: 'dd-mm-yy' });
-
-
-			$('#dateReturn').change(function() {
-						//Storing the users date inputs in variables
-						startDate = $('#dateLeave').datepicker('getDate');
-						endDate   = $('#dateReturn').datepicker('getDate');
-
-						if (startDate<endDate) {
-									diffDays   = (endDate - startDate)/1000/60/60/24;
+			map.addLayer({
+				id: "start",
+				type: "circle",
+				source: {
+					type: "geojson",
+					data: {
+						type: "Feature",
+						geometry: {
+							type: "Point",
+							coordinates: start
 						}
-						else {
-									console.log("You cant come back before you have been!");
-									returnDate.title = 'The past is unavailable';
-									console.log(returnDate.title);
-
-									// $('#dateLeave').val("");
-									// $('#dateReturn').val("");
+					}
+				}
+			});
+			map.addLayer({
+				id: "end",
+				type: "circle",
+				source: {
+					type: "geojson",
+					data: {
+						type: "Feature",
+						geometry: {
+							type: "Point",
+							coordinates: end
 						}
-			}); //end change function
-
-			//------------------------------
-			//Toggling Item Info Dynamically
-			//------------------------------
-			$(".moreInfoBtn").click(function(){
-				 	 	$(this).next().slideToggle();
-
+					}
+				}
 			});
+		});
+	}
 
-			//---------------
-			//Map Box & Route
- 			//---------------
-			mapboxgl.accessToken = 'pk.eyJ1Ijoia2F0aWVmcmVuY2giLCJhIjoiY2ppM240MGFyMDA5cTNrbDJwNTkwYWZmOSJ9.vMh53hzHle4vA4uwg0TE6A';
-			var map = new mapboxgl.Map({
-								container: 'map',
-								style: 'mapbox://styles/mapbox/streets-v9',
-								center: [173.839405, -41.181890],
-								zoom: 5
-			});
-			var directions = new MapboxDirections({
-								accessToken:
-									'pk.eyJ1Ijoia2F0aWVmcmVuY2giLCJhIjoiY2ppM240MGFyMDA5cTNrbDJwNTkwYWZmOSJ9.vMh53hzHle4vA4uwg0TE6A',
-								unit: 'metric',
-								profile: 'mapbox/driving'
-			});
-			function getRoute() {
+	//---------------------
+	//Jquery UI Date Picker
+	//---------------------
 
-							  var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?geometries=geojson&access_token=' + mapboxgl.accessToken;
-							  $.ajax({
-									    method: 'GET',
-									    url: directionsRequest,
-							  }).done(function(data) {
-											// custom function once ajax completes
-											goodToGo(data);
-									    map.addLayer({
-										      id: 'route',
-										      type: 'line',
-										      source: {
-												        type: 'geojson',
-												        data: {
-														          type: 'Feature',
-														          geometry: route
-												        }
-										      },
-										      paint: {
-								        				'line-width': 2
-										      }
-								    	}	);
-											map.addLayer({
-												  id: 'start',
-												  type: 'circle',
-												  source: {
-													    type: 'geojson',
-													    data: {
-														      type: 'Feature',
-														      geometry: {
-															        type: 'Point',
-															        coordinates: start
-														      }
-													    }
-												  }
-												});
-												map.addLayer({
-													  id: 'end',
-													  type: 'circle',
-													  source: {
-														    type: 'geojson',
-														    data: {
-															      type: 'Feature',
-															      geometry: {
-																        type: 'Point',
-																        coordinates: end
-															      }
-														    }
-													  }
-												});
-							  });
+	// date calender
+	var dateFormat = "mm/dd/yy",
+		from = $("#dateLeave")
+			.datepicker({
+				dateFormat: "dd/mm/yy",
+				defaultDate: 0,
+				minDate: 0,
+				numberOfMonths: 1
+			})
+			.on("change", function() {
+				to.datepicker("option", "minDate", getDate(this));
+			}),
+		to = $("#dateReturn").datepicker({
+			dateFormat: "dd/mm/yy",
+			defaultDate: 0,
+			minDate: 0,
+			numberOfMonths: 1
+		});
 
-			}
+	// sets return date to only show from pickDate
+	function getDate(element) {
+		var dateFormat = "dd/mm/yy";
+		var newDate = $("#dateLeave").datepicker({ dateFormat: "mm/dd/yy" });
+		var date;
+		try {
+			date = $.datepicker.parseDate(dateFormat, element.value);
+		} catch (error) {
+			date = null;
+		}
+		return date;
+	}
 
+	//This function is essentially date difference between pickDate and dropDate when called.
+	function compareDates(startDate, endDate) {
+		var date1 = new Date(startDate);
+		var date2 = new Date(endDate);
+		var timeDiff = date2.getTime() - date1.getTime();
+		var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+		return diffDays;
+	}
 
-			//--------------------------------------
-			// Getting user input of Dates & Seats
-			//--------------------------------------
+	//------------------------------
+	//Toggling Item Info Dynamically
+	//------------------------------
+	$(document).on("click", ".moreInfoBtn", function() {
+		$(this)
+			.next()
+			.slideToggle();
+	});
 
-			$("#sectionOneSubmitBtn").click(function(){
-						event.preventDefault();
-						// $('#dateLeave').tooltip('show');
-						// $('#dateReturn').tooltip('show');
-						// $('#seats').tooltip('show');
-						checkForm();
+	//----------------
+	// Form Validation
+	//----------------
 
-						//Storing the users seat input in a variable
-						seats = parseInt(seatNumber.value);
-						// userOptions.push(seats);
-						//pagepiling plugin - move to next section
-						$.fn.pagepiling.moveSectionDown();
-						checkForm();
-			});
+	function checkForm() {
+		pickDate = $("#dateLeave").datepicker("getDate");
+		dropDate = $("#dateReturn").datepicker("getDate");
 
-			//-------------------------------------------------
-			// Mapping Route & Getting User location & Distance
-			//-------------------------------------------------
-
-			var pickupLocation = document.getElementById('inputGroupSelect1');
-			var dropoffLocation = document.getElementById('inputGroupSelect2');
-			var getUserPickupLocation = pickupLocation.value;
-			var getUserDropoffLocation = dropoffLocation.value;
-			var viewRoute = document.getElementById('viewRoute');
-			//On click event listener
-			viewRoute.addEventListener('click', function (e) {
-							e.preventDefault();
-							startLocation();
-							endLocation();
-							getRoute();
-							//logs the distance of the route but needs to be fired after the Route function is finished running
-							getAllElements();
-
-			});
-			//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
-			var start = [];
-			var end = [];
-			//Finding the start location coordinates depending on what the user input was.  This is called in the click function above
-			function startLocation() {
-							if (pickupLocation.value === "auckland") {
-										start =[174.763332, -36.848460];
-							}else if(pickupLocation.value === "wellington"){
-										start =[174.776236, -41.286460];
-							}else if(pickupLocation.value === "queenstown"){
-										start =[168.662644, -45.031162];
-							}
-			}
-			//Finding the end location coordinates depending on what the user input was. This is called in the click function above
-			function endLocation () {
-							if (dropoffLocation.value === "auckland") {
-										end = [174.763332, -36.848460];
-							}else if(dropoffLocation.value === "wellington"){
-										end = [174.776236, -41.286460];
-							}else if(dropoffLocation.value === "queenstown"){
-										end = [168.662644, -45.031162];
-							}
-			}
-
-			//Have called this function above in the "done" phase of my Ajax call, Which means that it can grab the data info for distance
-			function goodToGo ( data ) {
-					route = data.routes[0].geometry;
-					distance = data.routes[0].distance / 1000;
-					console.log('checking');
-					console.log(route);
-					console.log(vehicleData[2].fuelKm * distance + "bbbb");
-			}
-			//--------------------------------------------------------------
-			// Dynamically show the right vehicle options for users requests
-			//--------------------------------------------------------------
-
-			function getAllElements () {
-
-
-							//getting vehicles
-							for(var i = 0; i < vehicleData.length; i++){
-										if (vehicleData[i].minSeats <= seats &&
-												vehicleData[i].maxSeats >= seats &&
-												vehicleData[i].minDays <= diffDays &&
-												vehicleData[i].maxDays >= diffDays) {
-
-													var newElement = "";
-													newElement += "<div class='myItem row justify-content-between'>"
-													newElement += "<div class='itemLabel col-3'>"
-													newElement +=			"<p class='headingSix removeSpace'>" + vehicleData[i].type + "</p>"
-													newElement +=			"<p class='headingFive removeSpace'>" + vehicleData[i].maxSeats + " Seats</p>"
-													newElement += "</div>"
-													newElement += "<button type='button' name='button' class='moreInfoBtn'><span class='btnText col-9'>View information</span><i class='icon fas fa-chevron-down'></i></button>"
-													// newElement += "<div class='hide'>"
-													newElement += "<div class='fullWidth'>"
-													newElement += 		"<h4 class='headingFive'>General</h4>"
-													newElement += 		"<div class='flexMe'>"
-													newElement += 					"<p class='flexChildren'>Seats</p>"
-													newElement += 					"<p class='flexChildren alignRight'>" + vehicleData[i].maxSeats + " Seats</p>"
-													newElement +=			"</div>"
-													newElement +=			"<div class='flexMe'>"
-													newElement +=					"<p class='flexChildren'>Rental cost per day</p>"
-													newElement +=					"<p class='flexChildren alignRight'>$" + vehicleData[i].pricePerDay + "</p>"
-													newElement +=			"</div>"
-													newElement +=			"<div class='flexMe'>"
-													newElement +=					"<p class='flexChildren'>Fuel consumption per 100km</p>"
-													newElement +=					"<p class='flexChildren alignRight'>" + vehicleData[i].fuelKm + "L</p>"
-													newElement +=			"</div>"
-													newElement +=	"</div>"
-													newElement +=	"<div class='fullWidth'>"
-													newElement +=			"<h4 class='headingFive'>Your trip</h4>"
-													newElement +=			"<div class='flexMe'>"
-													newElement +=					"<p class='flexChildren'>Rental cost total</p>"
-													newElement +=					"<p class='flexChildren alignRight'>$" + vehicleData[i].pricePerDay * diffDays + "</p>"
-													newElement +=			"</div>"
-													newElement +=			"<div class='flexMe'>"
-													newElement +=					"<p class='flexChildren'>Estimated fuel consumption total</p>"
-													newElement +=					"<p class='flexChildren alignRight'>" + vehicleData[i].fuelKm * distance + "L</p>"
-													newElement +=			"</div>"
-													newElement +=	"</div>"
-													newElement +=	"<button type='button' name='button' class='iconBtnFillWide' id='confirm" + vehicleData[i].type + "'><span class='btnText col-12'>Confirm this vehicle</span><i class='iconWide fas fa-chevron-right'></i></button>"
-													newElement +=	"</div>"
-													// newElement +=	"</div>"
-													newElement +=	"</div>"
-													console.log(vehicleData[i].type);
-
-													var insertItem = document.getElementById("itemsHeader");
-													insertItem.insertAdjacentHTML("afterEnd", newElement);
-													userOptions.push(vehicleData[i]);
-													console.dir(userOptions + " user options array");
-
-														// console.log(vehicleData[i].fuelKm * distance + "ddddd");
-										}
-										console.log(distance);
-										console.dir(vehicleData[i]+ "ffff");
-						 }
-						 	// console.dir(vehicleData[i]+ "xxx");
-
-						 //Changes h3 tag to dynamically display how many seats & days user has requested
-						 var newh3Element = "<h3 class='headingFour'>You requested a vehicle with <span class='featureFont'>" + seats + "</span> seats for a period of <span class='featureFont'>" + diffDays + "</span> days</h3>"
-						 var insertnewh3Element = document.getElementById("mainItemsHeader");
-						 insertnewh3Element.insertAdjacentHTML("afterEnd", newh3Element);
-
-						 //Inputs HTML saying the date leaving dynamically for section 5
-						 var lastPageleavingDate = "<h3 class='headingThree'>We'll see you on " + leaveDate.value + " when you start your journey</h3>";
-						 var insertLastPageleavingDate = document.getElementById("sectionFiveCongrat");
-						 insertLastPageleavingDate.insertAdjacentHTML("afterEnd", lastPageleavingDate);
-
-						 //inputs html saying journey leaving date
-						 var journeyLeaveDate = "<p class='flexChildren alignRight headingFive' id='bookingPickupDate'>" + leaveDate.value + "</p>";
-						 var insertJourneyLeaveDate = document.getElementById("journeyLeaveDate");
-						 insertJourneyLeaveDate.insertAdjacentHTML("afterEnd", journeyLeaveDate);
-
-						 //inputs html saying journey returning date
-						 var journeyReturnDate = "<p class='flexChildren alignRight headingFive' id='bookingDropoffDate'>" + returnDate.value + "</p>";
-						 var insertJourneyReturnDate = document.getElementById("journeyReturnDate");
-						 insertJourneyReturnDate.insertAdjacentHTML("afterEnd", journeyReturnDate);
-
-						 //inputs html saying journey leaving location
-						 var journeyLeaveLoc = "<p class='flexChildren alignRight headingFive'>" + pickupLocation.value + "</p>";
-						 var insertJourneyLeaveLoc = document.getElementById("journeyLeaveLoc");
-						 insertJourneyLeaveLoc.insertAdjacentHTML("afterEnd", journeyLeaveLoc);
-
-						 //inputs html saying journey returning location
-						 var journeyReturnLoc = "<p class='flexChildren alignRight headingFive'>" + dropoffLocation.value + "</p>";
-						 var insertJourneyReturnLoc = document.getElementById("journeyReturnLoc");
-						 insertJourneyReturnLoc.insertAdjacentHTML("afterEnd", journeyReturnLoc);
-
-
-
+		if (pickDate === null) {
+			console.log("error for date");
+		} else if (dropDate === null) {
+			console.log("error for date 2");
+		} else if (seatNumber.value === "") {
+			console.log("seat error");
 		}
 
-
-
-
-
-
-		//----------------
-		// Form Validation
-		//----------------
-
-
-		function checkForm() {
-				$('#firstForm').parsley().validate();
-
-				// alert("hello are you working???");
-
+		if (seatNumber.value === "") {
+			// $('#seats').tooltip('show');
+			$("#seats")
+				.attr("title", "You must select a required number of seats")
+				.tooltip("_fixTitle")
+				.tooltip("show");
+		} else {
+			seats = parseInt(seatNumber.value);
+			if (pickDate === null) {
+				$("#dateLeave").tooltip("show");
+			} else if (dropDate === null) {
+				$("#dateReturn").tooltip("show");
+			} else if (compareDates(pickDate, dropDate) > 16) {
+				$("#dateReturn")
+					.attr("title", "Maximum number of days to rent is 15")
+					.tooltip("_fixTitle")
+					.tooltip("show");
+			} else if (seats > 6) {
+				$("#seats")
+					.attr("title", "Maximum number of seats is 6")
+					.tooltip("_fixTitle")
+					.tooltip("show");
+			} else if (seats < 1) {
+				$("#seats")
+					.attr("title", "Minimum number of seats is 1")
+					.tooltip("_fixTitle")
+					.tooltip("show");
+			} else if (seats === NaN) {
+				// $('#seats').tooltip('show');
+				$("#seats")
+					.attr("title", "You must select a required number of seats")
+					.tooltip("_fixTitle")
+					.tooltip("show");
+			} else {
+				// seats = parseInt(seatNumber.value);
+				$.fn.pagepiling.moveSectionDown();
+			}
 		}
 
+		// 	if (seatNumber.value === '') {
+		// 		// $('#seats').tooltip('show');
+		// 	 $('#seats').attr("title", "You must select a required number of seats").tooltip("_fixTitle").tooltip("show");
+		// 	} else {
+		//
+		// 	 seats = parseInt(seatNumber.value);
+		// 	 if (pickDate === null){
+		// 				 $('#dateLeave').tooltip('show');
+		// 	 }else if (dropDate === null) {
+		// 				 $('#dateReturn').tooltip('show');
+		// 	 }else if (compareDates(pickDate, dropDate) > 16) {
+		// 			 $('#dateReturn').attr("title", "Maximum number of days to rent is 15").tooltip("_fixTitle").tooltip("show");
+		// 	 } else if (seatNumber.value === ''){// $('#seats').tooltip('show');
+		// 	$('#seats').attr("title", "You must select a required number of seats").tooltip("_fixTitle").tooltip("show");
+		// } else if (!(seatNumber.value === '')){
+		// 	if (seats > 6) {
+		// 				$('#seats').attr("title", "Maximum number of seats is 6").tooltip("_fixTitle").tooltip("show");
+		// 	}else if (seats < 1) {
+		// 				$('#seats').attr("title", "Minimum number of seats is 1").tooltip("_fixTitle").tooltip("show");
+		// 	}else if (seats === NaN) {
+		// 			// $('#seats').tooltip('show');
+		// 			$('#seats').attr("title", "You must select a required number of seats").tooltip("_fixTitle").tooltip("show");
+		// 	 } else {
+		// 		// seats = parseInt(seatNumber.value);
+		// 			$.fn.pagepiling.moveSectionDown();
+		// 	}
+	}
 
+	function checkLocationForm() {
+		if (inputGroupSelect1.value === "choose") {
+			$("#inputGroupSelect1").tooltip("show");
+		} else if (inputGroupSelect2.value === "choose") {
+			$("#inputGroupSelect2").tooltip("show");
+		} else {
+			document.getElementById("confirmLocation").classList.remove("hide");
+		}
+	}
 
+	//-------------------------------------------------
+	// Mapping Route & Getting User location & Distance
+	//-------------------------------------------------
 
+	var pickupLocation = document.getElementById("inputGroupSelect1");
+	var dropoffLocation = document.getElementById("inputGroupSelect2");
+	var getUserPickupLocation = pickupLocation.value;
+	var getUserDropoffLocation = dropoffLocation.value;
+	var viewRoute = document.getElementById("viewRoute");
+	//On click event listener
+	viewRoute.addEventListener("click", function(e) {
+		e.preventDefault();
+		checkLocationForm();
+		startLocation();
+		endLocation();
+		getRoute();
+	});
+	//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
+	var start = [];
+	var end = [];
+	//Finding the start location coordinates depending on what the user input was.  This is called in the click function above
+	function startLocation() {
+		if (pickupLocation.value === "auckland") {
+			start = [174.763332, -36.84846];
+		} else if (pickupLocation.value === "wellington") {
+			start = [174.776236, -41.28646];
+		} else if (pickupLocation.value === "queenstown") {
+			start = [168.662644, -45.031162];
+		}
+	}
+	//Finding the end location coordinates depending on what the user input was. This is called in the click function above
+	function endLocation() {
+		if (dropoffLocation.value === "auckland") {
+			end = [174.763332, -36.84846];
+		} else if (dropoffLocation.value === "wellington") {
+			end = [174.776236, -41.28646];
+		} else if (dropoffLocation.value === "queenstown") {
+			end = [168.662644, -45.031162];
+		}
+	}
 
+	//Have called this function above in the "done" phase of my Ajax call, Which means that it can grab the data info for distance
+	function goodToGo(data) {
+		route = data.routes[0].geometry;
+		distance = data.routes[0].distance / 1000;
+	}
+	//--------------------------------------------------------------
+	// Dynamically show the right vehicle options for users requests
+	//--------------------------------------------------------------
 
-			//--------------------------------------------------------------
-			// Functions for dynamically getting prices and fuel consumption
-			//--------------------------------------------------------------
-			//gets price per day of the vehicle index number multiplied by days travelled
-			// function getPricePerDay (indexNum) {
-			// 				var getPricePerDay = vehicleData[indexNum].pricePerDay * diffDays;
-			// 				console.log(getPricePerDay + " price to rent");
-			// }
-			//gets getFuelConsumption for the vehicle by its corresponding index number and distance travelled
-			// function getFuelConsumption (indexNum, distanceToTravel) {
-			// 				console.log(distance + " is the distance travelled");
-			// 				var getFuelConsumption = distanceToTravel / 100 * vehicleData[indexNum].fuelKm;
-			// 				console.log(getFuelConsumption + " fuel consumption");
-			// }
+	function getAllElements() {
+		//getting vehicles
+		for (var i = 0; i < vehicleData.length; i++) {
+			if (
+				vehicleData[i].minSeats <= seats &&
+				vehicleData[i].maxSeats >= seats &&
+				vehicleData[i].minDays <= compareDates(pickDate, dropDate) &&
+				vehicleData[i].maxDays >= compareDates(pickDate, dropDate)
+			) {
+				var newElement = "";
+				newElement += "<div class='myItem row justify-content-between'>";
+				newElement += "<div class='itemLabel col-3'>";
+				newElement +=
+					"<p class='headingSix removeSpace'>" + vehicleData[i].name + "</p>";
+				newElement +=
+					"<p class='headingFive removeSpace'>" +
+					vehicleData[i].maxSeats +
+					" Seats</p>";
+				newElement += "</div>";
+				newElement +=
+					"<button type='button' name='button' class='moreInfoBtn'><span class='btnText col-9'>View information</span><i class='icon fas fa-chevron-down'></i></button>";
+				newElement += "<div class='hide fullWidth'>";
+				newElement += "<div class='fullWidth'>";
+				newElement += "<h4 class='headingFive'>General</h4>";
+				newElement += "<div class='flexMe'>";
+				newElement += "<p class='flexChildren'>Seats</p>";
+				newElement += "<p class='flexChildren alignRight'>";
+				newElement += "<i class='far fa-user'></i>";
+				newElement += "</p>";
+				newElement += "</div>";
+				newElement += "<div class='flexMe'>";
+				newElement += "<p class='flexChildren'>Rental cost per day</p>";
+				newElement +=
+					"<p class='flexChildren alignRight'>$" +
+					vehicleData[i].pricePerDay +
+					"</p>";
+				newElement += "</div>";
+				newElement += "<div class='flexMe'>";
+				newElement += "<p class='flexChildren'>Fuel consumption per 100km</p>";
+				newElement +=
+					"<p class='flexChildren alignRight'>" +
+					vehicleData[i].fuelKm +
+					"L</p>";
+				newElement += "</div>";
+				newElement += "</div>";
+				newElement += "<div class='fullWidth'>";
+				newElement += "<h4 class='headingFive'>Your trip</h4>";
+				newElement += "<div class='flexMe'>";
+				newElement += "<p class='flexChildren'>Rental cost total</p>";
+				newElement +=
+					"<p class='flexChildren alignRight'>$" +
+					vehicleData[i].pricePerDay * compareDates(pickDate, dropDate) +
+					"</p>";
+				newElement += "</div>";
+				newElement += "<div class='flexMe'>";
+				newElement +=
+					"<p class='flexChildren'>Estimated fuel consumption total</p>";
+				newElement +=
+					"<p class='flexChildren alignRight'>" +
+					vehicleData[i].fuelKm * distance +
+					"L</p>";
+				newElement += "</div>";
+				newElement += "</div>";
+				newElement +=
+					"<button type='button' name='button' class='iconBtnFillWide vehicleConfirmBtn' id='confirm" +
+					vehicleData[i].type +
+					"'><span class='btnText col-12'>Confirm this vehicle</span><i class='iconWide fas fa-chevron-right'></i></button>";
+				newElement += "</div>";
+				newElement += "</div>";
+				newElement += "</div>";
 
+				var insertItem = document.getElementById("itemsHeader");
+				insertItem.insertAdjacentHTML("afterEnd", newElement);
+			}
+		}
 
+		//Changes h3 tag to dynamically display how many seats & days user has requested
+		var newh3Element =
+			"<h3 class='headingFour'>You requested a vehicle with <span class='featureFont'>" +
+			seats +
+			"</span> seats for a period of <span class='featureFont'>" +
+			compareDates(pickDate, dropDate) +
+			"</span> days</h3>";
+		var insertnewh3Element = document.getElementById("mainItemsHeader");
+		insertnewh3Element.insertAdjacentHTML("afterEnd", newh3Element);
 
-}());
+		//Inputs HTML saying the date leaving dynamically for section 5
+		var lastPageleavingDate =
+			"<h3 class='headingThree'>We'll see you on " +
+			leaveDate.value +
+			" when you start your journey</h3>";
+		var insertLastPageleavingDate = document.getElementById(
+			"sectionFiveCongrat"
+		);
+		insertLastPageleavingDate.insertAdjacentHTML(
+			"afterEnd",
+			lastPageleavingDate
+		);
+
+		//inputs html saying journey leaving date
+		var journeyLeaveDate =
+			"<p class='flexChildren alignRight headingFive' id='bookingPickupDate'>" +
+			leaveDate.value +
+			"</p>";
+		var insertJourneyLeaveDate = document.getElementById("journeyLeaveDate");
+		insertJourneyLeaveDate.insertAdjacentHTML("afterEnd", journeyLeaveDate);
+
+		//inputs html saying journey returning date
+		var journeyReturnDate =
+			"<p class='flexChildren alignRight headingFive' id='bookingDropoffDate'>" +
+			returnDate.value +
+			"</p>";
+		var insertJourneyReturnDate = document.getElementById("journeyReturnDate");
+		insertJourneyReturnDate.insertAdjacentHTML("afterEnd", journeyReturnDate);
+
+		//inputs html saying journey leaving location
+		var journeyLeaveLoc =
+			"<p class='flexChildren alignRight headingFive cap'>" +
+			pickupLocation.value +
+			"</p>";
+		var insertJourneyLeaveLoc = document.getElementById("journeyLeaveLoc");
+		insertJourneyLeaveLoc.insertAdjacentHTML("afterEnd", journeyLeaveLoc);
+
+		//inputs html saying journey returning location
+		var journeyReturnLoc =
+			"<p class='flexChildren alignRight headingFive cap'>" +
+			dropoffLocation.value +
+			"</p>";
+		var insertJourneyReturnLoc = document.getElementById("journeyReturnLoc");
+		insertJourneyReturnLoc.insertAdjacentHTML("afterEnd", journeyReturnLoc);
+	}
+})();
