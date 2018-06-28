@@ -103,13 +103,16 @@
 //REUSABLE INPUT CLASSES
 //----------------------
 .input {
-	padding: 18px 30px;
+	padding: 20px;
 	border: none;
-	border-right: 1px solid #b3b3b3;
+	border-right: 1px solid $tertiary;
+	color: $secondary;
+	padding-left: 20px !important;
 }
 
 .input::placeholder {
-	color: #b3b3b3;
+	color: $tertiary;
+	// padding-left: 20px;
 }
 
 //-----------------------
@@ -206,7 +209,7 @@
 //-------------------
 
 .sectionOneInner {
-	width: 60%;
+	width: 75%;
 	@include centerAll;
 }
 
@@ -270,14 +273,21 @@ body {
 
 .myItem {
 	background-color: $bgGrey;
-	margin-top: 10px;
+	margin-top: 40px;
 	padding: 20px;
 }
-#motorbike,
-#smallCar,
-#largeCar,
-#motorhome {
-	display: none;
+
+.itemSubHeader {
+	padding-bottom: 15px;
+}
+
+.itemInformation {
+	padding-top: 40px;
+}
+.itemGeneralInfo {
+}
+.itemTripInfo {
+	padding-top: 20px;
 }
 
 //--------------------

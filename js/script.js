@@ -20,7 +20,8 @@
 	//Page Piling Plugin
 	//------------------
 	$("#pagepiling").pagepiling({
-		normalScrollElements: ".halfScreen"
+		// normalScrollElements: ".halfScreen"
+		navigation: false
 	});
 
 	$.fn.pagepiling.setAllowScrolling(false);
@@ -47,7 +48,19 @@
 	$(".backBtn").click(function() {
 		event.preventDefault();
 		$.fn.pagepiling.moveSectionUp();
-		// alert("working");
+	});
+
+	//Toggling vehicle information
+	$(document).on("click", ".moreInfoBtn", function() {
+		$(this)
+			.next()
+			.slideToggle("done", function() {
+				// alert("open");
+				// console.log($(this));
+				// // $(this).toggleClass("fa-chevron-up");
+				// $(this).removeClass("fa-chevron-down");
+				// $(this).addClass("fa-chevron-up");
+			});
 	});
 
 	//Getting which vehicle was selected and inputting name & calculated price into the journey page
@@ -154,6 +167,7 @@
 	//---------------
 	mapboxgl.accessToken =
 		"pk.eyJ1Ijoia2F0aWVmcmVuY2giLCJhIjoiY2ppM240MGFyMDA5cTNrbDJwNTkwYWZmOSJ9.vMh53hzHle4vA4uwg0TE6A";
+
 	var map = new mapboxgl.Map({
 		container: "map",
 		style: "mapbox://styles/mapbox/streets-v9",
@@ -166,6 +180,7 @@
 		unit: "metric",
 		profile: "mapbox/driving"
 	});
+
 	function getRoute() {
 		var directionsRequest =
 			"https://api.mapbox.com/directions/v5/mapbox/driving/" +
@@ -274,15 +289,6 @@
 		return diffDays;
 	}
 
-	//------------------------------
-	//Toggling Item Info Dynamically
-	//------------------------------
-	$(document).on("click", ".moreInfoBtn", function() {
-		$(this)
-			.next()
-			.slideToggle();
-	});
-
 	//----------------
 	// Form Validation
 	//----------------
@@ -318,83 +324,14 @@
 				.attr("title", "Minimum number of seats is 1")
 				.tooltip("_fixTitle")
 				.tooltip("show");
-		} else if (seats === NaN) {
-			$("#seats")
-				.attr("title", "You must select a required number of seats")
-				.tooltip("_fixTitle")
-				.tooltip("show");
+		} else if (
+			(compareDates(pickDate, dropDate) === 1 && seats > 2) ||
+			(seats === 1 && compareDates(pickDate, dropDate) > 10)
+		) {
+			alert("Sorry, there are no vehicles available for those requirements...");
 		} else {
-			seats = parseInt(seatNumber.value);
 			$.fn.pagepiling.moveSectionDown();
 		}
-		//WORKING
-		//--------
-		// if (seatNumber.value === "") {
-		// 	$("#seats")
-		// 		.attr("title", "You must select a required number of seats")
-		// 		.tooltip("_fixTitle")
-		// 		.tooltip("show");
-		// } else {
-		// 	seats = parseInt(seatNumber.value);
-		//
-		// 	if (pickDate === null) {
-		// 		$("#dateLeave").tooltip("show");
-		// 	} else if (dropDate === null) {
-		// 		$("#dateReturn").tooltip("show");
-		// 	} else if (compareDates(pickDate, dropDate) > 16) {
-		// 		$("#dateReturn")
-		// 			.attr("title", "Maximum number of days to rent is 15")
-		// 			.tooltip("_fixTitle")
-		// 			.tooltip("show");
-		// 	} else if (seats > 6) {
-		// 		$("#seats")
-		// 			.attr("title", "Maximum number of seats is 6")
-		// 			.tooltip("_fixTitle")
-		// 			.tooltip("show");
-		// 	} else if (seats < 1) {
-		// 		$("#seats")
-		// 			.attr("title", "Minimum number of seats is 1")
-		// 			.tooltip("_fixTitle")
-		// 			.tooltip("show");
-		// 	} else if (seats === NaN) {
-		// 		// $('#seats').tooltip('show');
-		// 		$("#seats")
-		// 			.attr("title", "You must select a required number of seats")
-		// 			.tooltip("_fixTitle")
-		// 			.tooltip("show");
-		// 	} else {
-		// 		// seats = parseInt(seatNumber.value);
-		// 		$.fn.pagepiling.moveSectionDown();
-		// 	}
-		// }
-		//CATS TRY
-		//-------
-		// 	if (seatNumber.value === '') {
-		// 		// $('#seats').tooltip('show');
-		// 	 $('#seats').attr("title", "You must select a required number of seats").tooltip("_fixTitle").tooltip("show");
-		// 	} else {
-		//
-		// 	 seats = parseInt(seatNumber.value);
-		// 	 if (pickDate === null){
-		// 				 $('#dateLeave').tooltip('show');
-		// 	 }else if (dropDate === null) {
-		// 				 $('#dateReturn').tooltip('show');
-		// 	 }else if (compareDates(pickDate, dropDate) > 16) {
-		// 			 $('#dateReturn').attr("title", "Maximum number of days to rent is 15").tooltip("_fixTitle").tooltip("show");
-		// 	 } else if (seatNumber.value === ''){// $('#seats').tooltip('show');
-		// 	$('#seats').attr("title", "You must select a required number of seats").tooltip("_fixTitle").tooltip("show");
-		// } else if (!(seatNumber.value === '')){
-		// 	if (seats > 6) {
-		// 				$('#seats').attr("title", "Maximum number of seats is 6").tooltip("_fixTitle").tooltip("show");
-		// 	}else if (seats < 1) {
-		// 				$('#seats').attr("title", "Minimum number of seats is 1").tooltip("_fixTitle").tooltip("show");
-		// 	}else if (seats === NaN) {
-		// 			// $('#seats').tooltip('show');
-		// 			$('#seats').attr("title", "You must select a required number of seats").tooltip("_fixTitle").tooltip("show");
-		// 	 } else {
-		// 		// seats = parseInt(seatNumber.value);
-		// 			$.fn.pagepiling.moveSectionDown();
-		// 	}
 	}
 
 	function checkLocationForm() {
@@ -477,15 +414,16 @@
 					" Seats</p>";
 				newElement += "</div>";
 				newElement +=
-					"<button type='button' name='button' class='moreInfoBtn'><span class='btnText col-9'>View information</span><i class='icon fas fa-chevron-down'></i></button>";
-				newElement += "<div class='hide fullWidth'>";
-				newElement += "<div class='fullWidth'>";
-				newElement += "<h4 class='headingFive'>General</h4>";
+					"<button type='button' name='button' class='moreInfoBtn'><span class='btnText col-9'>View information</span><i class='icon fas fa-chevron-down test'></i></button>";
+				newElement += "<div class='hide itemInformation fullWidth'>";
+				newElement += "<div class='fullWidth itemGeneralInfo'>";
+				newElement += "<h4 class='headingFive itemSubHeader'>General</h4>";
 				newElement += "<div class='flexMe'>";
 				newElement += "<p class='flexChildren'>Seats</p>";
-				newElement += "<p class='flexChildren alignRight'>";
-				newElement += "<i class='far fa-user'></i>";
-				newElement += "</p>";
+				newElement +=
+					"<p class='flexChildren alignRight'>" +
+					vehicleData[i].maxSeats +
+					" seats</p>";
 				newElement += "</div>";
 				newElement += "<div class='flexMe'>";
 				newElement += "<p class='flexChildren'>Rental cost per day</p>";
@@ -502,8 +440,8 @@
 					"L</p>";
 				newElement += "</div>";
 				newElement += "</div>";
-				newElement += "<div class='fullWidth'>";
-				newElement += "<h4 class='headingFive'>Your trip</h4>";
+				newElement += "<div class='fullWidth itemTripInfo'>";
+				newElement += "<h4 class='headingFive itemSubHeader'>Your trip</h4>";
 				newElement += "<div class='flexMe'>";
 				newElement += "<p class='flexChildren'>Rental cost total</p>";
 				newElement +=
