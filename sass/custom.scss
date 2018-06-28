@@ -53,6 +53,17 @@
 .cap {
 	text-transform: capitalize;
 }
+
+.backBtn {
+	margin-bottom: 50px;
+	// outline: 1px blue solid;
+}
+
+.backBtnText {
+	// background-color: pink;
+	color: $primary;
+	// outline: 1px red solid;
+}
 //----------------------
 //PARSLEY ERROR MESSAGES
 //----------------------

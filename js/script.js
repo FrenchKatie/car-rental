@@ -33,15 +33,23 @@
 		$.fn.pagepiling.moveSectionDown();
 		getAllElements();
 	});
-	// $("#confirmJourney").click(function(){
-	// 			//pagepiling plugin - move to next section
-	// 			$.fn.pagepiling.moveSectionDown();
-	// });
+	$("#confirmJourney").click(function() {
+		//pagepiling plugin - move to next section
+		$.fn.pagepiling.moveSectionDown();
+	});
 
+	//First form validation
 	$("#sectionOneSubmitBtn").click(function() {
 		event.preventDefault();
 		checkForm();
 	});
+
+	$(".backBtn").click(function() {
+		event.preventDefault();
+		$.fn.pagepiling.moveSectionUp();
+		// alert("working");
+	});
+
 	//Getting which vehicle was selected and inputting name & calculated price into the journey page
 	$(document).on("click", ".vehicleConfirmBtn", function() {
 		// console.dir($(this)["0"].id);
@@ -515,7 +523,7 @@
 				newElement +=
 					"<button type='button' name='button' class='iconBtnFillWide vehicleConfirmBtn' id='confirm" +
 					vehicleData[i].type +
-					"'><span class='btnText col-12'>Confirm this vehicle</span><i class='iconWide fas fa-chevron-right'></i></button>";
+					"'><span class='btnText col-12'>Select this vehicle</span><i class='iconWide fas fa-chevron-right'></i></button>";
 				newElement += "</div>";
 				newElement += "</div>";
 				newElement += "</div>";
