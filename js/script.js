@@ -282,54 +282,85 @@
 	function checkForm() {
 		pickDate = $("#dateLeave").datepicker("getDate");
 		dropDate = $("#dateReturn").datepicker("getDate");
-
+		seats = parseInt(seatNumber.value);
+		//MY TRY
+		//------
 		if (pickDate === null) {
-			console.log("error for date");
+			$("#dateLeave").tooltip("show");
 		} else if (dropDate === null) {
-			console.log("error for date 2");
+			$("#dateReturn").tooltip("show");
+		} else if (compareDates(pickDate, dropDate) > 16) {
+			$("#dateReturn")
+				.attr("title", "Maximum number of days to rent is 15")
+				.tooltip("_fixTitle")
+				.tooltip("show");
 		} else if (seatNumber.value === "") {
-			console.log("seat error");
-		}
-
-		if (seatNumber.value === "") {
-			// $('#seats').tooltip('show');
+			console.log(seatNumber.value);
+			$("#seats")
+				.attr("title", "You must select a required number of seats")
+				.tooltip("_fixTitle")
+				.tooltip("show");
+		} else if (seats > 6) {
+			$("#seats")
+				.attr("title", "Maximum number of seats is 6")
+				.tooltip("_fixTitle")
+				.tooltip("show");
+		} else if (seats < 1) {
+			$("#seats")
+				.attr("title", "Minimum number of seats is 1")
+				.tooltip("_fixTitle")
+				.tooltip("show");
+		} else if (seats === NaN) {
 			$("#seats")
 				.attr("title", "You must select a required number of seats")
 				.tooltip("_fixTitle")
 				.tooltip("show");
 		} else {
 			seats = parseInt(seatNumber.value);
-			if (pickDate === null) {
-				$("#dateLeave").tooltip("show");
-			} else if (dropDate === null) {
-				$("#dateReturn").tooltip("show");
-			} else if (compareDates(pickDate, dropDate) > 16) {
-				$("#dateReturn")
-					.attr("title", "Maximum number of days to rent is 15")
-					.tooltip("_fixTitle")
-					.tooltip("show");
-			} else if (seats > 6) {
-				$("#seats")
-					.attr("title", "Maximum number of seats is 6")
-					.tooltip("_fixTitle")
-					.tooltip("show");
-			} else if (seats < 1) {
-				$("#seats")
-					.attr("title", "Minimum number of seats is 1")
-					.tooltip("_fixTitle")
-					.tooltip("show");
-			} else if (seats === NaN) {
-				// $('#seats').tooltip('show');
-				$("#seats")
-					.attr("title", "You must select a required number of seats")
-					.tooltip("_fixTitle")
-					.tooltip("show");
-			} else {
-				// seats = parseInt(seatNumber.value);
-				$.fn.pagepiling.moveSectionDown();
-			}
+			$.fn.pagepiling.moveSectionDown();
 		}
-
+		//WORKING
+		//--------
+		// if (seatNumber.value === "") {
+		// 	$("#seats")
+		// 		.attr("title", "You must select a required number of seats")
+		// 		.tooltip("_fixTitle")
+		// 		.tooltip("show");
+		// } else {
+		// 	seats = parseInt(seatNumber.value);
+		//
+		// 	if (pickDate === null) {
+		// 		$("#dateLeave").tooltip("show");
+		// 	} else if (dropDate === null) {
+		// 		$("#dateReturn").tooltip("show");
+		// 	} else if (compareDates(pickDate, dropDate) > 16) {
+		// 		$("#dateReturn")
+		// 			.attr("title", "Maximum number of days to rent is 15")
+		// 			.tooltip("_fixTitle")
+		// 			.tooltip("show");
+		// 	} else if (seats > 6) {
+		// 		$("#seats")
+		// 			.attr("title", "Maximum number of seats is 6")
+		// 			.tooltip("_fixTitle")
+		// 			.tooltip("show");
+		// 	} else if (seats < 1) {
+		// 		$("#seats")
+		// 			.attr("title", "Minimum number of seats is 1")
+		// 			.tooltip("_fixTitle")
+		// 			.tooltip("show");
+		// 	} else if (seats === NaN) {
+		// 		// $('#seats').tooltip('show');
+		// 		$("#seats")
+		// 			.attr("title", "You must select a required number of seats")
+		// 			.tooltip("_fixTitle")
+		// 			.tooltip("show");
+		// 	} else {
+		// 		// seats = parseInt(seatNumber.value);
+		// 		$.fn.pagepiling.moveSectionDown();
+		// 	}
+		// }
+		//CATS TRY
+		//-------
 		// 	if (seatNumber.value === '') {
 		// 		// $('#seats').tooltip('show');
 		// 	 $('#seats').attr("title", "You must select a required number of seats").tooltip("_fixTitle").tooltip("show");
