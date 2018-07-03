@@ -31,10 +31,10 @@
 	//Event Handlers
 	//------------------
 
-	$("#confirmLocation").click(function() {
-		$.fn.pagepiling.moveSectionDown();
-		getAllElements();
-	});
+	// $("#confirmLocation").click(function() {
+	// 	$.fn.pagepiling.moveSectionDown();
+	// 	getAllElements();
+	// });
 	$("#confirmJourney").click(function() {
 		//pagepiling plugin - move to next section
 		$.fn.pagepiling.moveSectionDown();
@@ -207,6 +207,11 @@
 			if (map.getLayer("end")) {
 				map.removeLayer("end");
 			}
+			//This event handler has to be in the done section of this ajax call.  If the user was too quick to click this button and the distance had not yet finished calculating then it would create an error.
+			$("#confirmLocation").click(function() {
+				$.fn.pagepiling.moveSectionDown();
+				getAllElements();
+			});
 
 			// custom function once ajax completes
 			goodToGo(data);
