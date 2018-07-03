@@ -64,40 +64,6 @@
 	color: $primary;
 	// outline: 1px red solid;
 }
-//----------------------
-//PARSLEY ERROR MESSAGES
-//----------------------
-
-.parsley-errors-list:first-child {
-	list-style-type: none;
-	position: absolute;
-	bottom: -4em;
-
-	transition: all 0.3s ease-in;
-	-o-transition: all 0.3s ease-in;
-	-moz-transition: all 0.3s ease-in;
-	-webkit-transition: all 0.3s ease-in;
-}
-.parsley-errors-list:nth-child(2) {
-	list-style-type: none;
-	position: absolute;
-	bottom: -4em;
-
-	transition: all 0.3s ease-in;
-	-o-transition: all 0.3s ease-in;
-	-moz-transition: all 0.3s ease-in;
-	-webkit-transition: all 0.3s ease-in;
-}
-.parsley-errors-list:nth-child(3) {
-	list-style-type: none;
-	position: absolute;
-	bottom: -4em;
-
-	transition: all 0.3s ease-in;
-	-o-transition: all 0.3s ease-in;
-	-moz-transition: all 0.3s ease-in;
-	-webkit-transition: all 0.3s ease-in;
-}
 
 //----------------------
 //REUSABLE INPUT CLASSES

@@ -10,69 +10,33 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/jquery-ui.min.css">
-  <link rel="stylesheet" href="css/parsley.css">
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.css' type='text/css' />
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
 </head>
   <body>
       <div id="pagepiling">
-        <div class="section">
-              <div class="sectionOneBg">
-                  <div class="sectionOneInner">
-                    <div class="row">
-                          <h1 class="col bannerHeading">Book a Rental</h1>
-                          <!-- <button type="button" class="outlineBtn"name="button">Return</button> -->
-                          <!-- <button type="button" class="fillBtn"name="button">One Way</button> -->
-                    </div>
-                      <form class="needs-validation" action="index.html" method="post" name="homeForm" novalidate>
-
-                          <div class="form-row">
-
-
-
-                            <input type="text" id="dateLeave" name="from" required type="text" class="col-4 input " placeholder="When are you leaving?"   data-toggle="tooltip" title="You must select a leaving date" data-placement="bottom">
-                            <input type="text" id="dateReturn" name="to" required type="text" class="col-4 input " placeholder="When are you returning?"   data-toggle="tooltip" title="You must select a returning date" data-placement="bottom">
-
-                                <!-- <input required type="text" id="dateLeave" class="col-4 input " name="dateLeave" placeholder="When are you leaving?"  data-toggle="tooltip" title="You must select a leaving date" data-placement="bottom">
-
-                                <input required type="text" id="dateReturn" class="col-4 input" name="dateReturn" placeholder="When are you returning?"   data-toggle="tooltip" title="You must select a returning date" data-placement="bottom"> -->
-
-                                <input required type="number" name="seatSelect" class="col-3 input" placeholder="How many seats do you need?" step="1" min="1" max="6" id="seats" data-toggle="tooltip" title="You must select how many seats you require" data-placement="bottom">
-
-                                <button type="submit" name="button" id="sectionOneSubmitBtn" class="submitBtn col-1"><i class="fas fa-search"></i></button>
-                          </div>
-                      </form>
-
-                      <div class="modal" tabindex="-1" role="dialog" id="myModal">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title">Modal title</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <p>Modal body text goes here.</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-primary">Save changes</button>
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                          </div>
+            <div class="section">
+                  <div class="sectionOneBg">
+                      <div class="sectionOneInner">
+                        <div class="row">
+                              <h1 class="col bannerHeading">Book a Rental</h1>
                         </div>
+                          <form class="needs-validation" action="index.html" method="post" name="homeForm" novalidate>
+                              <div class="form-row">
+                                <input id="dateLeave" name="from" required type="text" class="col-4 input " placeholder="When are you leaving?"   data-toggle="tooltip" title="You must select a leaving date" data-placement="bottom">
+                                <input id="dateReturn" name="to" required type="text" class="col-4 input " placeholder="When are you returning?"   data-toggle="tooltip" title="You must select a returning date" data-placement="bottom">
+                                <input required type="number" name="seatSelect" class="col-3 input" placeholder="How many seats do you need?" step="1" min="1" max="6" id="seats" data-toggle="tooltip" title="You must select how many seats you require" data-placement="bottom">
+                                <button type="submit" name="button" id="sectionOneSubmitBtn" class="submitBtn col-1"><i class="fas fa-search"></i></button>
+                              </div>
+                          </form>
                       </div>
                   </div>
-              </div>
-        </div>
-
-
-
+            </div>
             <div class="section">
                   <div class="sectionTwoBg">
                       <div class="sectionTwoInner halfScreenMap">
                         <div class="backBtn ">
-                            <p href="" class="backBtnText"><i class="fas fa-chevron-left"></i> Go back</p>
+                            <p class="backBtnText"><i class="fas fa-chevron-left"></i> Go back</p>
                         </div>
                           <h2 class="headingTwo">Where are you headed?</h2>
                           <select class="required custom-select"  data-toggle="tooltip" title="You must select a pickup location" data-placement="bottom" id="inputGroupSelect1">
@@ -90,194 +54,25 @@
                           <button type="button" class="outlineBtn" id="viewRoute" name="button">View Route</button>
                           <button type="button" name="button" class="hide nextIconBtnFillWide" id="confirmLocation"><span class="btnText col-12">Confirm locations</span><i class="iconWide fas fa-chevron-right"></i></button>
                       </div>
-
                       <div id='map'></div>
                   </div>
             </div>
-
-
-
             <div class="section">
                   <div class="sectionThreeBg">
                       <div class="sectionThreeInner" >
                           <div class="halfScreen"  id="vehicleContent">
                             <div class="backBtn ">
-                                <p href="" class="backBtnText"><i class="fas fa-chevron-left"></i> Go back</p>
+                                <p class="backBtnText"><i class="fas fa-chevron-left"></i> Go back</p>
                             </div>
                               <div class="" id="itemsHeader">
-                                    <h2 class="headingTwo" id="mainItemsHeader">Find what vehicle option suits you best</h2>
-                                    <!-- <h3 class="headingFour">You requested a vehicle with <span class="featureFont">3</span> seats for a period of <span class="featureFont">4</span> days</h3> -->
-                                    <h3 class="headingFour">Select a vehicle down below to see more information</h3>
-
+                                  <h2 class="headingTwo" id="mainItemsHeader">Find what vehicle option suits you best</h2>
+                                  <h3 class="headingFour">Select a vehicle down below to see more information</h3>
                               </div>
-
-
-                              <div id="itemWrapp">
-
-                                      <!-- <div class="myItem itemMotorbike row justify-content-between" id="motorbike">
-                                          <div class=" itemLabel col-3">
-                                                <p class="headingSix removeSpace">Motorbike</p>
-                                                <p class="headingFive removeSpace">1 Seat</p>
-                                          </div>
-                                          <button type="button" name="button" class="moreInfoBtn"><span class="btnText col-9">View information</span><i class="icon fas fa-chevron-down"></i></button>
-                                          <div class="hide itemInformation">
-                                                <div class="">
-                                                      <h4 class="headingFive">General</h4>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Seats</p>
-                                                          <p class="flexChildren alignRight"><i class="far fa-user"></i> <i class="far fa-user"></i></p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Rental cost per day</p>
-                                                          <p class="flexChildren alignRight">$129</p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Fuel consumption per 100km</p>
-                                                          <p class="flexChildren alignRight">8.5 L</p>
-                                                      </div>
-                                                </div>
-                                                <div class="">
-                                                      <h4 class="headingFive">Your trip</h4>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Rental cost total</p>
-                                                          <p class="flexChildren alignRight">$516</p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Estimated fuel consumption total</p>
-                                                          <p class="flexChildren alignRight">140</p>
-                                                      </div>
-                                                </div>
-                                                <button type="button" name="button" class="iconBtnFillWide" id="confirmVehicle"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
-
-                                          </div>
-                                      </div> -->
-
-
-
-                                      <!-- <div class="myItem itemSmallCar row justify-content-between" id="smallCar">
-                                          <div class=" itemLabel col-3">
-                                                <p class="headingSix removeSpace">Small Car</p>
-                                                <p class="headingFive removeSpace">1 Seat</p>
-                                          </div>
-                                          <button type="button" name="button" class="moreInfoBtn"><span class="btnText col-9">View information</span><i class="icon fas fa-chevron-down"></i></button>
-                                          <div class="hide itemInformation">
-                                                <div class="">
-                                                      <h4 class="headingFive">General</h4>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Seats</p>
-                                                          <p class="flexChildren alignRight"><i class="far fa-user"></i> <i class="far fa-user"></i></p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Rental cost per day</p>
-                                                          <p class="flexChildren alignRight">$129</p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Fuel consumption per 100km</p>
-                                                          <p class="flexChildren alignRight">8.5 L</p>
-                                                      </div>
-                                                </div>
-                                                <div class="">
-                                                      <h4 class="headingFive">Your trip</h4>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Rental cost total</p>
-                                                          <p class="flexChildren alignRight">$516</p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Estimated fuel consumption total</p>
-                                                          <p class="flexChildren alignRight">140</p>
-                                                      </div>
-                                                </div>
-                                                <button type="button" name="button" class="iconBtnFillWide"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
-
-                                          </div>
-                                      </div> -->
-
-
-
-                                      <!-- <div class="myItem itemLargeCar row justify-content-between" id="largeCar">
-                                          <div class=" itemLabel col-3">
-                                                <p class="headingSix removeSpace">Large Car</p>
-                                                <p class="headingFive removeSpace">1 Seat</p>
-                                          </div>
-                                          <button type="button" name="button" class="moreInfoBtn"><span class="btnText col-9">View information</span><i class="icon fas fa-chevron-down"></i></button>
-                                          <div class="hide itemInformation">
-                                                <div class="">
-                                                      <h4 class="headingFive">General</h4>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Seats</p>
-                                                          <p class="flexChildren alignRight"><i class="far fa-user"></i> <i class="far fa-user"></i></p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Rental cost per day</p>
-                                                          <p class="flexChildren alignRight">$129</p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Fuel consumption per 100km</p>
-                                                          <p class="flexChildren alignRight">8.5 L</p>
-                                                      </div>
-                                                </div>
-                                                <div class="">
-                                                      <h4 class="headingFive">Your trip</h4>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Rental cost total</p>
-                                                          <p class="flexChildren alignRight">$516</p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Estimated fuel consumption total</p>
-                                                          <p class="flexChildren alignRight">140</p>
-                                                      </div>
-                                                </div>
-                                                <button type="button" name="button" class="iconBtnFillWide"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
-
-                                          </div>
-                                      </div> -->
-
-
-
-                                      <!-- <div class="myItem itemMotorhome row justify-content-between" id="motorhome">
-                                          <div class=" itemLabel col-3">
-                                                <p class="headingSix removeSpace">Motorhome</p>
-                                                <p class="headingFive removeSpace">6 Seats</p>
-                                          </div>
-                                          <button type="button" name="button" class="moreInfoBtn"><span class="btnText col-9">View information</span><i class="icon fas fa-chevron-down"></i></button>
-                                          <div class="hide itemInformation">
-                                                <div class="">
-                                                      <h4 class="headingFive">General</h4>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Seats</p>
-                                                          <p class="flexChildren alignRight"><i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i> <i class="far fa-user"></i></p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Rental cost per day</p>
-                                                          <p class="flexChildren alignRight">$129</p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Fuel consumption per 100km</p>
-                                                          <p class="flexChildren alignRight">8.5 L</p>
-                                                      </div>
-                                                </div>
-                                                <div class="">
-                                                      <h4 class="headingFive">Your trip</h4>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Rental cost total</p>
-                                                          <p class="flexChildren alignRight">$516</p>
-                                                      </div>
-                                                      <div class="flexMe">
-                                                          <p class="flexChildren">Estimated fuel consumption total</p>
-                                                          <p class="flexChildren alignRight">140</p>
-                                                      </div>
-                                                </div>
-                                                <button type="button" name="button" class="iconBtnFillWide"><span class="btnText col-12">Confirm this vehicle</span><i class="iconWide fas fa-chevron-right"></i></button>
-
-                                          </div>
-                                      </div> -->
-                              </div>
+                              <div id="itemWrapp"></div>
                           </div>
                       </div>
                   </div>
             </div>
-
-
             <div class="section">
                   <div class="sectionFourBg">
                       <div class="sectionFourInner">
@@ -292,69 +87,46 @@
                                 <div class="bookingConfirmInfo">
                                       <div class="flexMe">
                                           <p class="flexChildren headingSix" id="journeyLeaveDate">Pick-up date</p>
-                                          <!-- <p class="flexChildren alignRight headingFive" id="bookingPickupDate"></p> -->
                                       </div>
                                       <div class="flexMe">
                                           <p class="flexChildren headingSix" id="journeyReturnDate">Drop-off date</p>
-                                          <!-- <p class="flexChildren alignRight headingFive">March 15 2018</p> -->
                                       </div>
                                       <div class="flexMe">
                                           <p class="flexChildren headingSix" id="journeyLeaveLoc">Pick-up location</p>
-                                          <!-- <p class="flexChildren alignRight headingFive">Auckland</p> -->
                                       </div>
                                       <div class="flexMe">
                                           <p class="flexChildren headingSix" id="journeyReturnLoc">Drop-off location</p>
-                                          <!-- <p class="flexChildren alignRight headingFive">Queenstown</p> -->
                                       </div>
                                       <div class="flexMe">
                                           <p class="flexChildren headingSix" id="journeyVehicle">Vehicle</p>
-                                          <!-- <p class="flexChildren alignRight headingFive">Small car</p> -->
                                       </div>
                                       <div class="flexMe">
                                             <h2 class="flexChildren headingFour" id="journeyVehiclePrice">Total booking cost:</h2>
-                                            <!-- <h3 class="flexChildren alignRight headingFour" >$516</h3> -->
                                       </div>
                                 </div>
                                 <button type="button" name="button" class="nextIconBtnFillWide" id="confirmJourney"><span class="btnText col-12">Confirm your booking</span><i class="iconWide fas fa-chevron-right"></i></button>
-
-
                           </div>
-
                       </div>
                   </div>
             </div>
-
-
-
             <div class="section">
                   <div class="sectionFiveBg">
                       <div class="sectionFiveInner">
                           <h1 class="bannerHeading">You're good to go!</h1>
                           <h2 class="headingTwo" id="sectionFiveCongrat">Congratulations, your booking has been succesful.</h2>
-                          <!-- <h3 class="headingThree">We'll see you on March 13 when you start your journey</h3> -->
                           <button type="button" name="button" class="iconBtnFill"><span class="btnText">Ok</span><i class="icon fas fa-chevron-right"></i></button>
                       </div>
                   </div>
             </div>
-
-
       </div>
-
-
-      <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.js'></script>
-  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.css' type='text/css' />
-  <!-- <script src="js/jquery.js"></script> -->
-  <!-- <script src="js/jquery-ui.min.js"></script> -->
-  <!-- <script src="js/bootstrap.bundle.min.js"></script> -->
-  <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.js'></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
   <script src="js/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
-  <script type="text/javascript" src="js/jquery.pagepiling.min.js"></script>
+  <script src="js/jquery.pagepiling.min.js"></script>
   <script src="js/data.js"></script>
-  <script type="text/javascript" src="js/script.js"></script>
+  <script src="js/script.js"></script>
   </body>
 </html>

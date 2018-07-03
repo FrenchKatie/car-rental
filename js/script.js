@@ -21,7 +21,8 @@
 	//------------------
 	$("#pagepiling").pagepiling({
 		// normalScrollElements: ".halfScreen"
-		navigation: false
+		navigation: false,
+		keyboardScrolling: false
 	});
 
 	$.fn.pagepiling.setAllowScrolling(false);
@@ -197,6 +198,16 @@
 			method: "GET",
 			url: directionsRequest
 		}).done(function(data) {
+			if (map.getLayer("route")) {
+				map.removeLayer("route");
+			}
+			if (map.getLayer("start")) {
+				map.removeLayer("start");
+			}
+			if (map.getLayer("end")) {
+				map.removeLayer("end");
+			}
+
 			// custom function once ajax completes
 			goodToGo(data);
 			map.addLayer({
@@ -260,12 +271,16 @@
 			.on("change", function() {
 				to.datepicker("option", "minDate", getDate(this));
 			}),
-		to = $("#dateReturn").datepicker({
-			dateFormat: "dd/mm/yy",
-			defaultDate: 0,
-			minDate: 0,
-			numberOfMonths: 1
-		});
+		to = $("#dateReturn")
+			.datepicker({
+				dateFormat: "dd/mm/yy",
+				defaultDate: 0,
+				minDate: 0,
+				numberOfMonths: 1
+			})
+			.on("change", function() {
+				from.datepicker("option", "maxDate", getDate(this));
+			});
 
 	// sets return date to only show from pickDate
 	function getDate(element) {
