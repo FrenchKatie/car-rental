@@ -170,6 +170,20 @@
 	padding-left: 0px !important;
 }
 
+//---------------
+//TOOLTIP STYLING
+//---------------
+
+.tooltip-inner {
+	background-color: $error !important;
+	color: white;
+}
+.bs-tooltip-bottom .arrow::before {
+	border-bottom-color: $error !important;
+}
+// .arrow::before {
+// 	display: none;
+// }
 //-------------------
 //SECTION ONE STYLING
 //-------------------
@@ -254,6 +268,16 @@ body {
 }
 .itemTripInfo {
 	padding-top: 20px;
+}
+
+//--------------------
+//SECTION FOUR STYLING
+//--------------------
+.bookingConfirmInfo {
+	margin-top: 100px;
+}
+.line {
+	margin-bottom: 30px;
 }
 
 //--------------------
