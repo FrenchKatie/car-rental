@@ -47,11 +47,16 @@
 		var bookingDropoffDate = document.getElementById("bookingDropoffDate");
 		resubmitRemove(bookingDropoffDate);
 	});
+	// $("#backToSecTwo").click(function(){
+	// 	var bookingDropoffDate = document.getElementById("bookingDropoffDate");
+	// 	resubmitRemove(bookingDropoffDate);
+	// })
 
 	//First form validation
 	$("#sectionOneSubmitBtn").click(function() {
 		event.preventDefault();
 		checkForm();
+		getJourneyDates();
 	});
 
 	//Toggling vehicle information
@@ -528,22 +533,6 @@
 			lastPageleavingDate
 		);
 
-		//inputs html saying journey leaving date
-		var journeyLeaveDate =
-			"<p class='flexChildren alignRight headingFive' id='bookingPickupDate'>" +
-			leaveDate.value +
-			"</p>";
-		var insertJourneyLeaveDate = document.getElementById("journeyLeaveDate");
-		insertJourneyLeaveDate.insertAdjacentHTML("afterEnd", journeyLeaveDate);
-
-		//inputs html saying journey returning date
-		var journeyReturnDate =
-			"<p class='flexChildren alignRight headingFive' id='bookingDropoffDate'>" +
-			returnDate.value +
-			"</p>";
-		var insertJourneyReturnDate = document.getElementById("journeyReturnDate");
-		insertJourneyReturnDate.insertAdjacentHTML("afterEnd", journeyReturnDate);
-
 		//inputs html saying journey leaving location
 		var journeyLeaveLoc =
 			"<p class='flexChildren alignRight headingFive cap'>" +
@@ -559,5 +548,23 @@
 			"</p>";
 		var insertJourneyReturnLoc = document.getElementById("journeyReturnLoc");
 		insertJourneyReturnLoc.insertAdjacentHTML("afterEnd", journeyReturnLoc);
+	}
+
+	function getJourneyDates() {
+		//inputs html saying journey leaving date
+		var journeyLeaveDate =
+			"<p class='flexChildren alignRight headingFive' id='bookingPickupDate'>" +
+			leaveDate.value +
+			"</p>";
+		var insertJourneyLeaveDate = document.getElementById("journeyLeaveDate");
+		insertJourneyLeaveDate.insertAdjacentHTML("afterEnd", journeyLeaveDate);
+
+		//inputs html saying journey returning date
+		var journeyReturnDate =
+			"<p class='flexChildren alignRight headingFive' id='bookingDropoffDate'>" +
+			returnDate.value +
+			"</p>";
+		var insertJourneyReturnDate = document.getElementById("journeyReturnDate");
+		insertJourneyReturnDate.insertAdjacentHTML("afterEnd", journeyReturnDate);
 	}
 })();
