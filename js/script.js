@@ -469,7 +469,7 @@
 					"<p class='flexChildren'>Estimated fuel consumption total</p>";
 				newElement +=
 					"<p class='flexChildren alignRight'>" +
-					vehicleData[i].fuelKm * distance +
+					Math.ceil(vehicleData[i].fuelKm * distance) +
 					"L</p>";
 				newElement += "</div>";
 				newElement += "</div>";
