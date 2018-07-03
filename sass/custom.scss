@@ -160,6 +160,13 @@
 	bottom: 5%;
 	left: 2.5%;
 }
+button:focus {
+	outline: 0;
+}
+button:active {
+	outline: none;
+	border: none;
+}
 
 //---------------------
 //REUSABLE FONT CLASSES

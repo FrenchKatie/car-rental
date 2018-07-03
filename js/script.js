@@ -30,14 +30,15 @@
 	//------------------
 	//Event Handlers
 	//------------------
-
-	// $("#confirmLocation").click(function() {
-	// 	$.fn.pagepiling.moveSectionDown();
-	// 	getAllElements();
-	// });
+	//pagepiling plugin - move to next section
 	$("#confirmJourney").click(function() {
-		//pagepiling plugin - move to next section
 		$.fn.pagepiling.moveSectionDown();
+	});
+
+	//pagepiling plugin - move up a section if back btn is clicked
+	$(".backBtn").click(function() {
+		event.preventDefault();
+		$.fn.pagepiling.moveSectionUp();
 	});
 
 	//First form validation
@@ -46,27 +47,15 @@
 		checkForm();
 	});
 
-	$(".backBtn").click(function() {
-		event.preventDefault();
-		$.fn.pagepiling.moveSectionUp();
-	});
-
 	//Toggling vehicle information
 	$(document).on("click", ".moreInfoBtn", function() {
 		$(this)
 			.next()
-			.slideToggle("done", function() {
-				// alert("open");
-				// console.log($(this));
-				// // $(this).toggleClass("fa-chevron-up");
-				// $(this).removeClass("fa-chevron-down");
-				// $(this).addClass("fa-chevron-up");
-			});
+			.slideToggle("done", function() {});
 	});
 
-	//Getting which vehicle was selected and inputting name & calculated price into the journey page
+	//If user clicks anywhere on the page and if the object clicked has class of .vehicleConfirmBtn then get which vehicle was selected and the input name & calculated price into the journey page
 	$(document).on("click", ".vehicleConfirmBtn", function() {
-		// console.dir($(this)["0"].id);
 		$.fn.pagepiling.moveSectionDown();
 
 		if ($(this)["0"].id == "confirmmotorbike") {
@@ -198,19 +187,13 @@
 			method: "GET",
 			url: directionsRequest
 		}).done(function(data) {
-			if (map.getLayer("route")) {
-				map.removeLayer("route");
-			}
-			if (map.getLayer("start")) {
-				map.removeLayer("start");
-			}
-			if (map.getLayer("end")) {
-				map.removeLayer("end");
-			}
+			resubmitMap();
 			//This event handler has to be in the done section of this ajax call.  If the user was too quick to click this button and the distance had not yet finished calculating then it would create an error.
 			$("#confirmLocation").click(function() {
-				$.fn.pagepiling.moveSectionDown();
+				resubmitVehicleTitleRemove();
+				resubmitItemRemove();
 				getAllElements();
+				$.fn.pagepiling.moveSectionDown();
 			});
 
 			// custom function once ajax completes
@@ -394,6 +377,7 @@
 			start = [168.662644, -45.031162];
 		}
 	}
+
 	//Finding the end location coordinates depending on what the user input was. This is called in the click function above
 	function endLocation() {
 		if (dropoffLocation.value === "auckland") {
@@ -410,6 +394,30 @@
 		route = data.routes[0].geometry;
 		distance = data.routes[0].distance / 1000;
 	}
+
+	//--------------------------------------------------------
+	// Removing appended items if user goes back and resubmits
+	//--------------------------------------------------------
+	//If the user has already defined a route this will remove the route before adding a new one.  Called in the done method of our map AJAX call
+	function resubmitMap() {
+		if (map.getLayer("route")) {
+			map.removeLayer("route");
+			map.removeLayer("start");
+			map.removeLayer("end");
+			map.removeSource("route");
+			map.removeSource("start");
+			map.removeSource("end");
+		}
+	}
+	//If the user has already submitted this form before then remove old items before adding new ones
+	function resubmitItemRemove() {
+		$(".myItem").remove();
+	}
+
+	function resubmitVehicleTitleRemove() {
+		$("#vehicleOptionTitle").remove();
+	}
+
 	//--------------------------------------------------------------
 	// Dynamically show the right vehicle options for users requests
 	//--------------------------------------------------------------
@@ -493,7 +501,7 @@
 
 		//Changes h3 tag to dynamically display how many seats & days user has requested
 		var newh3Element =
-			"<h3 class='headingFour'>You requested a vehicle with <span class='featureFont'>" +
+			"<h3 id='vehicleOptionTitle' class='headingFour'>You requested a vehicle with <span class='featureFont'>" +
 			seats +
 			"</span> seats for a period of <span class='featureFont'>" +
 			compareDates(pickDate, dropDate) +
