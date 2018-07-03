@@ -41,6 +41,13 @@
 		$.fn.pagepiling.moveSectionUp();
 	});
 
+	$("#backToSecOne").click(function() {
+		var bookingPickupDate = document.getElementById("bookingPickupDate");
+		resubmitRemove(bookingPickupDate);
+		var bookingDropoffDate = document.getElementById("bookingDropoffDate");
+		resubmitRemove(bookingDropoffDate);
+	});
+
 	//First form validation
 	$("#sectionOneSubmitBtn").click(function() {
 		event.preventDefault();
@@ -190,8 +197,10 @@
 			resubmitMap();
 			//This event handler has to be in the done section of this ajax call.  If the user was too quick to click this button and the distance had not yet finished calculating then it would create an error.
 			$("#confirmLocation").click(function() {
-				resubmitVehicleTitleRemove();
-				resubmitItemRemove();
+				var myItem = document.getElementsByClassName("myItem");
+				var vehicleOptionTitle = document.getElementById("vehicleOptionTitle");
+				resubmitRemove(myItem);
+				resubmitRemove(vehicleOptionTitle);
 				getAllElements();
 				$.fn.pagepiling.moveSectionDown();
 			});
@@ -410,12 +419,9 @@
 		}
 	}
 	//If the user has already submitted this form before then remove old items before adding new ones
-	function resubmitItemRemove() {
-		$(".myItem").remove();
-	}
 
-	function resubmitVehicleTitleRemove() {
-		$("#vehicleOptionTitle").remove();
+	function resubmitRemove(item) {
+		$(item).remove();
 	}
 
 	//--------------------------------------------------------------
