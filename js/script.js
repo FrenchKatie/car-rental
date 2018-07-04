@@ -42,15 +42,20 @@
 	});
 
 	$("#backToSecOne").click(function() {
-		var bookingPickupDate = document.getElementById("bookingPickupDate");
-		resubmitRemove(bookingPickupDate);
-		var bookingDropoffDate = document.getElementById("bookingDropoffDate");
-		resubmitRemove(bookingDropoffDate);
+		// var bookingPickupDate = document.getElementById("bookingPickupDate");
+		// resubmitRemove(bookingPickupDate);
+		// var bookingDropoffDate = document.getElementById("bookingDropoffDate");
+		// resubmitRemove(bookingDropoffDate);
 	});
-	// $("#backToSecTwo").click(function(){
-	// 	var bookingDropoffDate = document.getElementById("bookingDropoffDate");
-	// 	resubmitRemove(bookingDropoffDate);
-	// })
+
+	$("#backToSecTwo").click(function() {
+		// var bookingLeaveLoc = document.getElementById("bookingLeaveLoc");
+		// resubmitRemove(bookingLeaveLoc);
+		// $("#bookingLeaveLoc").remove();
+		// $('#bookingLeaveLoc').text()
+		// var journeyReturnLoc = document.getElementById("bookingReturnLoc");
+		// resubmitRemove(journeyReturnLoc);
+	});
 
 	//First form validation
 	$("#sectionOneSubmitBtn").click(function() {
@@ -71,94 +76,21 @@
 		$.fn.pagepiling.moveSectionDown();
 
 		if ($(this)["0"].id == "confirmmotorbike") {
-			userVehicleSelect = vehicleData[0].name;
-			userVehicleSelectPrice = vehicleData[0].pricePerDay;
+			$("#bookingVehicle").text(vehicleData[0].name);
 			userPrice = compareDates(pickDate, dropDate) * vehicleData[0].pricePerDay;
-			//inputs html saying journey vehicle
-			var journeyVehicle =
-				"<p class='flexChildren alignRight headingFive cap'>" +
-				userVehicleSelect +
-				"</p>";
-			var insertJourneyVehicle = document.getElementById("journeyVehicle");
-			insertJourneyVehicle.insertAdjacentHTML("afterEnd", journeyVehicle);
-
-			var journeyVehiclePrice =
-				"<h3 class='flexChildren alignRight headingFour'>$" +
-				userVehicleSelectPrice * compareDates(pickDate, dropDate) +
-				"</h3>";
-			var insertJourneyVehiclePrice = document.getElementById(
-				"journeyVehiclePrice"
-			);
-			insertJourneyVehiclePrice.insertAdjacentHTML(
-				"afterEnd",
-				journeyVehiclePrice
-			);
+			$("#journeyVehiclePrice").text("$ " + userPrice);
 		} else if ($(this)["0"].id == "confirmsmallCar") {
-			userVehicleSelect = vehicleData[1].name;
-			userVehicleSelectPrice = vehicleData[1].pricePerDay;
+			$("#bookingVehicle").text(vehicleData[1].name);
 			userPrice = compareDates(pickDate, dropDate) * vehicleData[1].pricePerDay;
-			//inputs html saying journey vehicle
-			var journeyVehicle =
-				"<p class='flexChildren alignRight headingFive cap'>" +
-				userVehicleSelect +
-				"</p>";
-			var insertJourneyVehicle = document.getElementById("journeyVehicle");
-			insertJourneyVehicle.insertAdjacentHTML("afterEnd", journeyVehicle);
-			var journeyVehiclePrice =
-				"<h3 class='flexChildren alignRight headingFour'>$" +
-				userVehicleSelectPrice * compareDates(pickDate, dropDate) +
-				"</h3>";
-			var insertJourneyVehiclePrice = document.getElementById(
-				"journeyVehiclePrice"
-			);
-			insertJourneyVehiclePrice.insertAdjacentHTML(
-				"afterEnd",
-				journeyVehiclePrice
-			);
+			$("#journeyVehiclePrice").text("$ " + userPrice);
 		} else if ($(this)["0"].id == "confirmlargeCar") {
-			userVehicleSelect = vehicleData[2].name;
-			userVehicleSelectPrice = vehicleData[2].pricePerDay;
+			$("#bookingVehicle").text(vehicleData[2].name);
 			userPrice = compareDates(pickDate, dropDate) * vehicleData[2].pricePerDay;
-			//inputs html saying journey vehicle
-			var journeyVehicle =
-				"<p class='flexChildren alignRight headingFive cap'>" +
-				userVehicleSelect +
-				"</p>";
-			var insertJourneyVehicle = document.getElementById("journeyVehicle");
-			insertJourneyVehicle.insertAdjacentHTML("afterEnd", journeyVehicle);
-			var journeyVehiclePrice =
-				"<h3 class='flexChildren alignRight headingFour'>$" +
-				userVehicleSelectPrice * compareDates(pickDate, dropDate) +
-				"</h3>";
-			var insertJourneyVehiclePrice = document.getElementById(
-				"journeyVehiclePrice"
-			);
-			insertJourneyVehiclePrice.insertAdjacentHTML(
-				"afterEnd",
-				journeyVehiclePrice
-			);
+			$("#journeyVehiclePrice").text("$ " + userPrice);
 		} else if ($(this)["0"].id == "confirmmotorhome") {
-			userVehicleSelect = vehicleData[3].name;
-			userVehicleSelectPrice = vehicleData[3].pricePerDay;
+			$("#bookingVehicle").text(vehicleData[3].name);
 			userPrice = compareDates(pickDate, dropDate) * vehicleData[3].pricePerDay;
-			//inputs html saying journey vehicle
-			var journeyVehicle =
-				"<p class='flexChildren alignRight headingFive cap'>" +
-				userVehicleSelect +
-				"</p>";
-			var insertJourneyVehicle = document.getElementById("journeyVehicle");
-			insertJourneyVehicle.insertAdjacentHTML("afterEnd", journeyVehicle);
-			var journeyVehiclePrice =
-				"<h3 class='flexChildren alignRight headingFour'>$" +
-				userVehicleSelectPrice * compareDates(pickDate, dropDate) +
-				"</h3>";
-			var insertJourneyVehiclePrice = document.getElementById(
-				"journeyVehiclePrice"
-			);
-			insertJourneyVehiclePrice.insertAdjacentHTML(
-				"afterEnd",
-				journeyVehiclePrice
-			);
+			$("#journeyVehiclePrice").text("$ " + userPrice);
 		}
 	});
 
@@ -207,6 +139,7 @@
 				resubmitRemove(myItem);
 				resubmitRemove(vehicleOptionTitle);
 				getAllElements();
+				getJourneyLocations();
 				$.fn.pagepiling.moveSectionDown();
 			});
 
@@ -519,52 +452,22 @@
 			"</span> days</h3>";
 		var insertnewh3Element = document.getElementById("mainItemsHeader");
 		insertnewh3Element.insertAdjacentHTML("afterEnd", newh3Element);
-
-		//Inputs HTML saying the date leaving dynamically for section 5
-		var lastPageleavingDate =
-			"<h3 class='headingThree'>We'll see you on " +
-			leaveDate.value +
-			" when you start your journey</h3>";
-		var insertLastPageleavingDate = document.getElementById(
-			"sectionFiveCongrat"
-		);
-		insertLastPageleavingDate.insertAdjacentHTML(
-			"afterEnd",
-			lastPageleavingDate
-		);
-
-		//inputs html saying journey leaving location
-		var journeyLeaveLoc =
-			"<p class='flexChildren alignRight headingFive cap'>" +
-			pickupLocation.value +
-			"</p>";
-		var insertJourneyLeaveLoc = document.getElementById("journeyLeaveLoc");
-		insertJourneyLeaveLoc.insertAdjacentHTML("afterEnd", journeyLeaveLoc);
-
-		//inputs html saying journey returning location
-		var journeyReturnLoc =
-			"<p class='flexChildren alignRight headingFive cap'>" +
-			dropoffLocation.value +
-			"</p>";
-		var insertJourneyReturnLoc = document.getElementById("journeyReturnLoc");
-		insertJourneyReturnLoc.insertAdjacentHTML("afterEnd", journeyReturnLoc);
+	}
+	//Inputs HTML of users journey locations
+	function getJourneyLocations() {
+		$("#bookingLeaveLoc").text(pickupLocation.value);
+		$("#bookingReturnLoc").text(dropoffLocation.value);
 	}
 
+	//Inputs HTML of users journey dates
 	function getJourneyDates() {
-		//inputs html saying journey leaving date
-		var journeyLeaveDate =
-			"<p class='flexChildren alignRight headingFive' id='bookingPickupDate'>" +
-			leaveDate.value +
-			"</p>";
-		var insertJourneyLeaveDate = document.getElementById("journeyLeaveDate");
-		insertJourneyLeaveDate.insertAdjacentHTML("afterEnd", journeyLeaveDate);
-
-		//inputs html saying journey returning date
-		var journeyReturnDate =
-			"<p class='flexChildren alignRight headingFive' id='bookingDropoffDate'>" +
-			returnDate.value +
-			"</p>";
-		var insertJourneyReturnDate = document.getElementById("journeyReturnDate");
-		insertJourneyReturnDate.insertAdjacentHTML("afterEnd", journeyReturnDate);
+		$("#bookingLeaveDate").text(leaveDate.value);
+		$("#bookingReturnDate").text(returnDate.value);
+		//inputs HTML text of leaving date for final  page
+		$("#sectionFiveDate").text(
+			"We'll see you on " + leaveDate.value + " when you start your journey"
+		);
 	}
+
+	function getJourneyVehicle() {}
 })();
