@@ -1,40 +1,38 @@
 @mixin bannerHeading {
-  font-size: 100px;
-  color: white;
+	font-size: 100px;
+	color: white;
 }
 
-.headingTwo{
-    color: $secondary;
-    font-size: 35px;
-    font-weight: 600;
+.headingTwo {
+	color: $secondary;
+	font-size: 35px;
+	font-weight: 600;
 }
 
-.headingThree{
-    color: $secondary;
-    font-size: 25px;
-    font-weight: 200;
+.headingThree {
+	color: $secondary;
+	font-size: 25px;
+	font-weight: 200;
 }
 
-.headingFour{
-    font-size: 23px;
-    color: $secondary;
+.headingFour {
+	font-size: 23px;
+	color: $secondary;
 }
 
-.headingFive{
-  color: $tertiary;
-  font-size: 23px;
-  font-weight: 200;
+.headingFive {
+	color: $tertiary;
+	font-size: 23px;
+	font-weight: 200;
 }
 
-.headingSix{
-
-      color: $secondary;
-      font-size: 23px;
-      font-weight: 200;
-
+.headingSix {
+	color: $secondary;
+	font-size: 23px;
+	font-weight: 200;
 }
 
-.featureFont{
-    color: $primary;
-    font-size: 25px;
+.featureFont {
+	color: $primary;
+	font-size: 25px;
 }

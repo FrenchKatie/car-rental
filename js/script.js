@@ -41,13 +41,7 @@
 		$.fn.pagepiling.moveSectionUp();
 	});
 
-	$("#backToSecOne").click(function() {
-		// var bookingPickupDate = document.getElementById("bookingPickupDate");
-		// resubmitRemove(bookingPickupDate);
-		// var bookingDropoffDate = document.getElementById("bookingDropoffDate");
-		// resubmitRemove(bookingDropoffDate);
-	});
-
+	//Hides the confirm location button again if user goes backwards
 	$("#backToSecTwo").click(function() {
 		$("#confirmLocation").addClass("hide");
 	});
@@ -88,8 +82,6 @@
 			$("#journeyVehiclePrice").text("$ " + userPrice);
 		}
 	});
-
-	// <h3 class="flexChildren alignRight headingFour">$516</h3>
 
 	//---------------
 	//Map Box & Route
@@ -351,8 +343,7 @@
 			map.removeSource("end");
 		}
 	}
-	//If the user has already submitted this form before then remove old items before adding new ones
-
+	//If the user has already submitted this form before then remove old vehicle items before adding new ones
 	function resubmitRemove(item) {
 		$(item).remove();
 	}

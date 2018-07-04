@@ -30,6 +30,10 @@
 	flex: 1;
 }
 
+// .centerText {
+// 	text-align: center;
+// }
+
 .halfScreenMap {
 	background-color: white;
 	width: 40%;
@@ -161,11 +165,11 @@
 	left: 2.5%;
 }
 button:focus {
-	outline: 0;
+	outline: 0 !important;
 }
 button:active {
-	outline: none;
-	border: none;
+	outline: none !important;
+	border: none !important;
 }
 
 //---------------------
