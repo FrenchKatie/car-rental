@@ -49,12 +49,7 @@
 	});
 
 	$("#backToSecTwo").click(function() {
-		// var bookingLeaveLoc = document.getElementById("bookingLeaveLoc");
-		// resubmitRemove(bookingLeaveLoc);
-		// $("#bookingLeaveLoc").remove();
-		// $('#bookingLeaveLoc').text()
-		// var journeyReturnLoc = document.getElementById("bookingReturnLoc");
-		// resubmitRemove(journeyReturnLoc);
+		$("#confirmLocation").addClass("hide");
 	});
 
 	//First form validation
