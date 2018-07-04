@@ -30,10 +30,6 @@
 	flex: 1;
 }
 
-// .centerText {
-// 	text-align: center;
-// }
-
 .halfScreenMap {
 	background-color: white;
 	width: 40%;
@@ -64,9 +60,7 @@
 }
 
 .backBtnText {
-	// background-color: pink;
 	color: $primary;
-	// outline: 1px red solid;
 }
 
 //----------------------
@@ -115,12 +109,13 @@
 	margin-right: 20px;
 	margin-top: 40px;
 	width: 160px;
+	transition: all 0.5s ease;
 }
 
 .outlineBtn:hover {
-	background: rgba(0, 0, 0, 0);
-	color: #3a7999;
-	box-shadow: inset 0 0 0 3px #3a7999;
+	background-color: $primary;
+	color: white;
+	// box-shadow: inset 0 0 0 5px $primary;
 }
 
 .fillBtn {
@@ -128,6 +123,10 @@
 	margin-top: 40px;
 	width: 160px;
 }
+
+// .fillBtn:hover {
+// 	background-color: red;
+// }
 
 .iconBtnFill {
 	@include fillBtn;
@@ -137,7 +136,12 @@
 	@include fillBtn;
 	font-size: 18px;
 	width: 100%;
+	transition: all 0.5s ease;
 }
+.iconBtnFillWide:hover {
+	background: $primaryHover;
+}
+
 .iconBtnOutline {
 	@include outlineBtn;
 	font-size: 18px;
@@ -146,6 +150,7 @@
 	text-align: center;
 	margin-left: 65px;
 }
+
 .icon {
 	text-align: right;
 	margin-left: 55px;
@@ -163,6 +168,11 @@
 	position: absolute;
 	bottom: 5%;
 	left: 2.5%;
+	transition: all 0.5s ease;
+}
+.nextIconBtnFillWide:hover {
+	background-color: $primaryHover;
+	box-shadow: inset 0 0 0 5px $primaryHover;
 }
 button:focus {
 	outline: 0 !important;
@@ -208,6 +218,10 @@ button:active {
 	color: white;
 	background-color: $primary;
 	border: none;
+	transition: background-color 0.5s ease;
+}
+.submitBtn:hover {
+	background-color: $primaryHover;
 }
 
 //--------------------
@@ -252,6 +266,12 @@ body {
 	@include outlineBtn;
 	font-size: 18px;
 	width: 350px;
+	transition: all 0.5s ease;
+}
+.moreInfoBtn:hover {
+	// box-shadow: inset 0 0 0 5px $primary;
+	background-color: $primary;
+	color: white;
 }
 
 .hide {
@@ -285,10 +305,10 @@ body {
 //SECTION FOUR STYLING
 //--------------------
 .bookingConfirmInfo {
-	margin-top: 100px;
+	margin-top: 30px;
 }
 .line {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 
 //--------------------

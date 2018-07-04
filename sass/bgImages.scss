@@ -1,45 +1,44 @@
 @mixin bg {
-    background-size: cover;
-    height: 100vh;
-    position: relative;
+	background-size: cover;
+	height: 100vh;
+	position: relative;
 }
 
-.sectionOneBg{
-    @include bg;
-    background-image: url(../images/home.jpg);
-    background-position: center top;
+.sectionOneBg {
+	@include bg;
+	background-image: url(../images/home.jpg);
+	background-position: center bottom;
 }
 
-.sectionTwoBg{
-    @include bg;
-    background-color: white;
+.sectionTwoBg {
+	@include bg;
+	background-color: white;
 }
 
-.sectionThreeBg{
-  @include bg;
-    background-image: url(../images/vehicles.jpg);
-    background-position: left center;
+.sectionThreeBg {
+	@include bg;
+	background-image: url(../images/vehicles.jpg);
+	background-position: left center;
 }
 
-.sectionFourBg{
-  @include bg;
-    background-image: url(../images/trip.jpg);
-    background-position: left center;
+.sectionFourBg {
+	@include bg;
+	background-image: url(../images/trip.jpg);
+	background-position: left center;
 }
 
-.sectionFiveBg{
-    @include bg;
-    background-image: url(../images/final.jpg);
-    background-position: center;
+.sectionFiveBg {
+	@include bg;
+	background-image: url(../images/final.jpg);
+	background-position: center;
 }
 
-.itemInformation{
-  width: 100%;
-
+.itemInformation {
+	width: 100%;
 }
 
-.itemImage{
-  display: block;
-  width: 20%;
-  margin: auto;
+.itemImage {
+	display: block;
+	width: 20%;
+	margin: auto;
 }
