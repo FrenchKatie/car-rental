@@ -11,7 +11,6 @@
 	var endDate = 0;
 	var route = 0;
 	var distance = 0;
-	// var userOptions = [];
 	var userVehicleSelect = 0;
 	var pickDate = 0;
 	var dropDate = 0;
@@ -19,12 +18,11 @@
 	//------------------
 	//Page Piling Plugin
 	//------------------
+
 	$("#pagepiling").pagepiling({
-		// normalScrollElements: ".halfScreen"
 		navigation: false,
 		keyboardScrolling: false
 	});
-
 	$.fn.pagepiling.setAllowScrolling(false);
 
 	//------------------
@@ -33,6 +31,11 @@
 	//pagepiling plugin - move to next section
 	$("#confirmJourney").click(function() {
 		$.fn.pagepiling.moveSectionDown();
+	});
+
+	$("#finalBtn").click(function() {
+		// $.fn.pagepiling.moveTo(1);
+		window.location.reload();
 	});
 
 	//pagepiling plugin - move up a section if back btn is clicked
@@ -81,6 +84,18 @@
 			userPrice = compareDates(pickDate, dropDate) * vehicleData[3].pricePerDay;
 			$("#journeyVehiclePrice").text("$ " + userPrice);
 		}
+	});
+
+	//----------------------------
+	//Stop double click on buttons
+	//----------------------------
+	$(".stopDoubleClick").on("click", function(event) {
+		event.preventDefault();
+		var el = $(this);
+		el.prop("disabled", true);
+		setTimeout(function() {
+			el.prop("disabled", false);
+		}, 3000);
 	});
 
 	//---------------
@@ -263,7 +278,8 @@
 				.tooltip("show");
 		} else if (
 			(compareDates(pickDate, dropDate) === 1 && seats > 2) ||
-			(seats === 1 && compareDates(pickDate, dropDate) > 10)
+			(seats === 1 && compareDates(pickDate, dropDate) > 10) ||
+			compareDates(pickDate, dropDate) === 0
 		) {
 			alert("Sorry, there are no vehicles available for those requirements...");
 		} else {
@@ -368,10 +384,6 @@
 				newElement += "<img src='images/" + vehicleData[i].type + "Icon.svg'>";
 				newElement +=
 					"<p class='headingSix removeSpace'>" + vehicleData[i].name + "</p>";
-				// newElement +=
-				// 	"<p class='headingFive removeSpace'>" +
-				// 	vehicleData[i].maxSeats +
-				// 	" Seats</p>";
 				newElement += "</div>";
 				newElement +=
 					"<button type='button' name='button' class='moreInfoBtn centerMe col-9'><span class='btnText '>View information</span><i class='icon fas fa-chevron-down test'></i></button>";
@@ -419,7 +431,7 @@
 				newElement += "</div>";
 				newElement += "</div>";
 				newElement +=
-					"<button type='button' name='button' class='iconBtnFillWide vehicleConfirmBtn' id='confirm" +
+					"<button type='button' name='button' class='iconBtnFillWide vehicleConfirmBtn stopDoubleClick' id='confirm" +
 					vehicleData[i].type +
 					"'><span class='btnText col-12'>Select this vehicle</span><i class='iconWide fas fa-chevron-right'></i></button>";
 				newElement += "</div>";
@@ -446,7 +458,6 @@
 		$("#bookingLeaveLoc").text(pickupLocation.value);
 		$("#bookingReturnLoc").text(dropoffLocation.value);
 	}
-
 	//Inputs HTML of users journey dates
 	function getJourneyDates() {
 		$("#bookingLeaveDate").text(leaveDate.value);
@@ -456,6 +467,4 @@
 			"We'll see you on " + leaveDate.value + " when you start your journey"
 		);
 	}
-
-	function getJourneyVehicle() {}
 })();

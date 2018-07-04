@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Book a Rental</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="css/jquery.pagepiling.css" />
   <link rel="stylesheet" href="css/custom.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -26,7 +28,7 @@
                                 <input id="dateLeave" name="from" required type="text" class="col-4 input " placeholder="When are you leaving?"   data-toggle="tooltip" title="You must select a leaving date" data-placement="bottom">
                                 <input id="dateReturn" name="to" required type="text" class="col-4 input " placeholder="When are you returning?"   data-toggle="tooltip" title="You must select a returning date" data-placement="bottom">
                                 <input required type="number" name="seatSelect" class="col-3 input" placeholder="How many seats do you need?" step="1" min="1" max="6" id="seats" data-toggle="tooltip" title="You must select how many seats you require" data-placement="bottom">
-                                <button type="submit" name="button" id="sectionOneSubmitBtn" class="submitBtn col-1"><i class="fas fa-search"></i></button>
+                                <button type="submit" name="button" id="sectionOneSubmitBtn" class="stopDoubleClick submitBtn col-1"><i class="fas fa-search"></i></button>
                               </div>
                           </form>
                       </div>
@@ -36,7 +38,7 @@
                   <div class="sectionTwoBg">
                       <div class="sectionTwoInner halfScreenMap">
                         <div class="backBtn ">
-                            <p class="backBtnText" id="backToSecOne"><i class="fas fa-chevron-left"></i> Go back</p>
+                            <p class="backBtnText stopDoubleClick" id="backToSecOne"><i class="fas fa-chevron-left"></i> Go back</p>
                         </div>
                           <h2 class="headingTwo">Where are you headed?</h2>
                           <select class="required custom-select"  data-toggle="tooltip" title="You must select a pickup location" data-placement="bottom" id="inputGroupSelect1">
@@ -51,8 +53,8 @@
                               <option value="wellington">Wellington</option>
                               <option value="queenstown">Queenstown</option>
                           </select>
-                          <button type="button" class="outlineBtn" id="viewRoute" name="button">View Route</button>
-                          <button type="button" name="button" class="hide nextIconBtnFillWide" id="confirmLocation"><span class="btnText col-12">Confirm locations</span><i class="iconWide fas fa-chevron-right"></i></button>
+                          <button type="button" class="outlineBtn stopDoubleClick" id="viewRoute" name="button">View Route</button>
+                          <button type="button" name="button" class="hide nextIconBtnFillWide stopDoubleClick" id="confirmLocation"><span class="btnText col-12">Confirm locations</span><i class="iconWide fas fa-chevron-right"></i></button>
                       </div>
                       <div id='map'></div>
                   </div>
@@ -61,7 +63,7 @@
                   <div class="sectionThreeBg">
                       <div class="sectionThreeInner" >
                           <div class="halfScreen"  id="vehicleContent">
-                            <div class="backBtn ">
+                            <div class="backBtn stopDoubleClick">
                                 <p class="backBtnText" id="backToSecTwo"><i class="fas fa-chevron-left"></i> Go back</p>
                             </div>
                               <div class="" id="itemsHeader">
@@ -78,7 +80,7 @@
                       <div class="sectionFourInner">
                           <div class="halfScreen">
                             <div class="backBtn ">
-                                <p class="backBtnText" id="backToSecThree"><i class="fas fa-chevron-left"></i> Go back</p>
+                                <p class="backBtnText stopDoubleClick" id="backToSecThree"><i class="fas fa-chevron-left"></i> Go back</p>
                             </div>
                                 <div class="">
                                       <h2 class="headingTwo">Your Journey</h2>
@@ -111,7 +113,7 @@
                                             <h2 class="flexChildren headingFour alignRight" id="journeyVehiclePrice"></h2>
                                       </div>
                                 </div>
-                                <button type="button" name="button" class="nextIconBtnFillWide" id="confirmJourney"><span class="btnText col-12">Confirm your booking</span><i class="iconWide fas fa-chevron-right"></i></button>
+                                <button type="button" name="button" class="nextIconBtnFillWide stopDoubleClick" id="confirmJourney"><span class="btnText col-12">Confirm your booking</span><i class="iconWide fas fa-chevron-right"></i></button>
                           </div>
                       </div>
                   </div>
@@ -122,7 +124,7 @@
                           <h1 class="bannerHeading">You're good to go!</h1>
                           <h2 class="headingTwo" id="sectionFiveCongrat">Congratulations, your booking has been succesful.</h2>
                           <h3 class='headingThree' id="sectionFiveDate"></h3>
-                          <button type="button" name="button" class="iconBtnFill"><span class="btnText">Ok</span><i class="icon fas fa-chevron-right"></i></button>
+                          <button type="button" name="button" class="iconBtnFill" id="finalBtn"><span class="btnText">Ok</span><i class="icon fas fa-chevron-right"></i></button>
                       </div>
                   </div>
             </div>
