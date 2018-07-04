@@ -30,6 +30,10 @@
 	flex: 1;
 }
 
+.centerMe {
+	text-align: center;
+}
+
 .halfScreenMap {
 	background-color: white;
 	width: 40%;
@@ -265,7 +269,9 @@ body {
 .moreInfoBtn {
 	@include outlineBtn;
 	font-size: 18px;
-	width: 350px;
+	// margin: auto;
+	margin-top: 5%;
+	width: 100%;
 	transition: all 0.5s ease;
 }
 .moreInfoBtn:hover {
@@ -286,6 +292,10 @@ body {
 	background-color: $bgGrey;
 	margin-top: 40px;
 	padding: 20px;
+}
+
+.myItem img {
+	width: 5em;
 }
 
 .itemSubHeader {
@@ -319,4 +329,8 @@ body {
 	@include centerAll;
 	width: 60%;
 	text-align: center;
+}
+#sectionFiveCongrat,
+#sectionFiveDate {
+	color: white;
 }

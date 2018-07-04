@@ -363,16 +363,18 @@
 			) {
 				var newElement = "";
 				newElement += "<div class='myItem row justify-content-between'>";
-				newElement += "<div class='itemLabel col-3'>";
+
+				newElement += "<div class='itemLabel col-2 centerMe'>";
+				newElement += "<img src='images/" + vehicleData[i].type + "Icon.svg'>";
 				newElement +=
 					"<p class='headingSix removeSpace'>" + vehicleData[i].name + "</p>";
-				newElement +=
-					"<p class='headingFive removeSpace'>" +
-					vehicleData[i].maxSeats +
-					" Seats</p>";
+				// newElement +=
+				// 	"<p class='headingFive removeSpace'>" +
+				// 	vehicleData[i].maxSeats +
+				// 	" Seats</p>";
 				newElement += "</div>";
 				newElement +=
-					"<button type='button' name='button' class='moreInfoBtn'><span class='btnText col-9'>View information</span><i class='icon fas fa-chevron-down test'></i></button>";
+					"<button type='button' name='button' class='moreInfoBtn centerMe col-9'><span class='btnText '>View information</span><i class='icon fas fa-chevron-down test'></i></button>";
 				newElement += "<div class='hide itemInformation fullWidth'>";
 				newElement += "<div class='fullWidth itemGeneralInfo'>";
 				newElement += "<h4 class='headingFive itemSubHeader'>General</h4>";
