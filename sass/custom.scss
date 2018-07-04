@@ -1,7 +1,6 @@
 @import "bgImages.scss";
 @import "variables.scss";
 @import "fonts.scss";
-
 //----------------------
 //REUSABLE LAYOUT CLASSES
 //----------------------
@@ -11,36 +10,29 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
 .removeSpace {
 	margin-bottom: 0px;
 }
-
 .alignRight {
 	text-align: right;
 }
-
 .flexMe {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
-
 .flexChildren {
 	flex: 1;
 }
-
 .centerMe {
 	text-align: center;
 }
-
 .halfScreenMap {
 	background-color: white;
 	width: 40%;
 	height: 100vh;
 	padding: 40px;
 }
-
 .halfScreen {
 	background-color: white;
 	width: 40%;
@@ -48,25 +40,18 @@
 	padding: 40px;
 	overflow: scroll;
 }
-
 .fullWidth {
 	width: 100%;
-	// background-color: red;
 }
-
 .cap {
 	text-transform: capitalize;
 }
-
 .backBtn {
 	margin-bottom: 50px;
-	// outline: 1px blue solid;
 }
-
 .backBtnText {
 	color: $primary;
 }
-
 //----------------------
 //REUSABLE INPUT CLASSES
 //----------------------
@@ -77,16 +62,12 @@
 	color: $secondary;
 	padding-left: 20px !important;
 }
-
 .input::placeholder {
 	color: $tertiary;
-	// padding-left: 20px;
 }
-
 //-----------------------
 //REUSABLE BUTTON CLASSES
 //-----------------------
-
 @mixin btn {
 	border-radius: 100px;
 	border: 3px solid $primary;
@@ -94,20 +75,17 @@
 	font-size: 20px;
 	font-weight: 400;
 }
-
 @mixin fillBtn {
 	@include btn;
 	background-color: $primary;
 	color: white;
 }
-
 @mixin outlineBtn {
 	@include btn;
 	background-color: Transparent;
 	background-repeat: no-repeat;
 	color: $primary;
 }
-
 .outlineBtn {
 	@include outlineBtn;
 	margin-right: 20px;
@@ -115,23 +93,15 @@
 	width: 160px;
 	transition: all 0.5s ease;
 }
-
 .outlineBtn:hover {
 	background-color: $primary;
 	color: white;
-	// box-shadow: inset 0 0 0 5px $primary;
 }
-
 .fillBtn {
 	@include fillBtn;
 	margin-top: 40px;
 	width: 160px;
 }
-
-// .fillBtn:hover {
-// 	background-color: red;
-// }
-
 .iconBtnFill {
 	@include fillBtn;
 	font-size: 18px;
@@ -145,7 +115,6 @@
 .iconBtnFillWide:hover {
 	background: $primaryHover;
 }
-
 .iconBtnOutline {
 	@include outlineBtn;
 	font-size: 18px;
@@ -154,7 +123,6 @@
 	text-align: center;
 	margin-left: 65px;
 }
-
 .icon {
 	text-align: right;
 	margin-left: 55px;
@@ -185,20 +153,16 @@ button:active {
 	outline: none !important;
 	border: none !important;
 }
-
 //---------------------
 //REUSABLE FONT CLASSES
 //---------------------
-
 .bannerHeading {
 	@include bannerHeading;
 	padding-left: 0px !important;
 }
-
 //---------------
 //TOOLTIP STYLING
 //---------------
-
 .tooltip-inner {
 	background-color: $error !important;
 	color: white;
@@ -206,18 +170,13 @@ button:active {
 .bs-tooltip-bottom .arrow::before {
 	border-bottom-color: $error !important;
 }
-// .arrow::before {
-// 	display: none;
-// }
 //-------------------
 //SECTION ONE STYLING
 //-------------------
-
 .sectionOneInner {
 	width: 75%;
 	@include centerAll;
 }
-
 .submitBtn {
 	color: white;
 	background-color: $primary;
@@ -227,11 +186,9 @@ button:active {
 .submitBtn:hover {
 	background-color: $primaryHover;
 }
-
 //--------------------
 //SECTION TWO STYLING
 //--------------------
-
 body {
 	margin: 0;
 	padding: 0;
@@ -243,65 +200,52 @@ body {
 	bottom: 0;
 	width: 60%;
 }
-
 #inputGroupSelect1 {
 	margin-top: 20px;
 }
 #inputGroupSelect2 {
 	margin-top: 20px;
 }
-
 //--------------------
 //SECTION THREE STYLING
 //--------------------
-
 .itemLabel {
 	padding: 0px !important;
 }
-
 .itemInfo {
 	display: block;
 	width: 100%;
 	padding-left: 15%;
 	padding-right: 15%;
 }
-
 .moreInfoBtn {
 	@include outlineBtn;
 	font-size: 18px;
-	// margin: auto;
 	margin-top: 5%;
 	width: 100%;
 	transition: all 0.5s ease;
 }
 .moreInfoBtn:hover {
-	// box-shadow: inset 0 0 0 5px $primary;
 	background-color: $primary;
 	color: white;
 }
-
 .hide {
 	display: none;
 }
-
 .show {
 	display: block;
 }
-
 .myItem {
 	background-color: $bgGrey;
 	margin-top: 40px;
 	padding: 20px;
 }
-
 .myItem img {
 	width: 5em;
 }
-
 .itemSubHeader {
 	padding-bottom: 15px;
 }
-
 .itemInformation {
 	padding-top: 40px;
 }
@@ -310,7 +254,6 @@ body {
 .itemTripInfo {
 	padding-top: 20px;
 }
-
 //--------------------
 //SECTION FOUR STYLING
 //--------------------
@@ -320,11 +263,9 @@ body {
 .line {
 	margin-bottom: 15px;
 }
-
 //--------------------
 //SECTION FIVE STYLING
 //--------------------
-
 .sectionFiveInner {
 	@include centerAll;
 	width: 60%;

@@ -28,35 +28,35 @@
 	//------------------
 	//Event Handlers
 	//------------------
-	//pagepiling plugin - move to next section
+	//move to next section
 	$("#confirmJourney").click(function() {
 		$.fn.pagepiling.moveSectionDown();
 	});
 
+	//refreshes form by reloading page when booking is confirmed
 	$("#finalBtn").click(function() {
-		// $.fn.pagepiling.moveTo(1);
 		window.location.reload();
 	});
 
-	//pagepiling plugin - move up a section if back btn is clicked
+	//move up 1 section if back btn is clicked
 	$(".backBtn").click(function() {
 		event.preventDefault();
 		$.fn.pagepiling.moveSectionUp();
 	});
 
-	//Hides the confirm location button again if user goes backwards
+	//Hides the confirm location button again if user goes backwards to choose location section so they must click route first
 	$("#backToSecTwo").click(function() {
 		$("#confirmLocation").addClass("hide");
 	});
 
-	//First form validation
+	//First form validation & inputs user dates into journey section
 	$("#sectionOneSubmitBtn").click(function() {
 		event.preventDefault();
 		checkForm();
 		getJourneyDates();
 	});
 
-	//Toggling vehicle information
+	//Toggling vehicle information open/shut
 	$(document).on("click", ".moreInfoBtn", function() {
 		$(this)
 			.next()
@@ -65,8 +65,7 @@
 
 	//If user clicks anywhere on the page and if the object clicked has class of .vehicleConfirmBtn then get which vehicle was selected and the input name & calculated price into the journey page
 	$(document).on("click", ".vehicleConfirmBtn", function() {
-		$.fn.pagepiling.moveSectionDown();
-
+		$.fn.pagepiling.moveSectionDown(); //move to next section
 		if ($(this)["0"].id == "confirmmotorbike") {
 			$("#bookingVehicle").text(vehicleData[0].name);
 			userPrice = compareDates(pickDate, dropDate) * vehicleData[0].pricePerDay;
@@ -144,9 +143,7 @@
 				getJourneyLocations();
 				$.fn.pagepiling.moveSectionDown();
 			});
-
-			// custom function once ajax completes
-			goodToGo(data);
+			getDistanceData(data);
 			map.addLayer({
 				id: "route",
 				type: "line",
@@ -195,8 +192,6 @@
 	//---------------------
 	//Jquery UI Date Picker
 	//---------------------
-
-	// date calender
 	var dateFormat = "mm/dd/yy",
 		from = $("#dateLeave")
 			.datepicker({
@@ -219,7 +214,7 @@
 				from.datepicker("option", "maxDate", getDate(this));
 			});
 
-	// sets return date to only show from pickDate
+	// sets return date to only show date options after pickdate
 	function getDate(element) {
 		var dateFormat = "dd/mm/yy";
 		var newDate = $("#dateLeave").datepicker({ dateFormat: "mm/dd/yy" });
@@ -232,7 +227,7 @@
 		return date;
 	}
 
-	//This function is essentially date difference between pickDate and dropDate when called.
+	//Gets date difference
 	function compareDates(startDate, endDate) {
 		var date1 = new Date(startDate);
 		var date2 = new Date(endDate);
@@ -244,13 +239,10 @@
 	//----------------
 	// Form Validation
 	//----------------
-
 	function checkForm() {
 		pickDate = $("#dateLeave").datepicker("getDate");
 		dropDate = $("#dateReturn").datepicker("getDate");
 		seats = parseInt(seatNumber.value);
-		//MY TRY
-		//------
 		if (pickDate === null) {
 			$("#dateLeave").tooltip("show");
 		} else if (dropDate === null) {
@@ -283,7 +275,7 @@
 		) {
 			alert("Sorry, there are no vehicles available for those requirements...");
 		} else {
-			$.fn.pagepiling.moveSectionDown();
+			$.fn.pagepiling.moveSectionDown(); //move to next section
 		}
 	}
 
@@ -300,13 +292,12 @@
 	//-------------------------------------------------
 	// Mapping Route & Getting User location & Distance
 	//-------------------------------------------------
-
 	var pickupLocation = document.getElementById("inputGroupSelect1");
 	var dropoffLocation = document.getElementById("inputGroupSelect2");
 	var getUserPickupLocation = pickupLocation.value;
 	var getUserDropoffLocation = dropoffLocation.value;
 	var viewRoute = document.getElementById("viewRoute");
-	//On click event listener
+	//Checks validation and if pass then add route onto map
 	viewRoute.addEventListener("click", function(e) {
 		e.preventDefault();
 		checkLocationForm();
@@ -317,7 +308,7 @@
 	//Defining variables to store coordinates of start and ending locations.  These are called above in the getRoute function
 	var start = [];
 	var end = [];
-	//Finding the start location coordinates depending on what the user input was.  This is called in the click function above
+	//Finding the start and end location coordinates depending on what the user input was.  This is called in the click function above
 	function startLocation() {
 		if (pickupLocation.value === "auckland") {
 			start = [174.763332, -36.84846];
@@ -327,8 +318,6 @@
 			start = [168.662644, -45.031162];
 		}
 	}
-
-	//Finding the end location coordinates depending on what the user input was. This is called in the click function above
 	function endLocation() {
 		if (dropoffLocation.value === "auckland") {
 			end = [174.763332, -36.84846];
@@ -338,9 +327,8 @@
 			end = [168.662644, -45.031162];
 		}
 	}
-
-	//Have called this function above in the "done" phase of my Ajax call, Which means that it can grab the data info for distance
-	function goodToGo(data) {
+	//Called in the "done" phase of my Ajax call, Which means that it can grab the data info for distance
+	function getDistanceData(data) {
 		route = data.routes[0].geometry;
 		distance = data.routes[0].distance / 1000;
 	}
@@ -367,9 +355,8 @@
 	//--------------------------------------------------------------
 	// Dynamically show the right vehicle options for users requests
 	//--------------------------------------------------------------
-
+	//Show vehicle
 	function getAllElements() {
-		//getting vehicles
 		for (var i = 0; i < vehicleData.length; i++) {
 			if (
 				vehicleData[i].minSeats <= seats &&
@@ -377,9 +364,7 @@
 				vehicleData[i].minDays <= compareDates(pickDate, dropDate) &&
 				vehicleData[i].maxDays >= compareDates(pickDate, dropDate)
 			) {
-				var newElement = "";
-				newElement += "<div class='myItem row justify-content-between'>";
-
+				var newElement = "<div class='myItem row justify-content-between'>";
 				newElement += "<div class='itemLabel col-2 centerMe'>";
 				newElement += "<img src='images/" + vehicleData[i].type + "Icon.svg'>";
 				newElement +=
@@ -442,8 +427,7 @@
 				insertItem.insertAdjacentHTML("afterEnd", newElement);
 			}
 		}
-
-		//Changes h3 tag to dynamically display how many seats & days user has requested
+		//Input subheader that dynamically displays how many seats & days user has requested
 		var newh3Element =
 			"<h3 id='vehicleOptionTitle' class='headingFour'>You requested a vehicle with <span class='featureFont'>" +
 			seats +

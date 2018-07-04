@@ -1,7 +1,3 @@
-//-----------------
-// Array of Objects
-//-----------------
-
 var vehicleData = [
 	(motorbike = {
 		type: "motorbike",
